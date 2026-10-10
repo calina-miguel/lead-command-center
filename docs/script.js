@@ -87,6 +87,13 @@ function toggleMobileMenu() {
   mobileMenuToggle?.setAttribute("aria-label", willOpen ? "Close menu" : "Open menu");
 }
 
+function updateScrolledState() {
+  document.body.classList.toggle("has-scrolled", window.scrollY > 120);
+  if (window.scrollY <= 120) {
+    closeMobileMenu();
+  }
+}
+
 function setWalkthroughStep(index) {
   currentStep = (index + walkthroughSteps.length) % walkthroughSteps.length;
   const step = walkthroughSteps[currentStep];
@@ -121,6 +128,9 @@ window.addEventListener("keydown", (event) => {
     closeMobileMenu();
   }
 });
+
+window.addEventListener("scroll", updateScrolledState, { passive: true });
+updateScrolledState();
 
 if (!reduceMotion) {
   let targetX = 0;
