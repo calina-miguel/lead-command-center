@@ -240,7 +240,7 @@ button {
   display: none;
 }
 
-.nav-item span {
+.nav-icon {
   width: 28px;
   aspect-ratio: 1;
   display: grid;
@@ -248,6 +248,24 @@ button {
   color: var(--brand);
   background: #eaf3ff;
   border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+.nav-icon svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav-icon svg path:first-child:last-child,
+.nav-icon svg path:first-child {
+  fill: currentColor;
+  stroke: none;
 }
 
 .nav-item.active,
@@ -1005,9 +1023,13 @@ button {
     transform: translateY(-1px);
   }
 
-  .nav-item span {
+  .nav-icon {
     width: 26px;
-    font-size: 14px;
+  }
+
+  .nav-icon svg {
+    width: 15px;
+    height: 15px;
   }
 
   .sidebar-panel {
