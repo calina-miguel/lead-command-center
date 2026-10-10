@@ -34,6 +34,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 const themeToggle = document.querySelector("#theme-toggle");
 const themeLabel = document.querySelector(".theme-label");
 const themeIcon = document.querySelector(".theme-icon");
+const mobileMenuToggle = document.querySelector("#mobile-menu-toggle");
 
 function applyTheme(theme) {
   document.body.dataset.theme = theme;
@@ -70,6 +71,20 @@ function setView(viewName) {
   });
 
   document.querySelector("#view-title").textContent = titles[viewName];
+  closeMobileMenu();
+}
+
+function closeMobileMenu() {
+  document.body.classList.remove("nav-open");
+  mobileMenuToggle?.setAttribute("aria-expanded", "false");
+  mobileMenuToggle?.setAttribute("aria-label", "Open menu");
+}
+
+function toggleMobileMenu() {
+  const willOpen = !document.body.classList.contains("nav-open");
+  document.body.classList.toggle("nav-open", willOpen);
+  mobileMenuToggle?.setAttribute("aria-expanded", String(willOpen));
+  mobileMenuToggle?.setAttribute("aria-label", willOpen ? "Close menu" : "Open menu");
 }
 
 function setWalkthroughStep(index) {
@@ -97,6 +112,14 @@ document.querySelector("#prev-step").addEventListener("click", () => {
 
 themeToggle.addEventListener("click", () => {
   applyTheme(document.body.dataset.theme === "dark" ? "light" : "dark");
+});
+
+mobileMenuToggle?.addEventListener("click", toggleMobileMenu);
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeMobileMenu();
+  }
 });
 
 if (!reduceMotion) {

@@ -15,9 +15,14 @@
             <p class="eyebrow">Black Glove Agency</p>
             <h1>Lead Command Center</h1>
           </div>
+          <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
 
-        <nav class="nav-list" aria-label="Dashboard sections">
+        <nav class="nav-list" id="primary-nav" aria-label="Dashboard sections">
           <button class="nav-item active" data-view="overview" title="Command Center">
             <span class="nav-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-9.5Z"/></svg>
@@ -295,6 +300,6 @@
       </main>
     </div>
 
-    <script src="./script.js?v=theme-spacing"></script>
+    <script src="./script.js?v=mobile-menu"></script>
   </body>
 </html>
