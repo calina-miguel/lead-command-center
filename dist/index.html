@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Black Glove Lead Command Center</title>
+    <link rel="stylesheet" href="./styles.css?v=theme-spacing" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">BG</div>
+          <div>
+            <p class="eyebrow">Black Glove Agency</p>
+            <h1>Lead Command Center</h1>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="Dashboard sections">
+          <button class="nav-item active" data-view="overview" title="Command Center">
+            <span>⌂</span>
+            Command Center
+          </button>
+          <button class="nav-item" data-view="hot-leads" title="Hot Leads">
+            <span>◆</span>
+            Hot Leads
+          </button>
+          <button class="nav-item" data-view="content" title="Content Approval">
+            <span>✎</span>
+            Content Approval
+          </button>
+          <button class="nav-item" data-view="pipeline" title="Pipeline">
+            <span>▦</span>
+            Pipeline
+          </button>
+          <button class="nav-item" data-view="engine" title="Under the Hood">
+            <span>⚙</span>
+            Under the Hood
+          </button>
+        </nav>
+
+        <div class="sidebar-panel">
+          <p class="panel-label">Guided Flow</p>
+          <p id="flow-caption">Show the client what they see first: leads, replies, booked calls, and follow-up status in one place.</p>
+          <div class="flow-controls">
+            <button id="prev-step" class="icon-button" title="Previous walkthrough step">‹</button>
+            <button id="next-step" class="primary-button">Next Step</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">SaaS command workspace</p>
+            <h2 id="view-title">Command Center</h2>
+          </div>
+          <div class="topbar-actions">
+            <div class="status-pill"><span></span> Live workspace</div>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Toggle light and dark mode">
+              <span class="theme-icon">☾</span>
+              <span class="theme-label">Dark</span>
+            </button>
+            <button class="ghost-button" id="record-mode">Walkthrough</button>
+          </div>
+        </header>
+
+        <section class="view active" id="overview">
+          <div class="metric-grid">
+            <article class="metric">
+              <p>Imported Leads</p>
+              <strong>2,852</strong>
+              <span>BoldTrail contacts organized by saved filters</span>
+            </article>
+            <article class="metric accent">
+              <p>Hot Replies</p>
+              <strong>37</strong>
+              <span>Positive, urgent, or ready-to-book responses</span>
+            </article>
+            <article class="metric">
+              <p>Booked Calls</p>
+              <strong>14</strong>
+              <span>SaaS Growth Strategy Calls queued</span>
+            </article>
+            <article class="metric">
+              <p>Follow-Up Coverage</p>
+              <strong>96%</strong>
+              <span>Contacts with active next action</span>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="panel wide">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Live operating flow</p>
+                  <h3>Lead Journey</h3>
+                </div>
+                <button class="ghost-button small" data-view-jump="engine">See Automation</button>
+              </div>
+              <div class="journey">
+                <div class="journey-step done">
+                  <span>01</span>
+                  <h4>Lead Intake</h4>
+                  <p>BoldTrail contacts enter GHL, get tagged, and move into the SaaS pipeline.</p>
+                </div>
+                <div class="journey-step active">
+                  <span>02</span>
+                  <h4>Reply Routing</h4>
+                  <p>Important replies become tasks for fast human review and next-step action.</p>
+                </div>
+                <div class="journey-step">
+                  <span>03</span>
+                  <h4>Booked Call</h4>
+                  <p>Booked calls trigger prep so sales walks in with context and offer angle.</p>
+                </div>
+                <div class="journey-step">
+                  <span>04</span>
+                  <h4>Won + Billing</h4>
+                  <p>Closed deals hand off to billing setup and onboarding operations.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Today's priorities</p>
+                  <h3>Action Queue</h3>
+                </div>
+              </div>
+              <div class="task-list">
+                <button class="task-row hot" data-view-jump="hot-leads">
+                  <span>9</span>
+                  Hot leads need reply
+                </button>
+                <button class="task-row" data-view-jump="content">
+                  <span>6</span>
+                  Content drafts awaiting approval
+                </button>
+                <button class="task-row" data-view-jump="pipeline">
+                  <span>4</span>
+                  Calls to prep this week
+                </button>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="hot-leads">
+          <div class="section-intro">
+            <div>
+              <p class="eyebrow">Priority inbox</p>
+              <h3>Hot Leads</h3>
+            </div>
+            <button class="primary-button">Prepare Outreach</button>
+          </div>
+          <div class="lead-table">
+            <div class="lead-row header">
+              <span>Lead</span><span>Source</span><span>Intent</span><span>Next Move</span>
+            </div>
+            <div class="lead-row">
+              <strong>Maya Chen</strong><span>Facebook Buyer Leads</span><span class="badge high">Ready to book</span><span>Send calendar link</span>
+            </div>
+            <div class="lead-row">
+              <strong>Andre Wallace</strong><span>EV-Leads</span><span class="badge">Question</span><span>Answer pricing concern</span>
+            </div>
+            <div class="lead-row">
+              <strong>Nina Patel</strong><span>Otto Szabo Leads</span><span class="badge high">Positive reply</span><span>Social touchpoint review</span>
+            </div>
+            <div class="lead-row">
+              <strong>Marcus Hill</strong><span>Sukh Bains</span><span class="badge">Warm</span><span>Tailored nurture email</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="content">
+          <div class="section-intro">
+            <div>
+              <p class="eyebrow">Human-approved messaging</p>
+              <h3>Content Approval Queue</h3>
+            </div>
+            <button class="primary-button">Approve Selected</button>
+          </div>
+          <div class="approval-grid">
+            <article class="approval-card">
+              <span class="channel">Email</span>
+              <h4>Follow-up for Facebook buyer leads</h4>
+              <p>Personalized message focused on response speed, appointment booking, and market timing.</p>
+              <div class="card-actions"><button>Review</button><button>Approve</button></div>
+            </article>
+            <article class="approval-card">
+              <span class="channel">SMS</span>
+              <h4>Short next-step prompt</h4>
+              <p>Asks whether the prospect wants details, a strategy call, or to pause outreach.</p>
+              <div class="card-actions"><button>Review</button><button>Approve</button></div>
+            </article>
+            <article class="approval-card">
+              <span class="channel">Social</span>
+              <h4>Policy-compliant hot lead touchpoint</h4>
+              <p>Private-first social message with public tagging only after relevance and consent review.</p>
+              <div class="card-actions"><button>Review</button><button>Approve</button></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="pipeline">
+          <div class="section-intro">
+            <div>
+              <p class="eyebrow">Revenue operations</p>
+              <h3>SaaS Client Pipeline</h3>
+            </div>
+          </div>
+          <div class="kanban">
+            <div class="lane"><h4>New Lead</h4><div class="deal">Maya Chen<span>$2.5k/mo</span></div><div class="deal">Marcus Hill<span>$1.8k/mo</span></div></div>
+            <div class="lane"><h4>Discovery Call</h4><div class="deal">Nina Patel<span>$3.2k/mo</span></div></div>
+            <div class="lane"><h4>Proposal Sent</h4><div class="deal">Andre Wallace<span>$2.0k/mo</span></div></div>
+            <div class="lane"><h4>Won</h4><div class="deal won">Rivera Realty<span>Billing handoff</span></div></div>
+          </div>
+        </section>
+
+        <section class="view" id="engine">
+          <div class="section-intro">
+            <div>
+              <p class="eyebrow">What powers the dashboard</p>
+              <h3>GHL Automation Engine</h3>
+            </div>
+          </div>
+          <div class="engine-flow">
+            <article>
+              <span>01</span>
+              <h4>BoldTrail Lead Intake + Nurture</h4>
+              <p>Contact created → tag lead → create opportunity → prepare tailored nurture.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h4>Reply Sorting + Priority Routing</h4>
+              <p>Customer replied → triage response → advance hot replies → prepare compliant social touchpoint.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h4>Booked Call + Next Step</h4>
+              <p>Appointment booked → tag strategy call booked → prepare sales context.</p>
+            </article>
+            <article>
+              <span>04</span>
+              <h4>Closed Won + Billing Handoff</h4>
+              <p>Opportunity won → tag closed won → prepare billing → start onboarding setup.</p>
+            </article>
+          </div>
+          <div class="screenshot-strip" aria-label="GHL setup screenshots">
+            <figure>
+              <img src="./assets/ghl-marketing-saas-setup.png" alt="GHL marketing and SaaS agency setup screen" />
+              <figcaption>Agency positioning</figcaption>
+            </figure>
+            <figure>
+              <img src="./assets/ghl-agency-tags-setup.png" alt="GHL tag setup screen" />
+              <figcaption>Lead tags and segments</figcaption>
+            </figure>
+            <figure>
+              <img src="./assets/ghl-rapid-response-workflow-draft.png" alt="GHL workflow draft screen" />
+              <figcaption>Automation workflow</figcaption>
+            </figure>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js?v=theme-spacing"></script>
+  </body>
+</html>
