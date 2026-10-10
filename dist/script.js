@@ -95,11 +95,6 @@ document.querySelector("#prev-step").addEventListener("click", () => {
   setDemoStep(currentStep - 1);
 });
 
-document.querySelector("#record-mode").addEventListener("click", () => {
-  document.body.classList.toggle("recording");
-  setDemoStep(0);
-});
-
 themeToggle.addEventListener("click", () => {
   applyTheme(document.body.dataset.theme === "dark" ? "light" : "dark");
 });
