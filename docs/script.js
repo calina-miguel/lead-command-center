@@ -72,7 +72,7 @@ function setView(viewName) {
   document.querySelector("#view-title").textContent = titles[viewName];
 }
 
-function setDemoStep(index) {
+function setWalkthroughStep(index) {
   currentStep = (index + walkthroughSteps.length) % walkthroughSteps.length;
   const step = walkthroughSteps[currentStep];
   setView(step.view);
@@ -88,11 +88,11 @@ document.querySelectorAll("[data-view-jump]").forEach((button) => {
 });
 
 document.querySelector("#next-step").addEventListener("click", () => {
-  setDemoStep(currentStep + 1);
+  setWalkthroughStep(currentStep + 1);
 });
 
 document.querySelector("#prev-step").addEventListener("click", () => {
-  setDemoStep(currentStep - 1);
+  setWalkthroughStep(currentStep - 1);
 });
 
 themeToggle.addEventListener("click", () => {
