@@ -14,8 +14,9 @@ Lead Command Center is a client-facing SaaS workspace for lead intake, priority 
 
 ## Local Preview
 
-Serve the `dist` directory with any static server.
+Serve the `docs` directory with any static server.
 
 ```bash
-python -m http.server 5178 --directory dist
+python -m http.server 5178 --directory docs
 ```
+
