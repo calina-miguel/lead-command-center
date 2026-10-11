@@ -49,6 +49,7 @@ const imageGuidance = document.querySelector("#image-guidance");
 const primaryCta = document.querySelector("#primary-cta");
 const secondaryCta = document.querySelector("#secondary-cta");
 const deploymentSummary = document.querySelector("#deployment-summary");
+const contextTrigger = document.querySelector("#context-trigger");
 const contextHint = document.querySelector("#context-hint");
 const contentVariants = [
   {
@@ -92,6 +93,8 @@ const contentVariants = [
   }
 ];
 let contentVariantIndex = 0;
+let activeSummaryTarget = null;
+let helpHideTimer = null;
 
 const contextSummaries = new Map([
   ["[data-view='overview']", "Command Center shows the top-level operating dashboard: lead volume, hot replies, booked calls, coverage, video walkthrough, journey, and priority queue."],
@@ -165,7 +168,33 @@ function hintPositionFor(element) {
   return { x, y };
 }
 
-function showContextHint(element) {
+function triggerPositionFor(element) {
+  const rect = element.getBoundingClientRect();
+  let x = rect.right - 18;
+  let y = rect.top - 10;
+
+  if (rect.width < 60) {
+    x = rect.right + 8;
+    y = rect.top + rect.height / 2 - 16;
+  }
+
+  x = Math.max(12, Math.min(x, window.innerWidth - 44));
+  y = Math.max(12, Math.min(y, window.innerHeight - 44));
+  return { x, y };
+}
+
+function showContextTrigger(element) {
+  if (!contextTrigger || !element?.dataset?.summary) return;
+
+  clearTimeout(helpHideTimer);
+  activeSummaryTarget = element;
+  const { x, y } = triggerPositionFor(element);
+  contextTrigger.style.setProperty("--help-x", `${Math.round(x)}px`);
+  contextTrigger.style.setProperty("--help-y", `${Math.round(y)}px`);
+  contextTrigger.classList.add("is-visible");
+}
+
+function showContextHint(element = activeSummaryTarget) {
   if (!contextHint || !element?.dataset?.summary) return;
 
   const { x, y } = hintPositionFor(element);
@@ -179,7 +208,23 @@ function hideContextHint() {
   contextHint?.classList.remove("is-visible");
 }
 
+function hideContextHelp() {
+  activeSummaryTarget = null;
+  contextTrigger?.classList.remove("is-visible");
+  hideContextHint();
+}
+
+function queueContextHelpHide() {
+  clearTimeout(helpHideTimer);
+  helpHideTimer = setTimeout(() => {
+    if (!contextTrigger?.matches(":hover, :focus-visible")) {
+      hideContextHelp();
+    }
+  }, 180);
+}
+
 function closestSummaryTarget(target) {
+  if (target === contextTrigger || contextTrigger?.contains(target)) return null;
   return target.closest("[data-summary]");
 }
 
@@ -211,7 +256,7 @@ applyTheme(savedTheme || preferredTheme);
 assignContextSummaries();
 
 function setView(viewName) {
-  hideContextHint();
+  hideContextHelp();
   document.querySelectorAll(".view").forEach((view) => {
     const isActive = view.id === viewName;
     view.classList.toggle("active", isActive);
@@ -323,39 +368,62 @@ mobileMenuToggle?.addEventListener("click", toggleMobileMenu);
 
 document.addEventListener("pointerover", (event) => {
   const target = closestSummaryTarget(event.target);
-  if (target) showContextHint(target);
+  if (target) showContextTrigger(target);
 });
 
 document.addEventListener("pointerout", (event) => {
   const target = closestSummaryTarget(event.target);
-  if (target && !target.contains(event.relatedTarget)) hideContextHint();
+  if (target && !target.contains(event.relatedTarget) && !contextTrigger?.contains(event.relatedTarget)) {
+    queueContextHelpHide();
+  }
 });
 
 document.addEventListener("focusin", (event) => {
   const target = closestSummaryTarget(event.target);
-  if (target) showContextHint(target);
+  if (target) showContextTrigger(target);
 });
 
 document.addEventListener("focusout", (event) => {
   const target = closestSummaryTarget(event.target);
-  if (target && !target.contains(event.relatedTarget)) hideContextHint();
+  if (target && !target.contains(event.relatedTarget) && event.relatedTarget !== contextTrigger) {
+    queueContextHelpHide();
+  }
 });
 
 document.addEventListener("pointerdown", (event) => {
   const target = closestSummaryTarget(event.target);
-  if (target) showContextHint(target);
+  if (target) showContextTrigger(target);
+});
+
+contextTrigger?.addEventListener("click", (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  showContextHint();
+});
+
+contextTrigger?.addEventListener("pointerover", () => {
+  clearTimeout(helpHideTimer);
+});
+
+contextTrigger?.addEventListener("pointerout", (event) => {
+  if (!activeSummaryTarget?.contains(event.relatedTarget)) queueContextHelpHide();
+});
+
+document.addEventListener("click", (event) => {
+  if (event.target === contextTrigger || contextTrigger?.contains(event.target)) return;
+  if (!closestSummaryTarget(event.target)) hideContextHelp();
 });
 
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-    hideContextHint();
+    hideContextHelp();
     closeMobileMenu();
   }
 });
 
 window.addEventListener("scroll", () => {
   updateScrolledState();
-  hideContextHint();
+  hideContextHelp();
 }, { passive: true });
 updateScrolledState();
 updateDeploymentSummary();
