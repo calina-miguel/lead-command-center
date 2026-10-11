@@ -31,8 +31,6 @@ const walkthroughSteps = [
 
 let currentStep = 0;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const desktopContextQuery = window.matchMedia("(min-width: 721px)");
-const usesDesktopContext = () => desktopContextQuery.matches;
 const themeToggle = document.querySelector("#theme-toggle");
 const themeLabel = document.querySelector(".theme-label");
 const themeIcon = document.querySelector(".theme-icon");
@@ -183,12 +181,13 @@ function assignContextSummaries() {
 }
 
 function hintPositionFor(element = activeSummaryTarget) {
-  const rect = usesDesktopContext() && element
+  const usesTriggerPosition = document.body.classList.contains("touch-context-help");
+  const rect = !usesTriggerPosition && element
     ? element.getBoundingClientRect()
     : contextTrigger.getBoundingClientRect();
   const width = Math.min(320, window.innerWidth - 28);
   let x = rect.left + rect.width / 2 - width / 2;
-  let y = usesDesktopContext() ? rect.top - 12 - 108 : rect.bottom + 10;
+  let y = usesTriggerPosition ? rect.bottom + 10 : rect.top - 12 - 108;
 
   x = Math.max(14, Math.min(x, window.innerWidth - width - 14));
   if (y < 14) y = rect.bottom + 12;
@@ -217,7 +216,7 @@ function showContextTrigger(element) {
   clearTimeout(helpHideTimer);
   clearContextIdleTimer();
   activeSummaryTarget = element;
-  if (usesDesktopContext()) {
+  if (!document.body.classList.contains("touch-context-help")) {
     contextTrigger.classList.remove("is-visible");
     showContextHint(element);
     return;
@@ -251,6 +250,7 @@ function hideContextHint() {
 function hideContextHelp() {
   clearContextIdleTimer();
   activeSummaryTarget = null;
+  document.body.classList.remove("touch-context-help");
   contextTrigger?.classList.remove("is-visible");
   hideContextHint();
 }
@@ -269,7 +269,7 @@ function scheduleContextIdleHide(delay = 2600) {
 function queueContextHelpHide() {
   clearTimeout(helpHideTimer);
   helpHideTimer = setTimeout(() => {
-    if (usesDesktopContext()) {
+    if (!document.body.classList.contains("touch-context-help")) {
       if (!contextHint?.matches(":hover")) hideContextHelp();
       return;
     }
@@ -541,7 +541,7 @@ mediaAttachmentInput?.addEventListener("change", () => {
 mobileMenuToggle?.addEventListener("click", toggleMobileMenu);
 
 document.addEventListener("pointerover", (event) => {
-  if (!usesDesktopContext()) return;
+  if (event.pointerType === "touch") return;
   const target = closestSummaryTarget(event.target);
   if (target) showContextTrigger(target);
 });
@@ -567,12 +567,11 @@ document.addEventListener("focusout", (event) => {
 
 document.addEventListener("pointerdown", (event) => {
   pulseTapMotion(closestTapTarget(event.target));
-  if (usesDesktopContext()) return;
+  if (event.pointerType !== "touch") return;
+  document.body.classList.add("touch-context-help");
   const target = closestSummaryTarget(event.target);
   if (target) showContextTrigger(target);
 });
-
-desktopContextQuery.addEventListener("change", hideContextHelp);
 
 contextTrigger?.addEventListener("click", (event) => {
   event.preventDefault();

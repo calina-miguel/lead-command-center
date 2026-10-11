@@ -185,20 +185,18 @@ button {
   animation: helpPulse 1.8s var(--ease-soft) infinite;
 }
 
+body:not(.touch-context-help) .context-trigger,
+body:not(.touch-context-help) .context-trigger.is-visible {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
 .context-trigger:hover,
 .context-trigger:focus-visible {
   box-shadow: 0 18px 42px rgba(0, 122, 255, 0.42), 0 0 0 7px rgba(0, 122, 255, 0.12);
   outline: 0;
   transform: translate3d(var(--help-x, 18px), var(--help-y, 18px), 0) scale(1.08);
-}
-
-@media (min-width: 721px) {
-  .context-trigger,
-  .context-trigger.is-visible {
-    opacity: 0;
-    pointer-events: none;
-    visibility: hidden;
-  }
 }
 
 .context-hint {
