@@ -50,7 +50,7 @@ const primaryCta = document.querySelector("#primary-cta");
 const secondaryCta = document.querySelector("#secondary-cta");
 const deploymentSummary = document.querySelector("#deployment-summary");
 const contextTrigger = document.querySelector("#context-trigger");
-const contextHint = document.querySelector("#context-hint");
+const contextText = document.querySelector(".context-text");
 const contentVariants = [
   {
     subject: "Subject: A clearer path for your next move",
@@ -157,29 +157,24 @@ function assignContextSummaries() {
   });
 }
 
-function hintPositionFor(element) {
+function triggerPositionFor(element, expanded = false) {
   const rect = element.getBoundingClientRect();
-  const width = Math.min(320, window.innerWidth - 28);
-  let x = rect.left + rect.width / 2 - width / 2;
-  let y = rect.bottom + 10;
+  const chipWidth = expanded ? Math.min(320, window.innerWidth - 28) : 32;
+  const chipHeight = expanded ? 96 : 32;
+  let x = expanded ? rect.left + rect.width / 2 - chipWidth / 2 : rect.right - 18;
+  let y = expanded ? rect.bottom + 10 : rect.top - 10;
 
-  x = Math.max(14, Math.min(x, window.innerWidth - width - 14));
-  if (y > window.innerHeight - 120) y = Math.max(14, rect.top - 96);
-  return { x, y };
-}
-
-function triggerPositionFor(element) {
-  const rect = element.getBoundingClientRect();
-  let x = rect.right - 18;
-  let y = rect.top - 10;
-
-  if (rect.width < 60) {
+  if (!expanded && rect.width < 60) {
     x = rect.right + 8;
     y = rect.top + rect.height / 2 - 16;
   }
 
-  x = Math.max(12, Math.min(x, window.innerWidth - 44));
-  y = Math.max(12, Math.min(y, window.innerHeight - 44));
+  if (expanded && y > window.innerHeight - chipHeight - 14) {
+    y = Math.max(14, rect.top - chipHeight - 10);
+  }
+
+  x = Math.max(12, Math.min(x, window.innerWidth - chipWidth - 12));
+  y = Math.max(12, Math.min(y, window.innerHeight - chipHeight - 12));
   return { x, y };
 }
 
@@ -191,21 +186,22 @@ function showContextTrigger(element) {
   const { x, y } = triggerPositionFor(element);
   contextTrigger.style.setProperty("--help-x", `${Math.round(x)}px`);
   contextTrigger.style.setProperty("--help-y", `${Math.round(y)}px`);
+  contextText.textContent = element.dataset.summary;
   contextTrigger.classList.add("is-visible");
 }
 
 function showContextHint(element = activeSummaryTarget) {
-  if (!contextHint || !element?.dataset?.summary) return;
+  if (!contextTrigger || !contextText || !element?.dataset?.summary) return;
 
-  const { x, y } = hintPositionFor(element);
-  contextHint.textContent = element.dataset.summary;
-  contextHint.style.setProperty("--hint-x", `${Math.round(x)}px`);
-  contextHint.style.setProperty("--hint-y", `${Math.round(y)}px`);
-  contextHint.classList.add("is-visible");
+  const { x, y } = triggerPositionFor(element, true);
+  contextText.textContent = element.dataset.summary;
+  contextTrigger.style.setProperty("--help-x", `${Math.round(x)}px`);
+  contextTrigger.style.setProperty("--help-y", `${Math.round(y)}px`);
+  contextTrigger.classList.add("is-expanded");
 }
 
 function hideContextHint() {
-  contextHint?.classList.remove("is-visible");
+  contextTrigger?.classList.remove("is-expanded");
 }
 
 function hideContextHelp() {
