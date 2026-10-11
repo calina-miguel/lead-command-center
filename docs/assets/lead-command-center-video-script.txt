@@ -15,17 +15,11 @@ For outreach, the content studio creates review-ready email, social copy, image 
 5. Deployment Composer
 Once content is approved, the user chooses the format, such as a post, reel, story, or My Day, selects the social platforms, attaches images or video, adds emoji tone, and queues the final deployment.
 
-6. Apartment Intercom Context
-For apartment communities, the story can transition into access and intercom workflows, showing how resident communication, visitor entry, and follow-up can sit beside the sales operation.
-
-7. BEC Risk Awareness
-The system also frames communication with security awareness, especially around business email compromise risk, where payment changes and urgent requests should be verified before action.
-
-8. Pipeline
+6. Pipeline
 The pipeline view connects outreach to revenue, showing which prospects are new, which calls are booked, which proposals are active, and which clients are ready for billing.
 
-9. Operating Engine
+7. Operating Engine
 Under the hood, the workflow keeps the system consistent: intake, reply routing, content review, appointment preparation, closed-won handoff, and billing setup.
 
-10. Client Value
+8. Client Value
 For clients, the value is simple: faster answers, smarter follow-up, compliant outreach, and a system that turns attention into booked conversations.

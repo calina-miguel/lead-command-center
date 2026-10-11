@@ -57,18 +57,6 @@ SCENES = [
         "vo": "Once content is approved, the user chooses the format, such as a post, reel, story, or My Day, selects the social platforms, attaches images or video, adds emoji tone, and queues the final deployment.",
     },
     {
-        "id": "aiphone",
-        "label": "Apartment Intercom Context",
-        "mode": "concept",
-        "vo": "For apartment communities, the story can transition into access and intercom workflows, showing how resident communication, visitor entry, and follow-up can sit beside the sales operation.",
-    },
-    {
-        "id": "bec",
-        "label": "BEC Risk Awareness",
-        "mode": "concept",
-        "vo": "The system also frames communication with security awareness, especially around business email compromise risk, where payment changes and urgent requests should be verified before action.",
-    },
-    {
         "id": "pipeline",
         "view": "pipeline",
         "label": "Pipeline",
@@ -88,7 +76,17 @@ SCENES = [
     },
 ]
 
-VOICE_PREFERENCES = ["Rachel", "Jessica", "Serena", "Aria", "Laura", "Nicole"]
+VOICE_PREFERENCES = [
+    "Eric - Smooth, Trustworthy",
+    "Brian - Deep, Resonant and Comforting",
+    "George - Warm, Captivating Storyteller",
+    "Bella - Professional, Bright, Warm",
+    "Sarah - Mature, Reassuring, Confident",
+    "Rachel",
+    "Serena",
+    "Aria",
+    "Nicole",
+]
 
 
 def font(size, bold=False):
@@ -149,45 +147,6 @@ def crop_focus_scene(scene, screenshot_path):
     image.crop((0, crop_top, W, crop_top + H)).save(screenshot_path)
 
 
-def make_concept_screenshot(scene):
-    image = Image.new("RGB", (W, H), "#0b111c")
-    draw = ImageDraw.Draw(image)
-    draw.ellipse((-180, -160, 440, 410), fill="#0f2f55")
-    draw.ellipse((840, -180, 1460, 430), fill="#123d32")
-    draw.rounded_rectangle((52, 48, 1228, 672), radius=34, fill="#111827", outline="#2a3445", width=2)
-    draw.text((92, 86), scene["label"].upper(), font=SMALL_FONT, fill="#78baff")
-
-    if scene["id"] == "aiphone":
-        draw.text((92, 126), "Apartment access + resident communication", font=font(40, True), fill="#f8fafc")
-        draw.text((92, 184), "Context scene for property-facing workflows", font=font(22), fill="#a7b0bf")
-        draw.rounded_rectangle((92, 250, 430, 560), radius=26, fill="#1d2532", outline="#344055", width=2)
-        draw.rounded_rectangle((134, 292, 388, 408), radius=18, fill="#0d1624", outline="#3b82f6", width=2)
-        draw.ellipse((206, 318, 316, 392), fill="#1f6feb")
-        draw.rectangle((250, 318, 272, 392), fill="#0d1624")
-        draw.text((146, 438), "Entrance station", font=font(24, True), fill="#ffffff")
-        draw.text((146, 478), "Visitor call, resident response,\nand controlled entry context.", font=font(18), fill="#a7b0bf")
-        cards = [("Resident app", "Call notification"), ("Property team", "Access request"), ("Follow-up", "Service or sales next step")]
-    else:
-        draw.text((92, 126), "Business email compromise awareness", font=font(40, True), fill="#f8fafc")
-        draw.text((92, 184), "Context scene for safer payment and communication workflows", font=font(22), fill="#a7b0bf")
-        draw.rounded_rectangle((92, 250, 430, 560), radius=26, fill="#1d2532", outline="#344055", width=2)
-        draw.rounded_rectangle((138, 306, 384, 404), radius=18, fill="#0d1624", outline="#ff9f0a", width=2)
-        draw.polygon([(170, 336), (260, 384), (350, 336), (350, 374), (260, 424), (170, 374)], fill="#ff9f0a")
-        draw.text((146, 438), "Verify before action", font=font(24, True), fill="#ffffff")
-        draw.text((146, 478), "Payment changes and urgent\nrequests require extra review.", font=font(18), fill="#a7b0bf")
-        cards = [("Request received", "Payment or access change"), ("Risk check", "Confirm sender and context"), ("Escalate", "Human approval before action")]
-
-    x = 510
-    for title, body in cards:
-        draw.rounded_rectangle((x, 270, x + 205, 520), radius=24, fill="#1d2532", outline="#344055", width=2)
-        draw.ellipse((x + 28, 304, x + 58, 334), fill="#007aff")
-        draw.text((x + 28, 368), title, font=font(22, True), fill="#f8fafc")
-        draw.text((x + 28, 410), body, font=font(18), fill="#a7b0bf")
-        x += 230
-
-    image.save(SHOTS / f"{scene['id']}.png")
-
-
 def capture_screenshots():
     SHOTS.mkdir(parents=True, exist_ok=True)
     for old in SHOTS.glob("*.png"):
@@ -202,9 +161,6 @@ def capture_screenshots():
         time.sleep(1.2)
         browser = chrome_path()
         for scene in SCENES:
-            if scene.get("mode") == "concept":
-                make_concept_screenshot(scene)
-                continue
             url = f"http://127.0.0.1:{PORT}/?view={scene['view']}"
             out = SHOTS / f"{scene['id']}.png"
             height = 2200 if scene.get("focus") else H
@@ -361,7 +317,7 @@ def render_voiceover():
     payload = {
         "text": "\n\n".join(scene["vo"] for scene in SCENES),
         "model_id": "eleven_multilingual_v2",
-        "voice_settings": {"stability": 0.76, "similarity_boost": 0.78, "style": 0.12, "use_speaker_boost": True},
+        "voice_settings": {"stability": 0.56, "similarity_boost": 0.82, "style": 0.28, "use_speaker_boost": True},
     }
     data = elevenlabs_request(f"text-to-speech/{voice_id}", payload=payload, method="POST")
     if not data:
