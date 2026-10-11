@@ -1,0 +1,22 @@
+Lead Command Center Video Presentation Script
+
+1. Black Glove Agency
+Meet Lead Command Center, a client-ready growth workspace built for agencies that need faster follow-up, cleaner pipeline visibility, and fewer missed opportunities.
+
+2. Priority Inbox
+The first screen shows what matters now: imported leads, positive replies, booked calls, and follow-up coverage, so the team always knows where to act first.
+
+3. Lead Journey
+Leads can move from BoldTrail intake into organized segments, then into outreach, reply sorting, call scheduling, proposal tracking, billing, and onboarding.
+
+4. Content Studio
+For outreach, the content studio creates review-ready email, social copy, image direction, and call-to-action links with consent checks and truthful claim controls built in.
+
+5. Pipeline
+The pipeline view connects outreach to revenue, showing which prospects are new, which calls are booked, which proposals are active, and which clients are ready for billing.
+
+6. Operating Engine
+Under the hood, the workflow keeps the system consistent: intake, reply routing, content review, appointment preparation, closed-won handoff, and billing setup.
+
+7. Client Value
+For clients, the value is simple: faster answers, smarter follow-up, compliant outreach, and a system that turns attention into booked conversations.

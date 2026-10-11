@@ -4,3 +4,5 @@ node_modules/
 .env
 .env.*
 tools/_presentation_frames/
+docs/assets/lead-command-center-presentation-video-only.mp4
+docs/assets/lead-command-center-voiceover.mp3

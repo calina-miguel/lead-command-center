@@ -554,9 +554,23 @@ button {
   line-height: 1.5;
 }
 
-.presentation-copy .primary-button {
+.presentation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.presentation-copy .primary-button,
+.presentation-copy .ghost-button {
   width: max-content;
   text-decoration: none;
+}
+
+.presentation-copy .ghost-button {
+  border-color: rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
 .video-frame {
