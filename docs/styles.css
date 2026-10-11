@@ -226,8 +226,8 @@ button {
 
 .context-text {
   display: block;
-  max-width: 0;
-  max-height: 0;
+  width: 250px;
+  max-width: 250px;
   opacity: 0;
   font-size: 13px;
   font-weight: 700;
@@ -235,14 +235,14 @@ button {
   text-align: left;
   white-space: normal;
   transform: translateY(4px);
-  transition: opacity 180ms ease 90ms, transform 220ms cubic-bezier(.2,.8,.2,1) 70ms, max-width 1ms linear 80ms, max-height 1ms linear 80ms;
+  visibility: hidden;
+  transition: opacity 180ms ease 120ms, transform 220ms cubic-bezier(.2,.8,.2,1) 100ms, visibility 1ms linear 120ms;
 }
 
 .context-trigger.is-expanded .context-text {
-  max-width: 250px;
-  max-height: 180px;
   opacity: 1;
   transform: translateY(0);
+  visibility: visible;
 }
 
 body[data-theme="dark"] .context-trigger.is-expanded {

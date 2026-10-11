@@ -180,6 +180,7 @@ function triggerPositionFor(element, expanded = false) {
 
 function showContextTrigger(element) {
   if (!contextTrigger || !element?.dataset?.summary) return;
+  if (contextTrigger.classList.contains("is-expanded")) return;
 
   clearTimeout(helpHideTimer);
   activeSummaryTarget = element;
@@ -193,6 +194,7 @@ function showContextTrigger(element) {
 function showContextHint(element = activeSummaryTarget) {
   if (!contextTrigger || !contextText || !element?.dataset?.summary) return;
 
+  clearTimeout(helpHideTimer);
   const { x, y } = triggerPositionFor(element, true);
   contextText.textContent = element.dataset.summary;
   contextTrigger.style.setProperty("--help-x", `${Math.round(x)}px`);
@@ -213,6 +215,7 @@ function hideContextHelp() {
 function queueContextHelpHide() {
   clearTimeout(helpHideTimer);
   helpHideTimer = setTimeout(() => {
+    if (contextTrigger?.classList.contains("is-expanded")) return;
     if (!contextTrigger?.matches(":hover, :focus-visible")) {
       hideContextHelp();
     }
@@ -363,6 +366,7 @@ generateContentButton?.addEventListener("click", () => {
 mobileMenuToggle?.addEventListener("click", toggleMobileMenu);
 
 document.addEventListener("pointerover", (event) => {
+  if (contextTrigger?.classList.contains("is-expanded")) return;
   const target = closestSummaryTarget(event.target);
   if (target) showContextTrigger(target);
 });
@@ -375,6 +379,7 @@ document.addEventListener("pointerout", (event) => {
 });
 
 document.addEventListener("focusin", (event) => {
+  if (contextTrigger?.classList.contains("is-expanded")) return;
   const target = closestSummaryTarget(event.target);
   if (target) showContextTrigger(target);
 });
@@ -387,6 +392,7 @@ document.addEventListener("focusout", (event) => {
 });
 
 document.addEventListener("pointerdown", (event) => {
+  if (contextTrigger?.classList.contains("is-expanded")) return;
   const target = closestSummaryTarget(event.target);
   if (target) showContextTrigger(target);
 });
