@@ -166,11 +166,10 @@ def card(draw, box, radius=26, fill="#ffffff", outline="#e1e7f0", width=1):
 
 
 def draw_background(draw, progress):
-    drift = math.sin(progress * math.pi * 2)
     draw.rectangle((0, 0, W, H), fill="#f5f7fb")
-    draw.ellipse((-210 + drift * 18, -170, 440 + drift * 18, 420), fill="#e4f1ff")
-    draw.ellipse((830 - drift * 16, -150, 1480 - drift * 16, 470), fill="#e6f8ee")
-    draw.ellipse((760 + drift * 10, 460, 1500 + drift * 10, 980), fill="#eef0ff")
+    draw.ellipse((-210, -170, 440, 420), fill="#e4f1ff")
+    draw.ellipse((830, -150, 1480, 470), fill="#e6f8ee")
+    draw.ellipse((760, 460, 1500, 980), fill="#eef0ff")
 
 
 def draw_nav(draw, active):
@@ -193,8 +192,7 @@ def draw_nav(draw, active):
 def draw_metrics(draw, scene, p):
     start_x = 310
     for i, (label, value) in enumerate(scene["metrics"]):
-        local = ease((p - i * 0.08) / 0.5)
-        y = 226 + int((1 - local) * 24)
+        y = 226
         x = start_x + i * 218
         card(draw, (x, y, x + 190, y + 98), 22)
         color = ["#007aff", "#34c759", "#ff9500", "#5856d6"][i % 4]
@@ -222,8 +220,7 @@ def draw_feature_panel(draw, scene, p):
 
     x = 344
     for i, label in enumerate(labels):
-        local = ease((p - 0.22 - i * 0.055) / 0.44)
-        yy = y + 138 + int((1 - local) * 18)
+        yy = y + 138
         fill = ["#eaf3ff", "#ecfdf3", "#fff5e6", "#f0efff", "#eef2f7"][i % 5]
         ink = ["#007aff", "#22863a", "#b65c00", "#5856d6", "#475569"][i % 5]
         tw = int(draw.textlength(label, font=FONTS["small_bold"]))
@@ -257,7 +254,6 @@ def make_frame(scene, scene_idx, frame, total_frames):
     draw = ImageDraw.Draw(img)
     draw_background(draw, scene_idx / max(1, len(SCENES) - 1) + p * 0.04)
 
-    scale = 1 + (1 - ease(p)) * 0.012
     shell = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     sd = ImageDraw.Draw(shell)
     rounded(sd, (38, 42, 1242, 666), 40, "#ffffff", "#dbe3ef", 2)
@@ -272,7 +268,7 @@ def make_frame(scene, scene_idx, frame, total_frames):
 
     draw_nav(draw, scene["highlight"])
 
-    title_y = 120 + int((1 - ease(p)) * 18)
+    title_y = 120
     draw.text((310, title_y), scene["label"].upper(), font=FONTS["eyebrow"], fill="#007aff")
     draw_wrapped(draw, scene["title"], (310, title_y + 34), 820, FONTS["title"], "#111827", 6)
 
@@ -280,11 +276,6 @@ def make_frame(scene, scene_idx, frame, total_frames):
     draw_feature_panel(draw, scene, p)
     draw_caption_bar(draw, scene, frame, total_frames)
 
-    if scale != 1:
-        nw, nh = int(W * scale), int(H * scale)
-        img = img.resize((nw, nh), Image.Resampling.LANCZOS)
-        left, top = (nw - W) // 2, (nh - H) // 2
-        img = img.crop((left, top, left + W, top + H))
     return img
 
 

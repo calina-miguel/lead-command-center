@@ -1347,6 +1347,90 @@ body[data-theme="dark"] .cta-list a {
     margin-top: 0;
   }
 
+  .mobile-menu-toggle {
+    width: 44px;
+    aspect-ratio: 1;
+    position: fixed;
+    right: 14px;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    z-index: 100;
+    margin-left: 0;
+    border: 1px solid var(--control-border);
+    background: var(--control-bg);
+    display: inline-grid;
+    place-items: center;
+    gap: 4px;
+    padding: 11px;
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    transition: opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .mobile-menu-toggle span {
+    width: 18px;
+    height: 2px;
+    display: block;
+    border-radius: 999px;
+    background: var(--ink);
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  body.nav-open .mobile-menu-toggle span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  body.nav-open .mobile-menu-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+
+  body.nav-open .mobile-menu-toggle span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .nav-list {
+    position: fixed;
+    top: auto;
+    left: auto;
+    right: 14px;
+    bottom: max(72px, calc(env(safe-area-inset-bottom) + 72px));
+    z-index: 90;
+    width: min(280px, calc(100vw - 28px));
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 24px;
+    box-shadow: 0 18px 42px rgba(24, 31, 43, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px) scale(0.98);
+    transform-origin: bottom right;
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  body.nav-open .nav-list {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+
+  .nav-item {
+    min-height: 48px;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.1;
+    text-align: left;
+  }
+
+  .nav-item span {
+    width: 30px;
+  }
+
   .metric-grid,
   .dashboard-grid,
   .journey,
