@@ -733,6 +733,7 @@ button {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-section);
+  margin-bottom: var(--space-section);
 }
 
 .approval-card {
@@ -755,6 +756,152 @@ button {
   gap: 8px;
   margin-top: 18px;
   flex-wrap: wrap;
+}
+
+.content-studio {
+  padding: calc(var(--space-card) + 2px);
+  background: var(--panel);
+  border: 1px solid var(--sidebar-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  animation: cardIn 560ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+.studio-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-section);
+  margin-bottom: var(--space-section);
+}
+
+.studio-header h3,
+.studio-header p {
+  margin: 0;
+}
+
+.studio-header h3 {
+  font-size: 24px;
+  line-height: 1.16;
+}
+
+.studio-header p:not(.eyebrow) {
+  max-width: 760px;
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.studio-grid,
+.generated-output {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-section);
+}
+
+.studio-grid {
+  margin-bottom: var(--space-section);
+}
+
+.studio-card,
+.output-card {
+  padding: var(--space-card);
+  background: var(--soft);
+  border: 1px solid var(--sidebar-border);
+  border-radius: var(--radius-md);
+}
+
+.signal-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.target-profile + .target-profile {
+  margin-top: 14px;
+}
+
+.target-profile strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.target-profile p,
+.output-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.compliance-card {
+  display: grid;
+  gap: 10px;
+}
+
+.compliance-card label {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.compliance-card input {
+  margin-top: 2px;
+  accent-color: var(--brand);
+}
+
+.output-card {
+  background: var(--control-bg);
+}
+
+.output-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.output-head span {
+  font-weight: 820;
+  color: var(--brand);
+}
+
+.output-head small {
+  color: var(--subtle);
+  font-weight: 760;
+}
+
+.output-card h4 {
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+
+.publish-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.publish-row span {
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: #eaf3ff;
+  color: var(--brand);
+  font-size: 13px;
+  font-weight: 780;
+}
+
+body[data-theme="dark"] .publish-row span {
+  background: #202f44;
+}
+
+.generated-output.is-refreshing .output-card {
+  animation: cardIn 420ms cubic-bezier(.2,.8,.2,1) both;
 }
 
 .kanban {
@@ -948,7 +1095,9 @@ button {
   .approval-grid,
   .kanban,
   .engine-flow,
-  .screenshot-strip { grid-template-columns: 1fr 1fr; }
+  .screenshot-strip,
+  .studio-grid,
+  .generated-output { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 720px) {
@@ -1110,7 +1259,17 @@ button {
   .kanban,
   .engine-flow,
   .screenshot-strip,
+  .studio-grid,
+  .generated-output,
   .presentation-panel { grid-template-columns: 1fr; }
+
+  .studio-header {
+    flex-direction: column;
+  }
+
+  .studio-header .primary-button {
+    width: 100%;
+  }
 
   .lead-row {
     grid-template-columns: 1fr;

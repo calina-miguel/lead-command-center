@@ -236,6 +236,82 @@
               <div class="card-actions"><button>Review</button><button>Approve</button></div>
             </article>
           </div>
+
+          <section class="content-studio" aria-label="Compliant content generator">
+            <div class="studio-header">
+              <div>
+                <p class="eyebrow">Policy-safe content studio</p>
+                <h3>Generate targeted email and social content</h3>
+                <p>Create buyer-specific copy from current market signals, prospect preferences, and consent status before anything is queued for publishing.</p>
+              </div>
+              <button class="primary-button" id="generate-content">Generate Content</button>
+            </div>
+
+            <div class="studio-grid">
+              <article class="studio-card">
+                <span class="channel">Trend Inputs</span>
+                <ul class="signal-list">
+                  <li>Short-form educational posts</li>
+                  <li>Personalized market timing angles</li>
+                  <li>Value-first email subject lines</li>
+                  <li>Clear opt-out and consent language</li>
+                </ul>
+              </article>
+
+              <article class="studio-card">
+                <span class="channel">Audience Targeting</span>
+                <div class="target-profile">
+                  <strong>Preferred buyer segment</strong>
+                  <p>Warm real estate prospects from Facebook Buyer Leads and EV-Leads with booking intent or pricing questions.</p>
+                </div>
+                <div class="target-profile">
+                  <strong>Personalization guardrails</strong>
+                  <p>Use source, stated interest, and pipeline stage. Avoid sensitive assumptions or pressure language.</p>
+                </div>
+              </article>
+
+              <article class="studio-card compliance-card">
+                <span class="channel">Publish Gate</span>
+                <label><input type="checkbox" checked /> Consent or legitimate context verified</label>
+                <label><input type="checkbox" checked /> Public tag reviewed for relevance</label>
+                <label><input type="checkbox" checked /> No misleading urgency or claims</label>
+                <label><input type="checkbox" checked /> Opt-out language included where needed</label>
+              </article>
+            </div>
+
+            <div class="generated-output" id="generated-output" aria-live="polite">
+              <article class="output-card">
+                <div class="output-head">
+                  <span>Email</span>
+                  <small>Persuasive, policy-reviewed</small>
+                </div>
+                <h4 id="email-subject">Subject: Ready when you are — quick next step?</h4>
+                <p id="email-copy">Hi Maya, based on what you were looking at, I put together a quick next-step option that keeps things simple: a short strategy call, a tailored property update, or a pause if now is not the right time.</p>
+              </article>
+
+              <article class="output-card">
+                <div class="output-head">
+                  <span>Social</span>
+                  <small>Multi-account queue</small>
+                </div>
+                <p id="social-copy">A helpful note for active buyers: the best next step is not more noise, it is a clear plan. We are helping buyers compare timing, options, and next moves without pressure.</p>
+                <div class="publish-row">
+                  <span>Facebook</span>
+                  <span>Instagram</span>
+                  <span>LinkedIn</span>
+                </div>
+              </article>
+
+              <article class="output-card">
+                <div class="output-head">
+                  <span>Tagging</span>
+                  <small>Consent-aware</small>
+                </div>
+                <p id="tag-copy">Suggested tag action: use a private message unless the prospect has opted into public interaction or the tag is clearly relevant to an existing conversation.</p>
+                <button class="ghost-button small">Queue for Review</button>
+              </article>
+            </div>
+          </section>
         </section>
 
         <section class="view" id="pipeline">
