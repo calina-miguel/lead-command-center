@@ -49,6 +49,7 @@ const imageGuidance = document.querySelector("#image-guidance");
 const primaryCta = document.querySelector("#primary-cta");
 const secondaryCta = document.querySelector("#secondary-cta");
 const deploymentSummary = document.querySelector("#deployment-summary");
+const mediaAttachmentInput = document.querySelector("#media-attachment-input");
 const contextTrigger = document.querySelector("#context-trigger");
 const contextHint = document.querySelector("#context-hint");
 const workflowToast = document.querySelector("#workflow-toast");
@@ -350,13 +351,27 @@ function runWorkflowAction(action, source) {
   }
 
   if (action === "attach-media") {
-    const mediaDrop = source.closest(".media-drop");
-    mediaDrop?.classList.add("has-media");
-    mediaDrop?.querySelector("span") && (mediaDrop.querySelector("span").textContent = "Creative attached");
-    mediaDrop?.querySelector("p") && (mediaDrop.querySelector("p").textContent = "Approved image/video asset attached for controlled workflow validation.");
-    showWorkflowToast("Media attachment added to the deployment package.");
+    mediaAttachmentInput?.click();
     return;
   }
+}
+
+function formatFileSize(bytes) {
+  if (!Number.isFinite(bytes) || bytes <= 0) return "0 KB";
+  if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function updateMediaAttachment(file) {
+  const mediaDrop = mediaAttachmentInput?.closest(".media-drop");
+  if (!mediaDrop || !file) return;
+
+  const type = file.type.startsWith("video/") ? "Video attached" : "Image attached";
+  mediaDrop.classList.add("has-media");
+  mediaDrop.querySelector("span").textContent = type;
+  mediaDrop.querySelector("p").textContent = `${file.name} · ${formatFileSize(file.size)} selected for review before deployment.`;
+  updateDeploymentSummary();
+  showWorkflowToast(`${type} and ready for approval.`);
 }
 
 function updateDeploymentSummary() {
@@ -367,8 +382,10 @@ function updateDeploymentSummary() {
     .map((button) => button.textContent.trim());
   const emojiTone = document.querySelector('[data-option-group="emoji"] .active')?.textContent.trim() || "Clear";
   const platformText = platforms.length ? platforms.join(", ") : "selected platforms";
+  const file = mediaAttachmentInput?.files?.[0];
+  const mediaText = file ? `${file.type.startsWith("video/") ? "video" : "image"} attachment` : "media ready to attach";
 
-  deploymentSummary.textContent = `${format} to ${platformText} with image/video attachment and ${emojiTone.toLowerCase()} tone.`;
+  deploymentSummary.textContent = `${format} to ${platformText} with ${mediaText} and ${emojiTone.toLowerCase()} tone.`;
 }
 
 function applyTheme(theme) {
@@ -498,6 +515,10 @@ generateContentButton?.addEventListener("click", () => {
   requestAnimationFrame(() => {
     generatedOutput?.classList.add("is-refreshing");
   });
+});
+
+mediaAttachmentInput?.addEventListener("change", () => {
+  updateMediaAttachment(mediaAttachmentInput.files?.[0]);
 });
 
 mobileMenuToggle?.addEventListener("click", toggleMobileMenu);
