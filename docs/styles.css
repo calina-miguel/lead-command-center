@@ -33,6 +33,7 @@
   --motion-fast: 220ms;
   --motion-med: 360ms;
   --motion-slow: 620ms;
+  --motion-slide: 420ms;
   color-scheme: light;
 }
 
@@ -1559,6 +1560,141 @@ body[data-theme="dark"] .cta-list a {
 @keyframes softPulse {
   0%, 100% { box-shadow: inset 0 0 0 1px rgba(0, 122, 255, 0.22), 0 14px 30px rgba(0, 122, 255, 0.11); }
   50% { box-shadow: inset 0 0 0 1px rgba(0, 122, 255, 0.36), 0 18px 38px rgba(0, 122, 255, 0.16); }
+}
+
+.nav-item,
+.primary-button,
+.ghost-button,
+.theme-toggle,
+.icon-button,
+.card-actions button,
+.task-row,
+.option-pill,
+.platform-pill,
+.emoji-pill {
+  transition-duration: var(--motion-med);
+  transition-timing-function: var(--ease-soft);
+}
+
+.metric,
+.panel,
+.approval-card,
+.lead-table,
+.lane,
+.engine-flow article,
+.screenshot-strip figure,
+.setup-card,
+.setup-runbook,
+.connection-table,
+.journey-step,
+.studio-card,
+.output-card,
+.creative-card,
+.composer-card,
+.deal {
+  transition: opacity var(--motion-fast) ease, transform var(--motion-slide) var(--ease-soft), box-shadow var(--motion-med) ease, border-color var(--motion-med) ease, background var(--motion-med) ease, filter var(--motion-med) ease;
+}
+
+.studio-card:hover,
+.output-card:hover,
+.creative-card:hover,
+.composer-card:hover,
+.journey-step:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(24, 31, 43, 0.1);
+}
+
+.option-pill:hover,
+.platform-pill:hover,
+.emoji-pill:hover {
+  box-shadow: 0 10px 22px rgba(24, 31, 43, 0.08);
+}
+
+.setup-card:hover .setup-state,
+.setup-card.is-tapping .setup-state {
+  opacity: 0.94;
+  transform: translateX(3px);
+}
+
+.setup-state {
+  transition: opacity var(--motion-fast) ease, transform var(--motion-med) var(--ease-soft), background var(--motion-fast) ease, color var(--motion-fast) ease;
+}
+
+.is-tapping {
+  animation: tapSettle 420ms var(--ease-soft) both;
+}
+
+.metric.is-tapping,
+.panel.is-tapping,
+.approval-card.is-tapping,
+.lane.is-tapping,
+.engine-flow article.is-tapping,
+.lead-table.is-tapping,
+.screenshot-strip figure.is-tapping,
+.setup-card.is-tapping,
+.setup-runbook.is-tapping,
+.connection-table.is-tapping,
+.journey-step.is-tapping,
+.studio-card.is-tapping,
+.output-card.is-tapping,
+.creative-card.is-tapping,
+.composer-card.is-tapping,
+.deal.is-tapping {
+  animation-name: cardTap;
+}
+
+.lead-row.is-tapping,
+.connection-row.is-tapping,
+.task-row.is-tapping {
+  animation-name: rowTap;
+}
+
+@keyframes tapSettle {
+  0% {
+    opacity: 0.88;
+    transform: translateY(1px) scale(0.975);
+  }
+  62% {
+    opacity: 1;
+    transform: translateY(-1px) scale(1.012);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cardTap {
+  0% {
+    opacity: 0.9;
+    transform: translateY(2px) scale(0.988);
+    filter: brightness(0.98);
+  }
+  64% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.006);
+    filter: brightness(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+  }
+}
+
+@keyframes rowTap {
+  0% {
+    opacity: 0.88;
+    transform: translateX(2px) scale(0.99);
+  }
+  68% {
+    opacity: 1;
+    transform: translateX(5px) scale(1.002);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

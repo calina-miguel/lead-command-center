@@ -69,10 +69,22 @@ SCENES = [
         "vo": "Under the hood, the workflow keeps the system consistent: intake, reply routing, content review, appointment preparation, closed-won handoff, and billing setup.",
     },
     {
+        "id": "setup",
+        "view": "setup",
+        "label": "Setup Readiness",
+        "vo": "The setup view shows what is ready to configure now, what stays safely staged, and which credentials are needed before production actions go live.",
+    },
+    {
+        "id": "backend",
+        "view": "setup",
+        "label": "Vercel API Layer",
+        "vo": "Vercel is the preferred backend path on the free tier to start, keeping the public app URL intact while secure API routes, webhooks, logs, and environment variables live behind the interface.",
+    },
+    {
         "id": "value",
         "view": "overview",
         "label": "Client Value",
-        "vo": "For clients, the value is simple: faster answers, smarter follow-up, compliant outreach, and a system that turns attention into booked conversations.",
+        "vo": "For clients, the value is simple: faster answers, smarter follow-up, compliant outreach, safer approvals, and a system that turns attention into booked conversations.",
     },
 ]
 

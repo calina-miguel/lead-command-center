@@ -101,6 +101,27 @@ let contentVariantIndex = 0;
 let activeSummaryTarget = null;
 let helpHideTimer = null;
 let helpIdleTimer = null;
+const tapMotionSelector = [
+  "button",
+  ".metric",
+  ".panel",
+  ".approval-card",
+  ".lead-row:not(.header)",
+  ".journey-step",
+  ".task-row",
+  ".studio-card",
+  ".output-card",
+  ".creative-card",
+  ".composer-card",
+  ".lane",
+  ".deal",
+  ".engine-flow article",
+  ".screenshot-strip figure",
+  ".setup-card",
+  ".setup-runbook",
+  ".connection-row:not(.header)",
+  ".connection-table"
+].join(",");
 
 const contextSummaries = new Map([
   ["[data-view='overview']", "Command Center shows the top-level operating dashboard: lead volume, hot replies, booked calls, coverage, video walkthrough, journey, and priority queue."],
@@ -253,6 +274,18 @@ function queueContextHelpHide() {
 function closestSummaryTarget(target) {
   if (target === contextTrigger || contextTrigger?.contains(target)) return null;
   return target.closest("[data-summary]");
+}
+
+function closestTapTarget(target) {
+  return target.closest(tapMotionSelector);
+}
+
+function pulseTapMotion(element) {
+  if (reduceMotion || !element) return;
+  element.classList.remove("is-tapping");
+  void element.offsetWidth;
+  element.classList.add("is-tapping");
+  window.setTimeout(() => element.classList.remove("is-tapping"), 460);
 }
 
 function updateDeploymentSummary() {
@@ -419,6 +452,7 @@ document.addEventListener("focusout", (event) => {
 });
 
 document.addEventListener("pointerdown", (event) => {
+  pulseTapMotion(closestTapTarget(event.target));
   const target = closestSummaryTarget(event.target);
   if (target) showContextTrigger(target);
 });
