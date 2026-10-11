@@ -56,6 +56,7 @@ const secondaryCta = document.querySelector("#secondary-cta");
 const deploymentSummary = document.querySelector("#deployment-summary");
 const contextTrigger = document.querySelector("#context-trigger");
 const contextHint = document.querySelector("#context-hint");
+const workflowToast = document.querySelector("#workflow-toast");
 const contentVariants = [
   {
     subject: "Subject: A clearer path for your next move",
@@ -101,6 +102,7 @@ let contentVariantIndex = 0;
 let activeSummaryTarget = null;
 let helpHideTimer = null;
 let helpIdleTimer = null;
+let toastTimer = null;
 const tapMotionSelector = [
   "button",
   ".metric",
@@ -288,6 +290,93 @@ function pulseTapMotion(element) {
   window.setTimeout(() => element.classList.remove("is-tapping"), 460);
 }
 
+function showWorkflowToast(message) {
+  if (!workflowToast) return;
+  clearTimeout(toastTimer);
+  workflowToast.textContent = message;
+  workflowToast.classList.add("is-visible");
+  toastTimer = window.setTimeout(() => {
+    workflowToast.classList.remove("is-visible");
+  }, 3600);
+}
+
+function markElementState(element, state, label) {
+  if (!element) return;
+  element.dataset.workflowState = state;
+  element.classList.remove("state-reviewing", "state-approved", "state-queued", "state-checked");
+  element.classList.add(`state-${state}`);
+  if (label) element.dataset.stateLabel = label;
+}
+
+function runContentGeneration() {
+  generateContentButton?.click();
+  document.querySelector(".content-studio")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function runWorkflowAction(action, source) {
+  const card = source.closest(".approval-card, .output-card, .deployment-composer, .setup-card, .setup-runbook");
+
+  if (action === "prepare-outreach") {
+    setView("content");
+    window.setTimeout(runContentGeneration, 180);
+    showWorkflowToast("Outreach package prepared and moved into content review.");
+    return;
+  }
+
+  if (action === "approve-selected") {
+    document.querySelectorAll(".approval-card").forEach((item) => {
+      markElementState(item, "approved", "Approved");
+    });
+    showWorkflowToast("All visible content cards approved and ready for queueing.");
+    return;
+  }
+
+  if (action === "review-card") {
+    markElementState(card, "reviewing", "In review");
+    card?.scrollIntoView({ behavior: "smooth", block: "center" });
+    showWorkflowToast("Card opened for review. Compliance gate remains active.");
+    return;
+  }
+
+  if (action === "approve-card") {
+    markElementState(card, "approved", "Approved");
+    showWorkflowToast("Card approved. It can now move to the deployment queue.");
+    return;
+  }
+
+  if (action === "queue-review") {
+    document.querySelectorAll(".output-card, .creative-card").forEach((item) => {
+      markElementState(item, "queued", "Queued");
+    });
+    showWorkflowToast("Generated email, social copy, image direction, and CTA moved to review queue.");
+    return;
+  }
+
+  if (action === "queue-deployment") {
+    markElementState(document.querySelector(".deployment-composer"), "queued", "Queued");
+    updateDeploymentSummary();
+    setView("pipeline");
+    showWorkflowToast("Approved deployment queued. Pipeline updated for next action.");
+    return;
+  }
+
+  if (action === "attach-media") {
+    const mediaDrop = source.closest(".media-drop");
+    mediaDrop?.classList.add("has-media");
+    mediaDrop?.querySelector("span") && (mediaDrop.querySelector("span").textContent = "Creative attached");
+    mediaDrop?.querySelector("p") && (mediaDrop.querySelector("p").textContent = "Approved image/video placeholder attached for safe workflow testing.");
+    showWorkflowToast("Media attachment added to the deployment package.");
+    return;
+  }
+
+  if (action === "run-safe-check") {
+    document.querySelectorAll(".setup-card, .setup-runbook, .connection-table").forEach((item) => {
+      markElementState(item, "checked", "Checked");
+    });
+    showWorkflowToast("Safe check complete: live sends and billing remain gated until credentials are connected.");
+  }
+}
+
 function updateDeploymentSummary() {
   if (!deploymentSummary) return;
 
@@ -376,6 +465,10 @@ document.querySelectorAll(".nav-item").forEach((button) => {
 
 document.querySelectorAll("[data-view-jump]").forEach((button) => {
   button.addEventListener("click", () => setView(button.dataset.viewJump));
+});
+
+document.querySelectorAll("[data-action]").forEach((button) => {
+  button.addEventListener("click", () => runWorkflowAction(button.dataset.action, button));
 });
 
 document.querySelectorAll('[data-option-group="format"] button, [data-option-group="emoji"] button').forEach((button) => {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Black Glove Lead Command Center</title>
-    <link rel="stylesheet" href="./styles.css?v=context-motion" />
+    <link rel="stylesheet" href="./styles.css?v=workflow-actions" />
   </head>
   <body>
     <div class="app-shell">
@@ -196,7 +196,7 @@
               <p class="eyebrow">Priority inbox</p>
               <h3>Hot Leads</h3>
             </div>
-            <button class="primary-button">Prepare Outreach</button>
+            <button class="primary-button" data-action="prepare-outreach">Prepare Outreach</button>
           </div>
           <div class="lead-table">
             <div class="lead-row header">
@@ -223,26 +223,26 @@
               <p class="eyebrow">Human-approved messaging</p>
               <h3>Content Approval Queue</h3>
             </div>
-            <button class="primary-button">Approve Selected</button>
+            <button class="primary-button" data-action="approve-selected">Approve Selected</button>
           </div>
           <div class="approval-grid">
             <article class="approval-card">
               <span class="channel">Email</span>
               <h4>Follow-up for Facebook buyer leads</h4>
               <p>Personalized message focused on response speed, appointment booking, and market timing.</p>
-              <div class="card-actions"><button>Review</button><button>Approve</button></div>
+              <div class="card-actions"><button data-action="review-card">Review</button><button data-action="approve-card">Approve</button></div>
             </article>
             <article class="approval-card">
               <span class="channel">SMS</span>
               <h4>Short next-step prompt</h4>
               <p>Asks whether the prospect wants details, a strategy call, or to pause outreach.</p>
-              <div class="card-actions"><button>Review</button><button>Approve</button></div>
+              <div class="card-actions"><button data-action="review-card">Review</button><button data-action="approve-card">Approve</button></div>
             </article>
             <article class="approval-card">
               <span class="channel">Social</span>
               <h4>Policy-compliant hot lead touchpoint</h4>
               <p>Private-first social message with public tagging only after relevance and consent review.</p>
-              <div class="card-actions"><button>Review</button><button>Approve</button></div>
+              <div class="card-actions"><button data-action="review-card">Review</button><button data-action="approve-card">Approve</button></div>
             </article>
           </div>
 
@@ -318,7 +318,7 @@
                   <small>Consent-aware</small>
                 </div>
                 <p id="tag-copy">Suggested tag action: use a private message unless the prospect has opted into public interaction or the tag is clearly relevant to an existing conversation.</p>
-                <button class="ghost-button small">Queue for Review</button>
+                <button class="ghost-button small" data-action="queue-review">Queue for Review</button>
               </article>
             </div>
 
@@ -355,7 +355,7 @@
                   <h4>Choose how and where the approved content goes live</h4>
                   <p>Package the approved message by format, platform, media attachment, and emoji tone before it enters the publishing queue.</p>
                 </div>
-                <button class="primary-button small">Queue Deployment</button>
+                <button class="primary-button small" data-action="queue-deployment">Queue Deployment</button>
               </div>
 
               <div class="composer-grid">
@@ -386,7 +386,7 @@
                   <div class="media-drop">
                     <span>Image or video</span>
                     <p>Attach approved creative, listing-safe footage, testimonial clips, or campaign visuals.</p>
-                    <button class="ghost-button small" type="button">Attach Media</button>
+                    <button class="ghost-button small" type="button" data-action="attach-media">Attach Media</button>
                   </div>
                 </article>
 
@@ -478,7 +478,7 @@
               <p class="eyebrow">Implementation readiness</p>
               <h3>End-to-End Setup</h3>
             </div>
-            <button class="primary-button">Run Safe Check</button>
+            <button class="primary-button" data-action="run-safe-check">Run Safe Check</button>
           </div>
 
           <div class="setup-grid">
@@ -570,6 +570,7 @@
       ?
     </button>
     <div class="context-hint" id="context-hint" role="status" aria-live="polite"></div>
-    <script src="./script.js?v=context-motion"></script>
+    <div class="workflow-toast" id="workflow-toast" role="status" aria-live="polite"></div>
+    <script src="./script.js?v=workflow-actions"></script>
   </body>
 </html>

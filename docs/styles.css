@@ -148,7 +148,8 @@ button {
 }
 
 .context-trigger,
-.context-hint {
+.context-hint,
+.workflow-toast {
   position: fixed;
   left: 0;
   top: 0;
@@ -216,6 +217,39 @@ button {
 }
 
 body[data-theme="dark"] .context-hint {
+  background: linear-gradient(145deg, rgba(245, 247, 251, 0.97), rgba(226, 232, 240, 0.97));
+  color: #101318;
+  border-color: rgba(16, 19, 24, 0.1);
+}
+
+.workflow-toast {
+  z-index: 230;
+  left: 50%;
+  top: auto;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  width: min(520px, calc(100vw - 28px));
+  padding: 14px 18px;
+  color: #ffffff;
+  background: linear-gradient(145deg, rgba(16, 19, 24, 0.96), rgba(28, 35, 48, 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.28);
+  font-size: 14px;
+  font-weight: 760;
+  line-height: 1.35;
+  text-align: center;
+  transform: translate(-50%, 18px) scale(0.96);
+  filter: blur(6px);
+  transition: opacity 320ms ease, transform 520ms var(--ease-smooth), filter 420ms ease;
+}
+
+.workflow-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+  filter: blur(0);
+}
+
+body[data-theme="dark"] .workflow-toast {
   background: linear-gradient(145deg, rgba(245, 247, 251, 0.97), rgba(226, 232, 240, 0.97));
   color: #101318;
   border-color: rgba(16, 19, 24, 0.1);
@@ -941,6 +975,58 @@ body[data-theme="dark"] .setup-card.sandbox .setup-state {
   animation: cardIn 740ms var(--ease-smooth) both;
 }
 
+.approval-card,
+.output-card,
+.creative-card,
+.deployment-composer,
+.setup-card,
+.setup-runbook,
+.connection-table {
+  position: relative;
+}
+
+[data-workflow-state] {
+  border-color: rgba(0, 122, 255, 0.42);
+}
+
+[data-workflow-state]::after {
+  content: attr(data-state-label);
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  z-index: 2;
+  padding: 6px 9px;
+  color: var(--brand);
+  background: #eaf3ff;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 18px rgba(0, 122, 255, 0.14);
+  animation: stateBadgeIn 420ms var(--ease-smooth) both;
+}
+
+.state-approved,
+.state-checked {
+  border-color: rgba(52, 199, 89, 0.48);
+}
+
+.state-approved::after,
+.state-checked::after {
+  color: #157a32;
+  background: #eaf8ef;
+}
+
+.state-queued::after {
+  color: #a45c00;
+  background: #fff3df;
+}
+
+body[data-theme="dark"] [data-workflow-state]::after {
+  background: #202f44;
+  color: #9dc5ff;
+}
+
 .connection-row {
   display: grid;
   grid-template-columns: 0.75fr 0.85fr 1.35fr 1.5fr;
@@ -1299,6 +1385,12 @@ body[data-theme="dark"] .emoji-pill.active {
   background: linear-gradient(145deg, rgba(0, 122, 255, 0.08), rgba(52, 199, 89, 0.06));
 }
 
+.media-drop.has-media {
+  border-style: solid;
+  border-color: rgba(52, 199, 89, 0.5);
+  background: linear-gradient(145deg, rgba(52, 199, 89, 0.12), rgba(0, 122, 255, 0.07));
+}
+
 .media-drop span {
   color: var(--brand);
   font-weight: 820;
@@ -1590,6 +1682,17 @@ body[data-theme="dark"] .cta-list a {
   100% {
     opacity: 1;
     transform: translate3d(var(--hint-x, 18px), var(--hint-y, 18px), 0) translateY(0) scale(1);
+  }
+}
+
+@keyframes stateBadgeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
