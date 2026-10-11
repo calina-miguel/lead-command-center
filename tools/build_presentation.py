@@ -265,7 +265,26 @@ def write_script():
     SCRIPT_OUT.write_text("\n".join(lines).strip() + "\n", encoding="utf-8")
 
 
-def build_video():
+def media_duration(path):
+    result = subprocess.run(
+        [
+            "ffprobe",
+            "-v",
+            "error",
+            "-show_entries",
+            "format=duration",
+            "-of",
+            "default=noprint_wrappers=1:nokey=1",
+            str(path),
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return float(result.stdout.strip())
+
+
+def build_video(scene_duration=7):
     FRAMES.mkdir(parents=True, exist_ok=True)
     for old in FRAMES.glob("*.png"):
         old.unlink()
@@ -278,7 +297,7 @@ def build_video():
             frame_path = FRAMES / f"scene_{index:02d}.png"
             img.save(frame_path)
             f.write(f"file '{frame_path.as_posix()}'\n")
-            f.write("duration 7\n")
+            f.write(f"duration {scene_duration:.3f}\n")
         f.write(f"file '{frame_path.as_posix()}'\n")
 
     subprocess.run(
@@ -365,12 +384,15 @@ def main():
     ASSETS.mkdir(parents=True, exist_ok=True)
     write_script()
     capture_screenshots()
-    build_video()
     has_voiceover = False
     try:
         has_voiceover = render_voiceover()
     except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError) as error:
         print(f"ElevenLabs voiceover could not be rendered: {error}")
+    scene_duration = 7
+    if has_voiceover:
+        scene_duration = max(7, (media_duration(AUDIO_OUT) + 2) / len(SCENES))
+    build_video(scene_duration)
     mux_final_video(has_voiceover)
     if not has_voiceover:
         print("ELEVENLABS_API_KEY not found; video was rendered with word-for-word captions and no external voiceover.")
