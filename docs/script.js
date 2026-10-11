@@ -3,7 +3,8 @@ const titles = {
   "hot-leads": "Hot Leads",
   content: "Content Approval",
   pipeline: "Pipeline",
-  engine: "Under the Hood"
+  engine: "Under the Hood",
+  setup: "Setup"
 };
 
 const walkthroughSteps = [
@@ -26,6 +27,10 @@ const walkthroughSteps = [
   {
     view: "engine",
     caption: "Then reveal the under-the-hood workflow engine in GHL: intake, reply routing, booked calls, and billing handoff."
+  },
+  {
+    view: "setup",
+    caption: "Close with implementation readiness: what is ready now, what is safely staged, and what needs partner approval."
   }
 ];
 
@@ -103,6 +108,7 @@ const contextSummaries = new Map([
   ["[data-view='content']", "Content Approval opens the messaging studio where emails, social copy, media direction, CTAs, and deployment settings are reviewed before publishing."],
   ["[data-view='pipeline']", "Pipeline shows where each opportunity sits from new lead through booked call, proposal, and closed-won billing handoff."],
   ["[data-view='engine']", "Under the Hood explains the workflow logic behind intake, routing, approvals, call preparation, and billing setup."],
+  ["[data-view='setup']", "Setup shows which integrations are ready now, which ones are staged safely, and what credentials are still needed for production."],
   ["#mobile-menu-toggle", "Opens the compact navigation menu on mobile so users can jump between workspace sections."],
   ["#theme-toggle", "Switches the workspace between light and dark mode."],
   ["#prev-step", "Moves the guided walkthrough back one step."],
@@ -122,7 +128,10 @@ const contextSummaries = new Map([
   [".creative-card", "Generated creative direction for visual assets, CTA language, and compliant campaign presentation."],
   [".composer-card", "Deployment setting for choosing format, platform, media attachment, and emoji tone."],
   [".lane", "Pipeline lane grouping opportunities by current revenue stage."],
-  [".engine-flow article", "Automation node showing what the operating workflow does at this stage."]
+  [".engine-flow article", "Automation node showing what the operating workflow does at this stage."],
+  [".setup-card", "Implementation card showing whether this workflow area is ready to configure or safely staged for later approval."],
+  [".setup-runbook", "Safe operating plan for testing the full workflow without live sends, real charges, or unintended account changes."],
+  [".connection-table", "Credential checklist for moving each workflow area from staged setup into production."]
 ]);
 
 function assignContextSummaries() {
