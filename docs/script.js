@@ -49,6 +49,7 @@ const imageGuidance = document.querySelector("#image-guidance");
 const primaryCta = document.querySelector("#primary-cta");
 const secondaryCta = document.querySelector("#secondary-cta");
 const deploymentSummary = document.querySelector("#deployment-summary");
+const contextHint = document.querySelector("#context-hint");
 const contentVariants = [
   {
     subject: "Subject: A clearer path for your next move",
@@ -92,6 +93,96 @@ const contentVariants = [
 ];
 let contentVariantIndex = 0;
 
+const contextSummaries = new Map([
+  ["[data-view='overview']", "Command Center shows the top-level operating dashboard: lead volume, hot replies, booked calls, coverage, video walkthrough, journey, and priority queue."],
+  ["[data-view='hot-leads']", "Hot Leads opens the priority inbox so the team can focus on prospects with strong buying signals or urgent questions."],
+  ["[data-view='content']", "Content Approval opens the messaging studio where emails, social copy, media direction, CTAs, and deployment settings are reviewed before publishing."],
+  ["[data-view='pipeline']", "Pipeline shows where each opportunity sits from new lead through booked call, proposal, and closed-won billing handoff."],
+  ["[data-view='engine']", "Under the Hood explains the workflow logic behind intake, routing, approvals, call preparation, and billing setup."],
+  ["#mobile-menu-toggle", "Opens the compact navigation menu on mobile so users can jump between workspace sections."],
+  ["#theme-toggle", "Switches the workspace between light and dark mode."],
+  ["#prev-step", "Moves the guided walkthrough back one step."],
+  ["#next-step", "Advances the guided walkthrough to the next section."],
+  ["#generate-content", "Generates a fresh compliant outreach set: email, social copy, CTA language, tag guidance, and image direction."],
+  ["[data-view-jump='engine']", "Jumps directly to the workflow engine view for the automation logic behind this dashboard."],
+  ["[data-view-jump='hot-leads']", "Jumps to the leads that need the fastest reply."],
+  ["[data-view-jump='content']", "Jumps to content drafts waiting for review and approval."],
+  ["[data-view-jump='pipeline']", "Jumps to scheduled calls and opportunity stages."],
+  [".presentation-panel", "Video walkthrough of the system: lead intake, priorities, content approval, pipeline movement, and workflow handoff."],
+  [".metric", "Snapshot metric showing current operating status for leads, replies, calls, or follow-up coverage."],
+  [".journey-step", "Workflow stage showing how a lead moves from intake through response, booking, closing, billing, and onboarding."],
+  [".task-row", "Priority action shortcut that opens the relevant workspace section."],
+  [".approval-card", "Review card for outbound messaging before it is approved for use."],
+  [".studio-card", "Input module that defines targeting, offer angle, compliance checks, and audience preferences for generated content."],
+  [".output-card", "Generated outreach output ready for review, edits, or approval."],
+  [".creative-card", "Generated creative direction for visual assets, CTA language, and compliant campaign presentation."],
+  [".composer-card", "Deployment setting for choosing format, platform, media attachment, and emoji tone."],
+  [".lane", "Pipeline lane grouping opportunities by current revenue stage."],
+  [".engine-flow article", "Automation node showing what the operating workflow does at this stage."]
+]);
+
+function assignContextSummaries() {
+  contextSummaries.forEach((summary, selector) => {
+    document.querySelectorAll(selector).forEach((element) => {
+      if (!element.dataset.summary) element.dataset.summary = summary;
+    });
+  });
+
+  document.querySelectorAll(".primary-button, .ghost-button, .card-actions button, .option-pill, .platform-pill, .emoji-pill").forEach((button) => {
+    if (button.dataset.summary) return;
+
+    const label = button.textContent.trim();
+    const group = button.closest("[data-option-group]")?.dataset.optionGroup;
+    if (group === "format") {
+      button.dataset.summary = `Selects ${label} as the publishing format for the approved content.`;
+    } else if (group === "platforms") {
+      button.dataset.summary = `Toggles ${label} as a deployment destination for this content.`;
+    } else if (group === "emoji") {
+      button.dataset.summary = `Sets the message tone to ${label}.`;
+    } else if (label) {
+      button.dataset.summary = `${label}: runs this action in the current workflow section.`;
+    }
+  });
+
+  document.querySelectorAll("section, article, figure").forEach((element) => {
+    if (element.dataset.summary) return;
+    const heading = element.querySelector("h3, h4, figcaption, strong")?.textContent.trim();
+    const copy = element.querySelector("p, span")?.textContent.trim();
+    if (heading && copy) {
+      element.dataset.summary = `${heading}: ${copy}`;
+    }
+  });
+}
+
+function hintPositionFor(element) {
+  const rect = element.getBoundingClientRect();
+  const width = Math.min(320, window.innerWidth - 28);
+  let x = rect.left + rect.width / 2 - width / 2;
+  let y = rect.bottom + 10;
+
+  x = Math.max(14, Math.min(x, window.innerWidth - width - 14));
+  if (y > window.innerHeight - 120) y = Math.max(14, rect.top - 96);
+  return { x, y };
+}
+
+function showContextHint(element) {
+  if (!contextHint || !element?.dataset?.summary) return;
+
+  const { x, y } = hintPositionFor(element);
+  contextHint.textContent = element.dataset.summary;
+  contextHint.style.setProperty("--hint-x", `${Math.round(x)}px`);
+  contextHint.style.setProperty("--hint-y", `${Math.round(y)}px`);
+  contextHint.classList.add("is-visible");
+}
+
+function hideContextHint() {
+  contextHint?.classList.remove("is-visible");
+}
+
+function closestSummaryTarget(target) {
+  return target.closest("[data-summary]");
+}
+
 function updateDeploymentSummary() {
   if (!deploymentSummary) return;
 
@@ -117,8 +208,10 @@ function applyTheme(theme) {
 const savedTheme = localStorage.getItem("lead-command-theme");
 const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 applyTheme(savedTheme || preferredTheme);
+assignContextSummaries();
 
 function setView(viewName) {
+  hideContextHint();
   document.querySelectorAll(".view").forEach((view) => {
     const isActive = view.id === viewName;
     view.classList.toggle("active", isActive);
@@ -228,13 +321,42 @@ generateContentButton?.addEventListener("click", () => {
 
 mobileMenuToggle?.addEventListener("click", toggleMobileMenu);
 
+document.addEventListener("pointerover", (event) => {
+  const target = closestSummaryTarget(event.target);
+  if (target) showContextHint(target);
+});
+
+document.addEventListener("pointerout", (event) => {
+  const target = closestSummaryTarget(event.target);
+  if (target && !target.contains(event.relatedTarget)) hideContextHint();
+});
+
+document.addEventListener("focusin", (event) => {
+  const target = closestSummaryTarget(event.target);
+  if (target) showContextHint(target);
+});
+
+document.addEventListener("focusout", (event) => {
+  const target = closestSummaryTarget(event.target);
+  if (target && !target.contains(event.relatedTarget)) hideContextHint();
+});
+
+document.addEventListener("pointerdown", (event) => {
+  const target = closestSummaryTarget(event.target);
+  if (target) showContextHint(target);
+});
+
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
+    hideContextHint();
     closeMobileMenu();
   }
 });
 
-window.addEventListener("scroll", updateScrolledState, { passive: true });
+window.addEventListener("scroll", () => {
+  updateScrolledState();
+  hideContextHint();
+}, { passive: true });
 updateScrolledState();
 updateDeploymentSummary();
 
