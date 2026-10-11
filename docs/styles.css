@@ -192,6 +192,15 @@ button {
   transform: translate3d(var(--help-x, 18px), var(--help-y, 18px), 0) scale(1.08);
 }
 
+@media (min-width: 721px) {
+  .context-trigger,
+  .context-trigger.is-visible {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+}
+
 .context-hint {
   z-index: 220;
   width: min(340px, calc(100vw - 28px));
