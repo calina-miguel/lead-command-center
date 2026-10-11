@@ -60,8 +60,8 @@ const workflowToast = document.querySelector("#workflow-toast");
 const contentVariants = [
   {
     subject: "Subject: A clearer path for your next move",
-    email: "Hi Maya, I noticed your interest came through our buyer lead list, so I put together a simple next step: compare timing, budget fit, and available options without pressure. If useful, I can send a tailored update or help you book a short strategy call.",
-    social: "Buyers do not need more noise. They need clear timing, useful options, and a next step that matches where they are in the process. We are helping active buyers move with clarity, not pressure.",
+    email: "Hi Maya, I noticed your interest came through our buyer lead list, so I put together a simple next step: compare timing, budget fit, and available options without pressure. If useful, I can send a tailored update or book a short strategy call.",
+    social: "Buyers do not need more noise. They need clear timing, useful options, and a next step that matches where they are in the process. We guide active buyers with clarity, not pressure.",
     tag: "Suggested tag action: avoid a public tag unless the prospect has already engaged publicly. Use a private message for personalized follow-up.",
     kicker: "Buyer Clarity",
     headline: "Move with a plan, not pressure.",
@@ -86,7 +86,7 @@ const contentVariants = [
   },
   {
     subject: "Subject: Want the short version?",
-    email: "Hi Nina, based on your reply, the short version is this: we can help you compare options, understand timing, and decide whether a call is worth it. If you want, I can send the most relevant details first.",
+    email: "Hi Nina, based on your reply, the short version is this: we can compare options, clarify timing, and decide whether a call is worth it. If you want, I can send the most relevant details first.",
     social: "The best follow-up is specific. When someone shows interest, the next message should match their source, question, and timing instead of sending the same generic pitch.",
     tag: "Suggested tag action: public tagging is only recommended when the post is educational, relevant, and connected to prior consent or public engagement.",
     kicker: "Specific Follow-Up",
@@ -136,7 +136,7 @@ const contextSummaries = new Map([
   ["#theme-toggle", "Switches the workspace between light and dark mode."],
   ["#prev-step", "Moves the guided walkthrough back one step."],
   ["#next-step", "Advances the guided walkthrough to the next section."],
-  ["#generate-content", "Generates a fresh compliant outreach set: email, social copy, CTA language, tag guidance, and image direction."],
+  ["#generate-content", "Builds a fresh compliant outreach set: email, social copy, CTA language, tag guidance, and image direction."],
   ["[data-view-jump='engine']", "Jumps directly to the workflow engine view for the automation logic behind this dashboard."],
   ["[data-view-jump='hot-leads']", "Jumps to the leads that need the fastest reply."],
   ["[data-view-jump='content']", "Jumps to content drafts waiting for review and approval."],
@@ -146,9 +146,9 @@ const contextSummaries = new Map([
   [".journey-step", "Workflow stage showing how a lead moves from intake through response, booking, closing, billing, and onboarding."],
   [".task-row", "Priority action shortcut that opens the relevant workspace section."],
   [".approval-card", "Review card for outbound messaging before it is approved for use."],
-  [".studio-card", "Input module that defines targeting, offer angle, compliance checks, and audience preferences for generated content."],
-  [".output-card", "Generated outreach output ready for review, edits, or approval."],
-  [".creative-card", "Generated creative direction for visual assets, CTA language, and compliant campaign presentation."],
+  [".studio-card", "Input module that defines targeting, offer angle, compliance checks, and audience preferences for prepared content."],
+  [".output-card", "Prepared outreach output ready for review, edits, or approval."],
+  [".creative-card", "Prepared creative direction for visual assets, CTA language, and compliant campaign presentation."],
   [".composer-card", "Deployment setting for choosing format, platform, media attachment, and emoji tone."],
   [".lane", "Pipeline lane grouping opportunities by current revenue stage."],
   [".engine-flow article", "Automation node showing what the operating workflow does at this stage."],
@@ -348,7 +348,7 @@ function runWorkflowAction(action, source) {
     document.querySelectorAll(".output-card, .creative-card").forEach((item) => {
       markElementState(item, "queued", "Queued");
     });
-    showWorkflowToast("Generated email, social copy, image direction, and CTA moved to review queue.");
+    showWorkflowToast("Prepared email, social copy, image direction, and CTA moved to review queue.");
     return;
   }
 
@@ -364,7 +364,7 @@ function runWorkflowAction(action, source) {
     const mediaDrop = source.closest(".media-drop");
     mediaDrop?.classList.add("has-media");
     mediaDrop?.querySelector("span") && (mediaDrop.querySelector("span").textContent = "Creative attached");
-    mediaDrop?.querySelector("p") && (mediaDrop.querySelector("p").textContent = "Approved image/video placeholder attached for safe workflow testing.");
+    mediaDrop?.querySelector("p") && (mediaDrop.querySelector("p").textContent = "Approved image/video asset attached for controlled workflow validation.");
     showWorkflowToast("Media attachment added to the deployment package.");
     return;
   }

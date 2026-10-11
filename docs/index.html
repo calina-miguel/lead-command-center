@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Black Glove Lead Command Center</title>
-    <link rel="stylesheet" href="./styles.css?v=workflow-actions" />
+    <link rel="stylesheet" href="./styles.css?v=ops-language" />
   </head>
   <body>
     <div class="app-shell">
@@ -250,10 +250,10 @@
             <div class="studio-header">
               <div>
                 <p class="eyebrow">Policy-safe content studio</p>
-                <h3>Generate targeted email and social content</h3>
-                <p>Create buyer-specific copy from current market signals, prospect preferences, and consent status before anything is queued for publishing.</p>
+                <h3>Build targeted email and social content</h3>
+                <p>Prepare buyer-specific copy from current market signals, prospect preferences, and consent status before anything is queued for publishing.</p>
               </div>
-              <button class="primary-button" id="generate-content">Generate Content</button>
+              <button class="primary-button" id="generate-content">Build Content</button>
             </div>
 
             <div class="studio-grid">
@@ -304,7 +304,7 @@
                   <span>Social</span>
                   <small>Multi-account queue</small>
                 </div>
-                <p id="social-copy">A helpful note for active buyers: the best next step is not more noise, it is a clear plan. We are helping buyers compare timing, options, and next moves without pressure.</p>
+                <p id="social-copy">A practical note for active buyers: the best next step is not more noise, it is a clear plan. We guide buyers through timing, options, and next moves without pressure.</p>
                 <div class="publish-row">
                   <span>Facebook</span>
                   <span>Instagram</span>
@@ -322,7 +322,7 @@
               </article>
             </div>
 
-            <div class="creative-output" aria-label="Generated marketing image and CTA concepts">
+            <div class="creative-output" aria-label="Prepared marketing image and CTA concepts">
               <article class="creative-card">
                 <div class="creative-preview" id="creative-preview">
                   <div>
@@ -505,7 +505,7 @@
             </article>
 
             <article class="setup-card sandbox">
-              <span class="setup-state">Sandbox placeholder</span>
+              <span class="setup-state">Staged until approval</span>
               <h4>Payments</h4>
               <p>Billing is modeled with test-price labels and invoice handoff states until Stripe or GHL payments are approved.</p>
               <ul>
@@ -527,7 +527,7 @@
             </article>
 
             <article class="setup-card sandbox">
-              <span class="setup-state">Sandbox placeholder</span>
+              <span class="setup-state">Staged until approval</span>
               <h4>Outbound Sending</h4>
               <p>Email, SMS, and social publishing stay in queued-review mode until real sender domains, numbers, and platform accounts are connected.</p>
               <ul>
@@ -542,11 +542,11 @@
             <div class="runbook-copy">
               <p class="eyebrow">Safe operating mode</p>
               <h3>What can run now</h3>
-              <p>The app can show the complete client-facing journey, generate approved outreach packages, route leads through staged pipeline states, and simulate booking and billing handoff without touching live customer accounts.</p>
+              <p>This workspace runs the client-facing journey, prepares approved outreach packages, routes leads through staged pipeline states, and keeps booking and billing handoff gated until production credentials are connected.</p>
             </div>
             <div class="runbook-list">
-              <div><span>01</span><strong>Import structure</strong><p>Use BoldTrail saved-filter names to create organized segments and test contact records.</p></div>
-              <div><span>02</span><strong>Approval gates</strong><p>Keep generated emails, texts, social posts, media, CTAs, and tags in review before deployment.</p></div>
+              <div><span>01</span><strong>Import structure</strong><p>Use BoldTrail saved-filter names to create organized segments and validation records.</p></div>
+              <div><span>02</span><strong>Approval gates</strong><p>Keep prepared emails, texts, social posts, media, CTAs, and tags in review before deployment.</p></div>
               <div><span>03</span><strong>Booking handoff</strong><p>Use the GHL calendar path when approved, otherwise keep the call as a queued action.</p></div>
               <div><span>04</span><strong>Billing handoff</strong><p>Use plan labels and invoice-ready status until Stripe or GHL payment keys are connected.</p></div>
             </div>
@@ -559,7 +559,7 @@
             <div class="connection-row"><strong>Email + SMS</strong><span class="badge">Queued review</span><span>Sender domain, phone number, consent rules</span><span>Send approved follow-ups and replies</span></div>
             <div class="connection-row"><strong>Social</strong><span class="badge">Queued review</span><span>Connected social accounts and permissions</span><span>Publish approved posts, reels, stories, and My Day content</span></div>
             <div class="connection-row"><strong>Calendar</strong><span class="badge">Ready path</span><span>GHL calendar or external calendar connection</span><span>Book accepted next-step calls</span></div>
-            <div class="connection-row"><strong>Billing</strong><span class="badge">Sandbox placeholder</span><span>Stripe or GHL payments credentials</span><span>Create customer, invoice, payment link, and onboarding trigger</span></div>
+            <div class="connection-row"><strong>Billing</strong><span class="badge">Staged until approval</span><span>Stripe or GHL payments credentials</span><span>Create customer, invoice, payment link, and onboarding trigger</span></div>
             <div class="connection-row"><strong>Backend</strong><span class="badge">Vercel free tier</span><span>GitHub import and environment variables</span><span>Run API routes, webhooks, logs, and secure service calls</span></div>
           </div>
         </section>
@@ -571,6 +571,6 @@
     </button>
     <div class="context-hint" id="context-hint" role="status" aria-live="polite"></div>
     <div class="workflow-toast" id="workflow-toast" role="status" aria-live="polite"></div>
-    <script src="./script.js?v=workflow-actions"></script>
+    <script src="./script.js?v=ops-language"></script>
   </body>
 </html>
