@@ -1254,6 +1254,7 @@ body[data-theme="dark"] .cta-list a {
     transition: opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease;
   }
 
+  body.is-at-top .mobile-menu-toggle,
   body.has-scrolled .mobile-menu-toggle,
   body.nav-open .mobile-menu-toggle {
     opacity: 1;

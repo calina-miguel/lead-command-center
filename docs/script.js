@@ -143,8 +143,10 @@ function toggleMobileMenu() {
 }
 
 function updateScrolledState() {
+  const isAtTop = window.scrollY <= 8;
+  document.body.classList.toggle("is-at-top", isAtTop);
   document.body.classList.toggle("has-scrolled", window.scrollY > 120);
-  if (window.scrollY <= 120) {
+  if (!isAtTop && window.scrollY <= 120) {
     closeMobileMenu();
   }
 }
