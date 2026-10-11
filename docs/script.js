@@ -27,10 +27,6 @@ const walkthroughSteps = [
   {
     view: "engine",
     caption: "Then reveal the under-the-hood workflow engine in GHL: intake, reply routing, booked calls, and billing handoff."
-  },
-  {
-    view: "setup",
-    caption: "Close with implementation readiness: what is ready now, what is safely staged, and what needs partner approval."
   }
 ];
 
@@ -57,6 +53,8 @@ const deploymentSummary = document.querySelector("#deployment-summary");
 const contextTrigger = document.querySelector("#context-trigger");
 const contextHint = document.querySelector("#context-hint");
 const workflowToast = document.querySelector("#workflow-toast");
+const params = new URLSearchParams(window.location.search);
+const isInternalMode = params.get("internal") === "1";
 const contentVariants = [
   {
     subject: "Subject: A clearer path for your next move",
@@ -403,6 +401,7 @@ const savedTheme = localStorage.getItem("lead-command-theme");
 const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 applyTheme(savedTheme || preferredTheme);
 assignContextSummaries();
+document.body.classList.toggle("internal-mode", isInternalMode);
 
 function setView(viewName) {
   hideContextHelp();
@@ -593,10 +592,11 @@ window.addEventListener("scroll", () => {
 updateScrolledState();
 updateDeploymentSummary();
 
-const params = new URLSearchParams(window.location.search);
 const initialView = params.get("view");
-if (initialView && titles[initialView]) {
+if (initialView && titles[initialView] && (initialView !== "setup" || isInternalMode)) {
   setView(initialView);
+} else if (initialView === "setup" && !isInternalMode) {
+  setView("overview");
 }
 
 const focusTarget = params.get("focus");

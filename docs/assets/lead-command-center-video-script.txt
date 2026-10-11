@@ -21,11 +21,5 @@ The pipeline view connects outreach to revenue, showing which prospects are new,
 7. Operating Engine
 Under the hood, the workflow keeps the system consistent: intake, reply routing, content review, appointment preparation, closed-won handoff, and billing setup.
 
-8. Setup Readiness
-The setup view shows what is ready to configure now, what stays safely staged, and which credentials are needed before production actions go live.
-
-9. Vercel API Layer
-Vercel is the preferred backend path on the free tier to start, keeping the public app URL intact while secure API routes, webhooks, logs, and environment variables live behind the interface.
-
-10. Client Value
-For clients, the value is simple: faster answers, smarter follow-up, compliant outreach, safer approvals, and a system that turns attention into booked conversations.
+8. Client Value
+For clients, the value is simple: faster answers, smarter follow-up, compliant outreach, and a system that turns attention into booked conversations.
