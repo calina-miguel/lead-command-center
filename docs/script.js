@@ -95,6 +95,7 @@ const contentVariants = [
 let contentVariantIndex = 0;
 let activeSummaryTarget = null;
 let helpHideTimer = null;
+let helpIdleTimer = null;
 
 const contextSummaries = new Map([
   ["[data-view='overview']", "Command Center shows the top-level operating dashboard: lead volume, hot replies, booked calls, coverage, video walkthrough, journey, and priority queue."],
@@ -187,22 +188,26 @@ function showContextTrigger(element) {
   if (!contextTrigger || !element?.dataset?.summary) return;
 
   clearTimeout(helpHideTimer);
+  clearContextIdleTimer();
   activeSummaryTarget = element;
   const { x, y } = triggerPositionFor(element);
   contextTrigger.style.setProperty("--help-x", `${Math.round(x)}px`);
   contextTrigger.style.setProperty("--help-y", `${Math.round(y)}px`);
   contextTrigger.classList.add("is-visible");
+  scheduleContextIdleHide();
 }
 
 function showContextHint(element = activeSummaryTarget) {
   if (!contextHint || !element?.dataset?.summary) return;
 
   clearTimeout(helpHideTimer);
+  clearContextIdleTimer();
   const { x, y } = hintPositionFor();
   contextHint.textContent = element.dataset.summary;
   contextHint.style.setProperty("--hint-x", `${Math.round(x)}px`);
   contextHint.style.setProperty("--hint-y", `${Math.round(y)}px`);
   contextHint.classList.add("is-visible");
+  scheduleContextIdleHide(4200);
 }
 
 function hideContextHint() {
@@ -210,9 +215,21 @@ function hideContextHint() {
 }
 
 function hideContextHelp() {
+  clearContextIdleTimer();
   activeSummaryTarget = null;
   contextTrigger?.classList.remove("is-visible");
   hideContextHint();
+}
+
+function clearContextIdleTimer() {
+  clearTimeout(helpIdleTimer);
+}
+
+function scheduleContextIdleHide(delay = 2600) {
+  clearContextIdleTimer();
+  helpIdleTimer = setTimeout(() => {
+    hideContextHelp();
+  }, delay);
 }
 
 function queueContextHelpHide() {
@@ -404,10 +421,20 @@ contextTrigger?.addEventListener("click", (event) => {
 
 contextTrigger?.addEventListener("pointerover", () => {
   clearTimeout(helpHideTimer);
+  clearContextIdleTimer();
 });
 
 contextTrigger?.addEventListener("pointerout", (event) => {
   if (!activeSummaryTarget?.contains(event.relatedTarget)) queueContextHelpHide();
+  scheduleContextIdleHide();
+});
+
+contextHint?.addEventListener("pointerover", () => {
+  clearContextIdleTimer();
+});
+
+contextHint?.addEventListener("pointerout", () => {
+  scheduleContextIdleHide(1600);
 });
 
 document.addEventListener("click", (event) => {
