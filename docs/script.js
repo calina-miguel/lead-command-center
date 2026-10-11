@@ -41,24 +41,52 @@ const emailSubject = document.querySelector("#email-subject");
 const emailCopy = document.querySelector("#email-copy");
 const socialCopy = document.querySelector("#social-copy");
 const tagCopy = document.querySelector("#tag-copy");
+const creativeKicker = document.querySelector("#creative-kicker");
+const creativeHeadline = document.querySelector("#creative-headline");
+const creativeSubcopy = document.querySelector("#creative-subcopy");
+const imageDirection = document.querySelector("#image-direction");
+const imageGuidance = document.querySelector("#image-guidance");
+const primaryCta = document.querySelector("#primary-cta");
+const secondaryCta = document.querySelector("#secondary-cta");
 const contentVariants = [
   {
     subject: "Subject: A clearer path for your next move",
     email: "Hi Maya, I noticed your interest came through our buyer lead list, so I put together a simple next step: compare timing, budget fit, and available options without pressure. If useful, I can send a tailored update or help you book a short strategy call.",
     social: "Buyers do not need more noise. They need clear timing, useful options, and a next step that matches where they are in the process. We are helping active buyers move with clarity, not pressure.",
-    tag: "Suggested tag action: avoid a public tag unless the prospect has already engaged publicly. Use a private message for personalized follow-up."
+    tag: "Suggested tag action: avoid a public tag unless the prospect has already engaged publicly. Use a private message for personalized follow-up.",
+    kicker: "Buyer Clarity",
+    headline: "Move with a plan, not pressure.",
+    subcopy: "A clear next step for active buyers comparing timing, options, and fit.",
+    image: "Truthful visual: calm buyer planning dashboard",
+    guidance: "Use lifestyle-neutral visuals, no exaggerated income/property claims, and no implication that results are guaranteed.",
+    primary: "Book a SaaS Growth Strategy Call",
+    secondary: "Request tailored information"
   },
   {
     subject: "Subject: Quick answer to your pricing question",
     email: "Hi Andre, your pricing question is exactly where a quick comparison helps. I can send a concise breakdown of what affects total cost, what to watch for, and which next step makes sense based on your timeline.",
     social: "A good buying decision starts with context: pricing, timing, and fit. The goal is not to rush the process. It is to remove uncertainty so the next step feels obvious.",
-    tag: "Suggested tag action: if referencing a pricing question, keep it private. Do not tag the prospect publicly around financial intent."
+    tag: "Suggested tag action: if referencing a pricing question, keep it private. Do not tag the prospect publicly around financial intent.",
+    kicker: "Price Context",
+    headline: "Know what affects the number.",
+    subcopy: "Useful pricing context without pressure, hidden terms, or exaggerated promises.",
+    image: "Truthful visual: clean pricing checklist with neutral housing imagery",
+    guidance: "Do not imply discounts, guaranteed savings, or guaranteed availability. Keep numbers contextual and verifiable.",
+    primary: "Compare options on a call",
+    secondary: "Send me the pricing checklist"
   },
   {
     subject: "Subject: Want the short version?",
     email: "Hi Nina, based on your reply, the short version is this: we can help you compare options, understand timing, and decide whether a call is worth it. If you want, I can send the most relevant details first.",
     social: "The best follow-up is specific. When someone shows interest, the next message should match their source, question, and timing instead of sending the same generic pitch.",
-    tag: "Suggested tag action: public tagging is only recommended when the post is educational, relevant, and connected to prior consent or public engagement."
+    tag: "Suggested tag action: public tagging is only recommended when the post is educational, relevant, and connected to prior consent or public engagement.",
+    kicker: "Specific Follow-Up",
+    headline: "Relevant beats generic.",
+    subcopy: "A sharper next step based on source, question, and timing.",
+    image: "Truthful visual: personalized follow-up cards organized by intent",
+    guidance: "Avoid using personal details publicly. Keep audience examples anonymized unless explicit consent exists.",
+    primary: "See the relevant next step",
+    secondary: "Ask for a personalized update"
   }
 ];
 let contentVariantIndex = 0;
@@ -155,6 +183,13 @@ generateContentButton?.addEventListener("click", () => {
   emailCopy.textContent = variant.email;
   socialCopy.textContent = variant.social;
   tagCopy.textContent = variant.tag;
+  creativeKicker.textContent = variant.kicker;
+  creativeHeadline.textContent = variant.headline;
+  creativeSubcopy.textContent = variant.subcopy;
+  imageDirection.textContent = variant.image;
+  imageGuidance.textContent = variant.guidance;
+  primaryCta.textContent = variant.primary;
+  secondaryCta.textContent = variant.secondary;
   generatedOutput?.classList.remove("is-refreshing");
   requestAnimationFrame(() => {
     generatedOutput?.classList.add("is-refreshing");
