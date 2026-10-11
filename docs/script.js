@@ -31,6 +31,7 @@ const walkthroughSteps = [
 
 let currentStep = 0;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const usesHoverContext = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 const themeToggle = document.querySelector("#theme-toggle");
 const themeLabel = document.querySelector(".theme-label");
 const themeIcon = document.querySelector(".theme-icon");
@@ -180,13 +181,16 @@ function assignContextSummaries() {
   });
 }
 
-function hintPositionFor() {
-  const rect = contextTrigger.getBoundingClientRect();
+function hintPositionFor(element = activeSummaryTarget) {
+  const rect = usesHoverContext && element
+    ? element.getBoundingClientRect()
+    : contextTrigger.getBoundingClientRect();
   const width = Math.min(320, window.innerWidth - 28);
   let x = rect.left + rect.width / 2 - width / 2;
-  let y = rect.bottom + 10;
+  let y = usesHoverContext ? rect.top - 12 - 108 : rect.bottom + 10;
 
   x = Math.max(14, Math.min(x, window.innerWidth - width - 14));
+  if (y < 14) y = rect.bottom + 12;
   if (y > window.innerHeight - 120) y = Math.max(14, rect.top - 108);
   return { x, y };
 }
@@ -212,6 +216,12 @@ function showContextTrigger(element) {
   clearTimeout(helpHideTimer);
   clearContextIdleTimer();
   activeSummaryTarget = element;
+  if (usesHoverContext) {
+    contextTrigger.classList.remove("is-visible");
+    showContextHint(element);
+    return;
+  }
+
   const { x, y } = triggerPositionFor(element);
   contextTrigger.style.setProperty("--help-x", `${Math.round(x)}px`);
   contextTrigger.style.setProperty("--help-y", `${Math.round(y)}px`);
@@ -224,7 +234,8 @@ function showContextHint(element = activeSummaryTarget) {
 
   clearTimeout(helpHideTimer);
   clearContextIdleTimer();
-  const { x, y } = hintPositionFor();
+  activeSummaryTarget = element;
+  const { x, y } = hintPositionFor(element);
   contextHint.textContent = element.dataset.summary;
   contextHint.style.setProperty("--hint-x", `${Math.round(x)}px`);
   contextHint.style.setProperty("--hint-y", `${Math.round(y)}px`);
@@ -257,6 +268,11 @@ function scheduleContextIdleHide(delay = 2600) {
 function queueContextHelpHide() {
   clearTimeout(helpHideTimer);
   helpHideTimer = setTimeout(() => {
+    if (usesHoverContext) {
+      if (!contextHint?.matches(":hover")) hideContextHelp();
+      return;
+    }
+
     if (!contextTrigger?.matches(":hover, :focus-visible")) {
       hideContextHelp();
     }
@@ -524,6 +540,7 @@ mediaAttachmentInput?.addEventListener("change", () => {
 mobileMenuToggle?.addEventListener("click", toggleMobileMenu);
 
 document.addEventListener("pointerover", (event) => {
+  if (!usesHoverContext) return;
   const target = closestSummaryTarget(event.target);
   if (target) showContextTrigger(target);
 });
@@ -549,6 +566,7 @@ document.addEventListener("focusout", (event) => {
 
 document.addEventListener("pointerdown", (event) => {
   pulseTapMotion(closestTapTarget(event.target));
+  if (usesHoverContext) return;
   const target = closestSummaryTarget(event.target);
   if (target) showContextTrigger(target);
 });
