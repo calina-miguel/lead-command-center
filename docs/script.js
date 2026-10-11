@@ -238,6 +238,19 @@ window.addEventListener("scroll", updateScrolledState, { passive: true });
 updateScrolledState();
 updateDeploymentSummary();
 
+const params = new URLSearchParams(window.location.search);
+const initialView = params.get("view");
+if (initialView && titles[initialView]) {
+  setView(initialView);
+}
+
+const focusTarget = params.get("focus");
+if (focusTarget) {
+  requestAnimationFrame(() => {
+    document.querySelector(`#${focusTarget}, .${focusTarget}`)?.scrollIntoView({ block: "center" });
+  });
+}
+
 if (!reduceMotion) {
   let targetX = 0;
   let targetY = 0;
