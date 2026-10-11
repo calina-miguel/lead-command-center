@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Black Glove Lead Command Center</title>
-    <link rel="stylesheet" href="./styles.css?v=ops-language" />
+    <link rel="stylesheet" href="./styles.css?v=client-clean" />
   </head>
   <body>
     <div class="app-shell">
@@ -57,13 +57,6 @@
             </span>
             <b class="nav-full">Under the Hood</b>
             <b class="nav-short">Engine</b>
-          </button>
-          <button class="nav-item internal-only" data-view="setup" title="Setup">
-            <span class="nav-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M5 6h14M5 12h14M5 18h14"/><path d="M9 6a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm10 6a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm-7 6a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/></svg>
-            </span>
-            <b class="nav-full">Setup</b>
-            <b class="nav-short">Setup</b>
           </button>
         </nav>
 
@@ -471,98 +464,6 @@
             </figure>
           </div>
         </section>
-
-        <section class="view internal-only" id="setup">
-          <div class="section-intro">
-            <div>
-              <p class="eyebrow">Implementation readiness</p>
-              <h3>End-to-End Setup</h3>
-            </div>
-            <button class="primary-button" data-action="run-safe-check">Run Safe Check</button>
-          </div>
-
-          <div class="setup-grid">
-            <article class="setup-card ready">
-              <span class="setup-state">Ready to configure</span>
-              <h4>GHL Workspace</h4>
-              <p>Location, workflow folder, tags, custom fields, calendar area, and payment area are already opened for admin setup.</p>
-              <ul>
-                <li>Map contact fields and lead tags</li>
-                <li>Connect workflow triggers to actual actions</li>
-                <li>Keep approvals on until production signoff</li>
-              </ul>
-            </article>
-
-            <article class="setup-card ready">
-              <span class="setup-state">Ready to map</span>
-              <h4>BoldTrail Lead Intake</h4>
-              <p>Use the current BoldTrail contact views and saved filters as the source of truth for lead segmentation.</p>
-              <ul>
-                <li>Import by CSV first if API approval is pending</li>
-                <li>Preserve saved-filter names as GHL tags</li>
-                <li>Assign nurture path by intent and source</li>
-              </ul>
-            </article>
-
-            <article class="setup-card sandbox">
-              <span class="setup-state">Staged until approval</span>
-              <h4>Payments</h4>
-              <p>Billing is modeled with test-price labels and invoice handoff states until Stripe or GHL payments are approved.</p>
-              <ul>
-                <li>Starter plan: $1,800/mo</li>
-                <li>Growth plan: $2,500/mo</li>
-                <li>Scale plan: $3,200/mo</li>
-              </ul>
-            </article>
-
-            <article class="setup-card ready">
-              <span class="setup-state">Preferred backend path</span>
-              <h4>Vercel API Layer</h4>
-              <p>Keep this public app URL intact while Vercel hosts secure webhook and API routes on the free tier to start.</p>
-              <ul>
-                <li>Use GitHub deployment from this repo</li>
-                <li>Store keys as Vercel environment variables</li>
-                <li>Route GHL, BoldTrail, Stripe, and calendar webhooks through serverless functions</li>
-              </ul>
-            </article>
-
-            <article class="setup-card sandbox">
-              <span class="setup-state">Staged until approval</span>
-              <h4>Outbound Sending</h4>
-              <p>Email, SMS, and social publishing stay in queued-review mode until real sender domains, numbers, and platform accounts are connected.</p>
-              <ul>
-                <li>No live sends during safe testing</li>
-                <li>Consent checks must pass before send</li>
-                <li>All public social tags remain approval-gated</li>
-              </ul>
-            </article>
-          </div>
-
-          <div class="setup-runbook">
-            <div class="runbook-copy">
-              <p class="eyebrow">Safe operating mode</p>
-              <h3>What can run now</h3>
-              <p>This workspace runs the client-facing journey, prepares approved outreach packages, routes leads through staged pipeline states, and keeps booking and billing handoff gated until production credentials are connected.</p>
-            </div>
-            <div class="runbook-list">
-              <div><span>01</span><strong>Import structure</strong><p>Use BoldTrail saved-filter names to create organized segments and validation records.</p></div>
-              <div><span>02</span><strong>Approval gates</strong><p>Keep prepared emails, texts, social posts, media, CTAs, and tags in review before deployment.</p></div>
-              <div><span>03</span><strong>Booking handoff</strong><p>Use the GHL calendar path when approved, otherwise keep the call as a queued action.</p></div>
-              <div><span>04</span><strong>Billing handoff</strong><p>Use plan labels and invoice-ready status until Stripe or GHL payment keys are connected.</p></div>
-            </div>
-          </div>
-
-          <div class="connection-table" aria-label="Integration checklist">
-            <div class="connection-row header"><span>Area</span><span>Current Mode</span><span>Next Credential</span><span>Production Action</span></div>
-            <div class="connection-row"><strong>GHL API</strong><span class="badge">Admin setup</span><span>Private integration or OAuth app</span><span>Sync contacts, tags, opportunities, tasks</span></div>
-            <div class="connection-row"><strong>BoldTrail</strong><span class="badge">CSV/API pending</span><span>Export file, API access, Zapier, or webhook</span><span>Import saved-filter leads into GHL segments</span></div>
-            <div class="connection-row"><strong>Email + SMS</strong><span class="badge">Queued review</span><span>Sender domain, phone number, consent rules</span><span>Send approved follow-ups and replies</span></div>
-            <div class="connection-row"><strong>Social</strong><span class="badge">Queued review</span><span>Connected social accounts and permissions</span><span>Publish approved posts, reels, stories, and My Day content</span></div>
-            <div class="connection-row"><strong>Calendar</strong><span class="badge">Ready path</span><span>GHL calendar or external calendar connection</span><span>Book accepted next-step calls</span></div>
-            <div class="connection-row"><strong>Billing</strong><span class="badge">Staged until approval</span><span>Stripe or GHL payments credentials</span><span>Create customer, invoice, payment link, and onboarding trigger</span></div>
-            <div class="connection-row"><strong>Backend</strong><span class="badge">Vercel free tier</span><span>GitHub import and environment variables</span><span>Run API routes, webhooks, logs, and secure service calls</span></div>
-          </div>
-        </section>
       </main>
     </div>
 
@@ -571,6 +472,6 @@
     </button>
     <div class="context-hint" id="context-hint" role="status" aria-live="polite"></div>
     <div class="workflow-toast" id="workflow-toast" role="status" aria-live="polite"></div>
-    <script src="./script.js?v=ops-language"></script>
+    <script src="./script.js?v=client-clean"></script>
   </body>
 </html>

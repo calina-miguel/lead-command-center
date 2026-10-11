@@ -3,8 +3,7 @@ const titles = {
   "hot-leads": "Hot Leads",
   content: "Content Approval",
   pipeline: "Pipeline",
-  engine: "Under the Hood",
-  setup: "Setup"
+  engine: "Under the Hood"
 };
 
 const walkthroughSteps = [
@@ -54,7 +53,6 @@ const contextTrigger = document.querySelector("#context-trigger");
 const contextHint = document.querySelector("#context-hint");
 const workflowToast = document.querySelector("#workflow-toast");
 const params = new URLSearchParams(window.location.search);
-const isInternalMode = params.get("internal") === "1";
 const contentVariants = [
   {
     subject: "Subject: A clearer path for your next move",
@@ -117,10 +115,7 @@ const tapMotionSelector = [
   ".deal",
   ".engine-flow article",
   ".screenshot-strip figure",
-  ".setup-card",
-  ".setup-runbook",
-  ".connection-row:not(.header)",
-  ".connection-table"
+  ".connection-row:not(.header)"
 ].join(",");
 
 const contextSummaries = new Map([
@@ -128,8 +123,7 @@ const contextSummaries = new Map([
   ["[data-view='hot-leads']", "Hot Leads opens the priority inbox so the team can focus on prospects with strong buying signals or urgent questions."],
   ["[data-view='content']", "Content Approval opens the messaging studio where emails, social copy, media direction, CTAs, and deployment settings are reviewed before publishing."],
   ["[data-view='pipeline']", "Pipeline shows where each opportunity sits from new lead through booked call, proposal, and closed-won billing handoff."],
-  ["[data-view='engine']", "Under the Hood explains the workflow logic behind intake, routing, approvals, call preparation, and billing setup."],
-  ["[data-view='setup']", "Setup shows which integrations are ready now, which ones are staged safely, and what credentials are still needed for production."],
+  ["[data-view='engine']", "Under the Hood explains the workflow logic behind intake, routing, approvals, call preparation, and billing handoff."],
   ["#mobile-menu-toggle", "Opens the compact navigation menu on mobile so users can jump between workspace sections."],
   ["#theme-toggle", "Switches the workspace between light and dark mode."],
   ["#prev-step", "Moves the guided walkthrough back one step."],
@@ -149,10 +143,7 @@ const contextSummaries = new Map([
   [".creative-card", "Prepared creative direction for visual assets, CTA language, and compliant campaign presentation."],
   [".composer-card", "Deployment setting for choosing format, platform, media attachment, and emoji tone."],
   [".lane", "Pipeline lane grouping opportunities by current revenue stage."],
-  [".engine-flow article", "Automation node showing what the operating workflow does at this stage."],
-  [".setup-card", "Implementation card showing whether this workflow area is ready to configure or safely staged for later approval."],
-  [".setup-runbook", "Safe operating plan for testing the full workflow without live sends, real charges, or unintended account changes."],
-  [".connection-table", "Credential checklist for moving each workflow area from staged setup into production."]
+  [".engine-flow article", "Automation node showing what the operating workflow does at this stage."]
 ]);
 
 function assignContextSummaries() {
@@ -312,7 +303,7 @@ function runContentGeneration() {
 }
 
 function runWorkflowAction(action, source) {
-  const card = source.closest(".approval-card, .output-card, .deployment-composer, .setup-card, .setup-runbook");
+  const card = source.closest(".approval-card, .output-card, .deployment-composer");
 
   if (action === "prepare-outreach") {
     setView("content");
@@ -366,13 +357,6 @@ function runWorkflowAction(action, source) {
     showWorkflowToast("Media attachment added to the deployment package.");
     return;
   }
-
-  if (action === "run-safe-check") {
-    document.querySelectorAll(".setup-card, .setup-runbook, .connection-table").forEach((item) => {
-      markElementState(item, "checked", "Checked");
-    });
-    showWorkflowToast("Safe check complete: live sends and billing remain gated until credentials are connected.");
-  }
 }
 
 function updateDeploymentSummary() {
@@ -401,7 +385,6 @@ const savedTheme = localStorage.getItem("lead-command-theme");
 const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 applyTheme(savedTheme || preferredTheme);
 assignContextSummaries();
-document.body.classList.toggle("internal-mode", isInternalMode);
 
 function setView(viewName) {
   hideContextHelp();
@@ -593,10 +576,8 @@ updateScrolledState();
 updateDeploymentSummary();
 
 const initialView = params.get("view");
-if (initialView && titles[initialView] && (initialView !== "setup" || isInternalMode)) {
+if (initialView && titles[initialView]) {
   setView(initialView);
-} else if (initialView === "setup" && !isInternalMode) {
-  setView("overview");
 }
 
 const focusTarget = params.get("focus");
