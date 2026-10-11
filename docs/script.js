@@ -48,6 +48,7 @@ const imageDirection = document.querySelector("#image-direction");
 const imageGuidance = document.querySelector("#image-guidance");
 const primaryCta = document.querySelector("#primary-cta");
 const secondaryCta = document.querySelector("#secondary-cta");
+const deploymentSummary = document.querySelector("#deployment-summary");
 const contentVariants = [
   {
     subject: "Subject: A clearer path for your next move",
@@ -90,6 +91,18 @@ const contentVariants = [
   }
 ];
 let contentVariantIndex = 0;
+
+function updateDeploymentSummary() {
+  if (!deploymentSummary) return;
+
+  const format = document.querySelector('[data-option-group="format"] .active')?.textContent.trim() || "Post";
+  const platforms = [...document.querySelectorAll('[data-option-group="platforms"] .active')]
+    .map((button) => button.textContent.trim());
+  const emojiTone = document.querySelector('[data-option-group="emoji"] .active')?.textContent.trim() || "Clear";
+  const platformText = platforms.length ? platforms.join(", ") : "selected platforms";
+
+  deploymentSummary.textContent = `${format} to ${platformText} with image/video attachment and ${emojiTone.toLowerCase()} tone.`;
+}
 
 function applyTheme(theme) {
   document.body.dataset.theme = theme;
@@ -166,6 +179,21 @@ document.querySelectorAll("[data-view-jump]").forEach((button) => {
   button.addEventListener("click", () => setView(button.dataset.viewJump));
 });
 
+document.querySelectorAll('[data-option-group="format"] button, [data-option-group="emoji"] button').forEach((button) => {
+  button.addEventListener("click", () => {
+    button.parentElement.querySelectorAll("button").forEach((option) => option.classList.remove("active"));
+    button.classList.add("active");
+    updateDeploymentSummary();
+  });
+});
+
+document.querySelectorAll('[data-option-group="platforms"] button').forEach((button) => {
+  button.addEventListener("click", () => {
+    button.classList.toggle("active");
+    updateDeploymentSummary();
+  });
+});
+
 document.querySelector("#next-step").addEventListener("click", () => {
   setWalkthroughStep(currentStep + 1);
 });
@@ -208,6 +236,7 @@ window.addEventListener("keydown", (event) => {
 
 window.addEventListener("scroll", updateScrolledState, { passive: true });
 updateScrolledState();
+updateDeploymentSummary();
 
 if (!reduceMotion) {
   let targetX = 0;
