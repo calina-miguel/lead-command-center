@@ -1425,6 +1425,7 @@ body[data-theme="dark"] .cta-list a {
     aspect-ratio: 1;
     position: fixed;
     right: 14px;
+    top: auto;
     bottom: max(14px, env(safe-area-inset-bottom));
     z-index: 100;
     margin-left: 0;
@@ -1440,6 +1441,11 @@ body[data-theme="dark"] .cta-list a {
     pointer-events: auto;
     transform: translateY(0) scale(1);
     transition: opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  body.is-at-top .mobile-menu-toggle {
+    top: max(14px, env(safe-area-inset-top));
+    bottom: auto;
   }
 
   .mobile-menu-toggle span {
@@ -1481,6 +1487,13 @@ body[data-theme="dark"] .cta-list a {
     transform: translateY(8px) scale(0.98);
     transform-origin: bottom right;
     transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  body.is-at-top .nav-list {
+    top: max(68px, calc(env(safe-area-inset-top) + 68px));
+    bottom: auto;
+    transform: translateY(-8px) scale(0.98);
+    transform-origin: top right;
   }
 
   body.nav-open .nav-list {
@@ -1562,6 +1575,7 @@ body[data-theme="dark"] .cta-list a {
     aspect-ratio: 1;
     position: fixed;
     right: 14px;
+    top: auto;
     bottom: max(14px, env(safe-area-inset-bottom));
     z-index: 100;
     margin-left: 0;
@@ -1577,6 +1591,11 @@ body[data-theme="dark"] .cta-list a {
     pointer-events: auto;
     transform: translateY(0) scale(1);
     transition: opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  body.is-at-top .mobile-menu-toggle {
+    top: max(10px, env(safe-area-inset-top));
+    bottom: auto;
   }
 
   body.is-at-top .mobile-menu-toggle,
@@ -1614,7 +1633,7 @@ body[data-theme="dark"] .cta-list a {
     left: auto;
     right: 14px;
     bottom: max(72px, calc(env(safe-area-inset-bottom) + 72px));
-    z-index: 30;
+    z-index: 90;
     width: min(280px, calc(100vw - 28px));
     grid-template-columns: 1fr;
     gap: 8px;
@@ -1626,6 +1645,13 @@ body[data-theme="dark"] .cta-list a {
     transform: translateY(-8px) scale(0.98);
     transform-origin: top right;
     transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  body.is-at-top .nav-list {
+    top: max(62px, calc(env(safe-area-inset-top) + 62px));
+    bottom: auto;
+    transform: translateY(-8px) scale(0.98);
+    transform-origin: top right;
   }
 
   body.nav-open .nav-list {
