@@ -282,10 +282,11 @@ function setView(viewName) {
       view.getAnimations().forEach((animation) => animation.cancel());
       view.animate(
         [
-          { opacity: 0, transform: "translateY(12px) scale(0.992)", filter: "blur(4px)" },
+          { opacity: 0, transform: "translateY(16px) scale(0.985)", filter: "blur(8px)" },
+          { opacity: 0.82, transform: "translateY(5px) scale(0.996)", filter: "blur(2px)", offset: 0.58 },
           { opacity: 1, transform: "translateY(0) scale(1)", filter: "blur(0)" }
         ],
-        { duration: 520, easing: "cubic-bezier(.2,.8,.2,1)" }
+        { duration: 680, easing: "cubic-bezier(0.16, 1, 0.3, 1)" }
       );
     }
   });

@@ -27,6 +27,12 @@
   --space-page: 18px;
   --space-section: 18px;
   --space-card: 20px;
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-settle: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --motion-fast: 220ms;
+  --motion-med: 360ms;
+  --motion-slow: 620ms;
   color-scheme: light;
 }
 
@@ -105,7 +111,7 @@ body {
     radial-gradient(circle at 84% 14%, rgba(52, 199, 89, 0.06), transparent 26%),
     linear-gradient(145deg, var(--page-start) 0%, var(--page-mid) 45%, var(--page-end) 100%);
   overflow-x: hidden;
-  transition: background 260ms ease, color 260ms ease;
+  transition: background var(--motion-med) var(--ease-soft), color var(--motion-med) var(--ease-soft);
 }
 
 body::before,
@@ -117,7 +123,7 @@ body::after {
   border-radius: 50%;
   pointer-events: none;
   z-index: -1;
-  transition: transform 600ms cubic-bezier(.2,.8,.2,1);
+  transition: transform 800ms var(--ease-soft), opacity var(--motion-med) ease;
 }
 
 body::before {
@@ -165,7 +171,7 @@ button {
   font-weight: 850;
   cursor: pointer;
   transform: translate3d(var(--help-x, 18px), var(--help-y, 18px), 0) scale(0.88);
-  transition: opacity 140ms ease, transform 180ms cubic-bezier(.2,.8,.2,1), box-shadow 180ms ease;
+  transition: opacity 220ms ease, transform 280ms var(--ease-soft), box-shadow 260ms ease;
 }
 
 .context-trigger.is-visible {
@@ -192,8 +198,8 @@ button {
   font-size: 13px;
   font-weight: 680;
   line-height: 1.35;
-  transform: translate3d(var(--hint-x, 18px), var(--hint-y, 18px), 0) translateY(6px) scale(0.98);
-  transition: opacity 160ms ease, transform 220ms cubic-bezier(.2,.8,.2,1);
+  transform: translate3d(var(--hint-x, 18px), var(--hint-y, 18px), 0) translateY(10px) scale(0.975);
+  transition: opacity 240ms ease, transform 320ms var(--ease-soft), box-shadow 320ms ease;
 }
 
 .context-hint.is-visible {
@@ -229,7 +235,7 @@ body[data-theme="dark"] .context-hint {
   border-radius: 32px;
   box-shadow: var(--shadow);
   transform: translate3d(calc(var(--mx, 0) * -4px), calc(var(--my, 0) * -3px), 0);
-  transition: transform 500ms cubic-bezier(.2,.8,.2,1), box-shadow 260ms ease;
+  transition: transform 720ms var(--ease-soft), box-shadow var(--motion-med) ease, border-color var(--motion-med) ease;
 }
 
 .brand-block {
@@ -299,7 +305,7 @@ body[data-theme="dark"] .context-hint {
   cursor: pointer;
   text-align: left;
   font-weight: 700;
-  transition: background 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  transition: background var(--motion-fast) ease, color var(--motion-fast) ease, transform 260ms var(--ease-soft), box-shadow 260ms ease;
 }
 
 .nav-item b {
@@ -367,7 +373,7 @@ body[data-theme="dark"] .context-hint {
   aspect-ratio: 1;
   background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 60%);
   transform: translate3d(calc(var(--mx, 0) * 18px), calc(var(--my, 0) * 14px), 0);
-  transition: transform 500ms cubic-bezier(.2,.8,.2,1);
+  transition: transform 720ms var(--ease-soft), opacity var(--motion-med) ease;
 }
 
 .panel-label {
@@ -452,7 +458,7 @@ body[data-theme="dark"] .context-hint {
   cursor: pointer;
   font-weight: 760;
   box-shadow: var(--shadow-soft);
-  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  transition: transform 260ms var(--ease-soft), box-shadow 260ms ease, background var(--motion-fast) ease, border-color var(--motion-fast) ease;
 }
 
 .primary-button:hover,
@@ -508,7 +514,7 @@ body[data-theme="dark"] .context-hint {
 
 .view {
   display: none;
-  animation: viewIn 520ms cubic-bezier(.2,.8,.2,1) both;
+  animation: viewIn 640ms var(--ease-smooth) both;
 }
 
 .view.active { display: block; }
@@ -531,7 +537,7 @@ body[data-theme="dark"] .context-hint {
   border: 1px solid var(--sidebar-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
-  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  transition: transform 320ms var(--ease-soft), box-shadow 320ms ease, border-color 260ms ease, background 260ms ease;
 }
 
 .metric:hover,
@@ -549,7 +555,7 @@ body[data-theme="dark"] .context-hint {
 .metric {
   padding: var(--space-card);
   min-height: 150px;
-  animation: cardIn 560ms cubic-bezier(.2,.8,.2,1) both;
+  animation: cardIn 680ms var(--ease-smooth) both;
 }
 
 .metric p,
@@ -586,7 +592,7 @@ body[data-theme="dark"] .context-hint {
   display: grid;
   grid-template-columns: 1.6fr 0.8fr;
   gap: var(--space-section);
-  animation: cardIn 620ms cubic-bezier(.2,.8,.2,1) both;
+  animation: cardIn 720ms var(--ease-smooth) both;
 }
 
 .presentation-panel {
@@ -601,7 +607,7 @@ body[data-theme="dark"] .context-hint {
   border: 1px solid rgba(255,255,255,0.18);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
-  animation: cardIn 600ms cubic-bezier(.2,.8,.2,1) both;
+  animation: cardIn 700ms var(--ease-smooth) both;
 }
 
 .presentation-copy h3,
@@ -672,7 +678,7 @@ body[data-theme="dark"] .context-hint {
   border-radius: var(--radius-md);
   padding: 16px;
   min-height: 172px;
-  animation: cardIn 520ms cubic-bezier(.2,.8,.2,1) both;
+  animation: cardIn 660ms var(--ease-smooth) both;
 }
 
 .journey-step:nth-child(2) { animation-delay: 60ms; }
@@ -695,7 +701,7 @@ body[data-theme="dark"] .context-hint {
 .journey-step.active {
   background: var(--panel);
   box-shadow: inset 0 0 0 1px rgba(0, 122, 255, 0.22), 0 14px 30px rgba(0, 122, 255, 0.11);
-  animation: cardIn 520ms cubic-bezier(.2,.8,.2,1) both, softPulse 3.8s ease-in-out infinite;
+  animation: cardIn 660ms var(--ease-smooth) both, softPulse 4.4s ease-in-out infinite;
 }
 
 .journey-step.done span {
@@ -737,7 +743,7 @@ body[data-theme="dark"] .context-hint {
   cursor: pointer;
   text-align: left;
   font-weight: 760;
-  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+  transition: transform 300ms var(--ease-soft), background 240ms ease, box-shadow 300ms ease;
 }
 
 .task-row:hover {
@@ -775,7 +781,7 @@ body[data-theme="dark"] .context-hint {
   padding: 17px 20px;
   border-top: 1px solid var(--line);
   align-items: center;
-  transition: background 180ms ease, transform 180ms ease;
+  transition: background 240ms ease, transform 300ms var(--ease-soft);
 }
 
 .lead-row > * {
@@ -820,7 +826,7 @@ body[data-theme="dark"] .context-hint {
 
 .approval-card {
   padding: var(--space-card);
-  animation: cardIn 520ms cubic-bezier(.2,.8,.2,1) both;
+  animation: cardIn 660ms var(--ease-smooth) both;
 }
 
 .approval-card:nth-child(2) { animation-delay: 70ms; }
@@ -846,7 +852,7 @@ body[data-theme="dark"] .context-hint {
   border: 1px solid var(--sidebar-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
-  animation: cardIn 560ms cubic-bezier(.2,.8,.2,1) both;
+  animation: cardIn 680ms var(--ease-smooth) both;
 }
 
 .studio-header {
@@ -986,7 +992,7 @@ body[data-theme="dark"] .publish-row span {
 }
 
 .generated-output.is-refreshing .output-card {
-  animation: cardIn 420ms cubic-bezier(.2,.8,.2,1) both;
+  animation: cardIn 560ms var(--ease-smooth) both;
 }
 
 .creative-output {
@@ -1071,7 +1077,7 @@ body[data-theme="dark"] .publish-row span {
   font-size: 13px;
   font-weight: 780;
   cursor: pointer;
-  transition: transform 180ms ease, border-color 180ms ease, color 180ms ease, background 180ms ease;
+  transition: transform 300ms var(--ease-soft), border-color 240ms ease, color 240ms ease, background 240ms ease;
 }
 
 .option-pill:hover,
@@ -1254,7 +1260,7 @@ body[data-theme="dark"] .cta-list a {
   margin-top: 10px;
   font-weight: 800;
   box-shadow: 0 8px 22px rgba(24, 31, 43, 0.08);
-  transition: transform 180ms ease, box-shadow 180ms ease;
+  transition: transform 300ms var(--ease-soft), box-shadow 300ms ease;
 }
 
 .deal:hover {
@@ -1283,7 +1289,7 @@ body[data-theme="dark"] .cta-list a {
 .engine-flow article {
   padding: var(--space-card);
   min-height: 260px;
-  animation: cardIn 540ms cubic-bezier(.2,.8,.2,1) both;
+  animation: cardIn 680ms var(--ease-smooth) both;
 }
 
 .engine-flow article:nth-child(2) { animation-delay: 60ms; }
@@ -1300,7 +1306,7 @@ body[data-theme="dark"] .cta-list a {
 .screenshot-strip figure {
   margin: 0;
   overflow: hidden;
-  animation: cardIn 560ms cubic-bezier(.2,.8,.2,1) both;
+  animation: cardIn 680ms var(--ease-smooth) both;
 }
 
 .screenshot-strip img {
@@ -1310,7 +1316,7 @@ body[data-theme="dark"] .cta-list a {
   object-fit: cover;
   object-position: top left;
   border-bottom: 1px solid var(--line);
-  transition: transform 600ms cubic-bezier(.2,.8,.2,1);
+  transition: transform 600ms var(--ease-smooth);
 }
 
 .screenshot-strip figure:hover img {
@@ -1335,8 +1341,12 @@ body[data-theme="dark"] .cta-list a {
 @keyframes viewIn {
   from {
     opacity: 0;
-    transform: translateY(12px) scale(0.992);
-    filter: blur(4px);
+    transform: translateY(16px) scale(0.985);
+    filter: blur(8px);
+  }
+  55% {
+    opacity: 0.82;
+    filter: blur(2px);
   }
   to {
     opacity: 1;
@@ -1348,11 +1358,17 @@ body[data-theme="dark"] .cta-list a {
 @keyframes cardIn {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(18px) scale(0.985);
+    filter: blur(5px);
+  }
+  60% {
+    opacity: 0.86;
+    filter: blur(1px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
@@ -1440,7 +1456,7 @@ body[data-theme="dark"] .cta-list a {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0) scale(1);
-    transition: opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+    transition: opacity 260ms ease, transform 320ms var(--ease-soft), box-shadow 180ms ease;
   }
 
   body.is-at-top .mobile-menu-toggle {
@@ -1454,7 +1470,7 @@ body[data-theme="dark"] .cta-list a {
     display: block;
     border-radius: 999px;
     background: var(--ink);
-    transition: transform 180ms ease, opacity 180ms ease;
+    transition: transform 300ms var(--ease-soft), opacity 240ms ease;
   }
 
   body.nav-open .mobile-menu-toggle span:nth-child(1) {
@@ -1486,7 +1502,7 @@ body[data-theme="dark"] .cta-list a {
     pointer-events: none;
     transform: translateY(8px) scale(0.98);
     transform-origin: bottom right;
-    transition: opacity 180ms ease, transform 180ms ease;
+    transition: opacity 260ms ease, transform 320ms var(--ease-soft);
   }
 
   body.is-at-top .nav-list {
@@ -1590,7 +1606,7 @@ body[data-theme="dark"] .cta-list a {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0) scale(1);
-    transition: opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+    transition: opacity 260ms ease, transform 320ms var(--ease-soft), box-shadow 180ms ease;
   }
 
   body.is-at-top .mobile-menu-toggle {
@@ -1612,7 +1628,7 @@ body[data-theme="dark"] .cta-list a {
     display: block;
     border-radius: 999px;
     background: var(--ink);
-    transition: transform 180ms ease, opacity 180ms ease;
+    transition: transform 300ms var(--ease-soft), opacity 240ms ease;
   }
 
   body.nav-open .mobile-menu-toggle span:nth-child(1) {
@@ -1644,7 +1660,7 @@ body[data-theme="dark"] .cta-list a {
     pointer-events: none;
     transform: translateY(-8px) scale(0.98);
     transform-origin: top right;
-    transition: opacity 180ms ease, transform 180ms ease;
+    transition: opacity 260ms ease, transform 320ms var(--ease-soft);
   }
 
   body.is-at-top .nav-list {
