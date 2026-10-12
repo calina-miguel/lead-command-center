@@ -211,16 +211,22 @@ body:not(.touch-context-help) .context-trigger.is-visible {
   font-size: 13px;
   font-weight: 680;
   line-height: 1.42;
-  transform: translate3d(var(--hint-x, 18px), var(--hint-y, 18px), 0) translateY(16px) scale(0.94);
-  filter: blur(5px);
-  transition: opacity 360ms ease, transform 560ms var(--ease-smooth), filter 460ms ease, box-shadow 460ms ease;
+  transform: translate3d(var(--hint-x, 18px), calc(var(--hint-y, 18px) + 14px), 0) scale(0.92);
+  transform-origin: top center;
+  filter: blur(8px) saturate(0.88);
+  will-change: opacity, transform, filter;
+  transition:
+    opacity 420ms ease,
+    transform 620ms var(--ease-smooth),
+    filter 520ms ease,
+    box-shadow 520ms ease;
 }
 
 .context-hint.is-visible {
   opacity: 1;
-  transform: translate3d(var(--hint-x, 18px), var(--hint-y, 18px), 0) translateY(0) scale(1);
-  filter: blur(0);
-  animation: hintSettle 560ms var(--ease-smooth) both;
+  transform: translate3d(var(--hint-x, 18px), var(--hint-y, 18px), 0) scale(1);
+  filter: blur(0) saturate(1);
+  animation: hintSettle 680ms var(--ease-smooth) both;
 }
 
 body[data-theme="dark"] .context-hint {
@@ -1708,15 +1714,18 @@ body[data-theme="dark"] .cta-list a {
 @keyframes hintSettle {
   0% {
     opacity: 0;
-    transform: translate3d(var(--hint-x, 18px), var(--hint-y, 18px), 0) translateY(18px) scale(0.94);
+    transform: translate3d(var(--hint-x, 18px), calc(var(--hint-y, 18px) + 18px), 0) scale(0.92);
+    filter: blur(8px) saturate(0.88);
   }
-  64% {
+  58% {
     opacity: 1;
-    transform: translate3d(var(--hint-x, 18px), var(--hint-y, 18px), 0) translateY(-2px) scale(1.012);
+    transform: translate3d(var(--hint-x, 18px), calc(var(--hint-y, 18px) - 3px), 0) scale(1.012);
+    filter: blur(0) saturate(1);
   }
   100% {
     opacity: 1;
-    transform: translate3d(var(--hint-x, 18px), var(--hint-y, 18px), 0) translateY(0) scale(1);
+    transform: translate3d(var(--hint-x, 18px), var(--hint-y, 18px), 0) scale(1);
+    filter: blur(0) saturate(1);
   }
 }
 
