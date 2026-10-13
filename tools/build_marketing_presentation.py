@@ -53,7 +53,7 @@ def capture():
         time.sleep(1)
         path = ROOT / "tools" / "_marketing_presentation.png"
         profile = tempfile.mkdtemp()
-        subprocess.run([chrome_path(), "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1", "--window-size=1280,1500", "--virtual-time-budget=2500", f"--user-data-dir={profile}", f"--screenshot={path}", f"http://127.0.0.1:{PORT}/marketing/"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run([chrome_path(), "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1", "--window-size=1280,720", "--virtual-time-budget=2500", f"--user-data-dir={profile}", f"--screenshot={path}", f"http://127.0.0.1:{PORT}/marketing/"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         return path
     finally:
         server.terminate()
@@ -63,7 +63,10 @@ def capture():
 def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     screenshot = capture()
-    base = Image.open(screenshot).convert("RGB").resize((1180, 620), Image.Resampling.LANCZOS)
+    source = Image.open(screenshot).convert("RGB")
+    base = Image.new("RGB", (1180, 620), "#080f1a")
+    source.thumbnail((1180, 620), Image.Resampling.LANCZOS)
+    base.paste(source, ((1180 - source.width) // 2, (620 - source.height) // 2))
     frames = ROOT / "tools" / "_marketing_frames"
     frames.mkdir(exist_ok=True)
     list_file = frames / "slides.txt"
