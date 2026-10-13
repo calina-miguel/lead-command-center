@@ -15,6 +15,6 @@ const messages = [
 function showToast(message){toast.textContent=message;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2600)}
 function render(){const [title,desc,copy]=messages[current];status.textContent=title;detail.textContent=desc;monitor.textContent=copy;bar.style.width=`${((current+1)/steps.length)*100}%`;count.textContent=`Step ${current+1} of ${steps.length}`;steps.forEach((step,index)=>step.classList.toggle('active',index===current));}
 document.querySelectorAll('[data-action]').forEach(button=>button.addEventListener('click',()=>{current=button.dataset.action==='start-campaign'?Math.min(1,steps.length-1):(current+1)%steps.length;render();showToast(messages[current][0]);document.querySelector('#workflow').scrollIntoView({behavior:'smooth',block:'center'})}));
-document.querySelector('#theme-toggle').addEventListener('click',()=>{const dark=document.body.dataset.theme==='dark';document.body.dataset.theme=dark?'light':'dark';document.querySelector('#theme-toggle').textContent=dark?'Dark':'Light';});
+document.querySelector('#theme-toggle').addEventListener('click',()=>{const dark=document.body.dataset.theme==='dark';const theme=dark?'light':'dark';document.body.dataset.theme=theme;localStorage.setItem('black-glove-marketing-theme',theme);document.querySelector('#theme-toggle').textContent=dark?'Dark':'Light';});
 document.body.dataset.theme=localStorage.getItem('black-glove-marketing-theme')||'light';document.querySelector('#theme-toggle').textContent=document.body.dataset.theme==='dark'?'Light':'Dark';
 render();
