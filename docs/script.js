@@ -25,7 +25,7 @@ const walkthroughSteps = [
   },
   {
     view: "engine",
-    caption: "Then reveal the under-the-hood workflow engine in GHL: intake, reply routing, booked calls, and billing handoff."
+    caption: "Then reveal the operating engine: intake starts the campaign, replies route into action, and approved records can sync to the client’s native CRM."
   }
 ];
 
@@ -144,7 +144,9 @@ const contextSummaries = new Map([
   [".creative-card", "Prepared creative direction for visual assets, CTA language, and compliant campaign presentation."],
   [".composer-card", "Deployment setting for choosing format, platform, media attachment, and emoji tone."],
   [".lane", "Pipeline lane grouping opportunities by current revenue stage."],
-  [".engine-flow article", "Automation node showing what the operating workflow does at this stage."]
+  [".engine-flow article", "Automation node showing what the operating workflow does at this stage."],
+  [".sync-branch", "Optional client connection that keeps approved lead records, tags, stages, and next actions aligned with a client’s native CRM."],
+  [".sync-steps", "The CRM sync branch starts after lead intake and campaign setup, then passes approved context into the client’s existing system."]
 ]);
 
 function assignContextSummaries() {

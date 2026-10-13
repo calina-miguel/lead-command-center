@@ -40,7 +40,13 @@ SCENES = [
         "id": "hot-leads",
         "view": "hot-leads",
         "label": "Hot Leads",
-        "vo": "Leads can move from BoldTrail intake into organized segments, then into outreach, reply sorting, call scheduling, proposal tracking, billing, and onboarding.",
+        "vo": "Leads can move from BoldTrail intake into organized segments, then start a campaign with email follow-up, reply sorting, call scheduling, proposal tracking, billing, and onboarding.",
+    },
+    {
+        "id": "crm-sync",
+        "view": "engine",
+        "label": "Client CRM Sync",
+        "vo": "When a client already uses another CRM, the approved contact record, tags, pipeline stage, and next action can stay aligned across systems after intake and consent checks.",
     },
     {
         "id": "content",
@@ -66,7 +72,7 @@ SCENES = [
         "id": "engine",
         "view": "engine",
         "label": "Operating Engine",
-        "vo": "Under the hood, the workflow keeps the system consistent: intake, reply routing, content review, appointment preparation, closed-won handoff, and billing setup.",
+        "vo": "Under the hood, the workflow keeps the system consistent: intake starts the campaign, reply routing creates the next action, content review protects the outreach, and approved records can sync to a client’s native CRM before appointment preparation, closed-won handoff, and billing setup.",
     },
     {
         "id": "value",
@@ -340,9 +346,10 @@ def main():
     ASSETS.mkdir(parents=True, exist_ok=True)
     write_script()
     capture_screenshots()
-    has_voiceover = False
+    # Reuse the existing approved voice track when a fresh API render is not available.
+    has_voiceover = AUDIO_OUT.exists()
     try:
-        has_voiceover = render_voiceover()
+        has_voiceover = render_voiceover() or has_voiceover
     except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError) as error:
         print(f"ElevenLabs voiceover could not be rendered: {error}")
     scene_duration = 7
@@ -351,7 +358,7 @@ def main():
     build_video(scene_duration)
     mux_final_video(has_voiceover)
     if not has_voiceover:
-        print("ELEVENLABS_API_KEY not found; video was rendered with word-for-word captions and no external voiceover.")
+        print("No voiceover track available; video was rendered with captions only.")
     print(OUT)
     print(SCRIPT_OUT)
 

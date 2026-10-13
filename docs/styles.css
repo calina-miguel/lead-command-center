@@ -1602,7 +1602,7 @@ body[data-theme="dark"] .cta-list a {
 
 .engine-flow {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: var(--space-section);
 }
 
@@ -1615,6 +1615,60 @@ body[data-theme="dark"] .cta-list a {
 .engine-flow article:nth-child(2) { animation-delay: 60ms; }
 .engine-flow article:nth-child(3) { animation-delay: 120ms; }
 .engine-flow article:nth-child(4) { animation-delay: 180ms; }
+.engine-flow article:nth-child(5) { animation-delay: 240ms; }
+
+.sync-branch {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  gap: var(--space-section);
+  align-items: center;
+  margin-top: var(--space-section);
+  padding: var(--space-card);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-soft);
+}
+
+.sync-branch h3 {
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+
+.sync-branch > div:first-child > p:last-child {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.sync-steps {
+  display: grid;
+  gap: 10px;
+}
+
+.sync-steps span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 14px;
+  color: var(--ink);
+  background: var(--panel-strong);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.sync-steps span::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px rgba(0, 122, 255, 0.12);
+}
 
 .screenshot-strip {
   display: grid;
@@ -2042,6 +2096,8 @@ body[data-theme="dark"] .cta-list a {
   .setup-runbook,
   .runbook-list { grid-template-columns: 1fr 1fr; }
 
+  .sync-branch { grid-template-columns: 1fr; }
+
   .connection-row {
     grid-template-columns: 1fr 1fr;
   }
@@ -2064,6 +2120,8 @@ body[data-theme="dark"] .cta-list a {
   .app-shell {
     gap: 12px;
   }
+
+  .sync-branch { grid-template-columns: 1fr; }
 
   .main {
     padding: 0 0 96px;
