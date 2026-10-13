@@ -39,7 +39,7 @@ export async function requireUser(req, { admin = false } = {}) {
 }
 
 export async function audit(user, action, resource, metadata = {}) {
-  await sql`insert into audit_logs (user_id, action, resource, metadata) values (${user.id}, ${action}, ${resource}, ${JSON.stringify(metadata)})`;
+  await sql`insert into audit_logs (user_id, action, resource, metadata) values (${user.id}, ${action}, ${resource}, ${JSON.stringify(metadata)}::jsonb)`;
 }
 
 export function json(res, status, body) {
