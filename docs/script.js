@@ -1,5 +1,5 @@
 const titles = {
-  overview: "Command Center",
+  overview: "Admin Panel",
   "hot-leads": "Hot Leads",
   content: "Content Approval",
   pipeline: "Pipeline",
@@ -120,7 +120,7 @@ const tapMotionSelector = [
 ].join(",");
 
 const contextSummaries = new Map([
-  ["[data-view='overview']", "Command Center shows the top-level operating dashboard: lead volume, hot replies, booked calls, coverage, video walkthrough, journey, and priority queue."],
+  ["[data-view='overview']", "Admin Panel shows the top-level operating dashboard: lead volume, hot replies, booked calls, coverage, video walkthrough, journey, and priority queue."],
   ["[data-view='hot-leads']", "Hot Leads opens the priority inbox so the team can focus on prospects with strong buying signals or urgent questions."],
   ["[data-view='content']", "Content Approval opens the messaging studio where emails, social copy, media direction, CTAs, and deployment settings are reviewed before publishing."],
   ["[data-view='pipeline']", "Pipeline shows where each opportunity sits from new lead through booked call, proposal, and closed-won billing handoff."],
