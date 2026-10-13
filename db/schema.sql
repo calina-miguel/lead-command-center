@@ -1,10 +1,13 @@
 create table if not exists users (
   id uuid primary key default gen_random_uuid(),
   email text unique not null,
+  username text unique,
   password_hash text not null,
   role text not null check (role in ('admin', 'member')),
   created_at timestamptz not null default now()
 );
+
+create unique index if not exists users_username_lower_idx on users(lower(username)) where username is not null;
 
 create table if not exists sessions (
   id uuid primary key default gen_random_uuid(),
