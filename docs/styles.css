@@ -51,6 +51,11 @@ body.auth-locked > .workflow-toast { visibility: hidden; }
 #command-login-form label { color: var(--muted); font-size: 0.88rem; font-weight: 700; }
 #command-login-form input { width: 100%; box-sizing: border-box; border: 1px solid var(--control-border); border-radius: 14px; background: var(--control-bg); color: var(--ink); padding: 13px 14px; margin-bottom: 8px; font: inherit; }
 #command-login-form input:focus { outline: 3px solid rgba(0, 122, 255, 0.2); border-color: var(--brand); }
+.login-divider { display: flex; align-items: center; gap: 12px; margin: 6px 0; color: var(--subtle); font-size: 0.82rem; }
+.login-divider::before, .login-divider::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+.google-login { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; border: 1px solid var(--control-border); border-radius: 14px; background: var(--control-bg); color: var(--ink); padding: 12px 14px; font: inherit; font-weight: 700; cursor: pointer; transition: transform var(--motion-fast) var(--ease-soft), border-color var(--motion-fast) ease, background var(--motion-fast) ease; }
+.google-login:hover { transform: translateY(-2px); border-color: var(--brand); background: var(--row-hover); }
+.google-mark { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; color: #4285f4; background: #fff; font-weight: 800; font-family: Arial, sans-serif; }
 .login-status { min-height: 1.4em; margin: 4px 0 0; color: var(--danger); font-size: 0.9rem; }
 @keyframes login-rise { from { opacity: 0; transform: translateY(18px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 

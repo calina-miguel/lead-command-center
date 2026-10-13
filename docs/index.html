@@ -19,6 +19,9 @@
           <label for="command-password">Password</label>
           <input id="command-password" type="password" autocomplete="current-password" required />
           <button class="primary" type="submit">Sign in</button>
+          <div class="login-divider"><span>or</span></div>
+          <button class="google-login" id="google-sign-in" type="button"><span class="google-mark" aria-hidden="true">G</span>Sign in with Google</button>
+          <button class="google-login" id="google-sign-up" type="button"><span class="google-mark" aria-hidden="true">G</span>Sign up with Google</button>
           <p class="login-status" id="command-login-status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -531,6 +534,9 @@
           if (!response.ok) { status.textContent = data.error || 'Unable to sign in'; return; }
           unlock(data.user);
         });
+        const googleMessage = () => { status.textContent = 'Google access is awaiting workspace OAuth setup.'; };
+        document.querySelector('#google-sign-in').addEventListener('click', googleMessage);
+        document.querySelector('#google-sign-up').addEventListener('click', googleMessage);
       })();
     </script>
   </body>
