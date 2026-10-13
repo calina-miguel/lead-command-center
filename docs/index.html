@@ -6,7 +6,23 @@
     <title>Black Glove Lead Command Center</title>
     <link rel="stylesheet" href="./styles.css?v=client-clean" />
   </head>
-  <body>
+  <body class="auth-locked">
+    <section class="command-login" id="command-login" aria-labelledby="command-login-title">
+      <div class="command-login-card">
+        <div class="brand-mark" aria-hidden="true">BG</div>
+        <p class="eyebrow">Black Glove Agency</p>
+        <h1 id="command-login-title">Lead Command Center</h1>
+        <p class="login-copy">Private operations access for authorized administrators.</p>
+        <form id="command-login-form">
+          <label for="command-identifier">Username or email</label>
+          <input id="command-identifier" type="text" autocomplete="username" required />
+          <label for="command-password">Password</label>
+          <input id="command-password" type="password" autocomplete="current-password" required />
+          <button class="primary" type="submit">Sign in</button>
+          <p class="login-status" id="command-login-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
     <div class="app-shell">
       <aside class="sidebar">
         <div class="brand-block">
@@ -491,5 +507,31 @@
     <div class="context-hint" id="context-hint" role="status" aria-live="polite"></div>
     <div class="workflow-toast" id="workflow-toast" role="status" aria-live="polite"></div>
     <script src="./script.js?v=client-clean"></script>
+    <script>
+      (() => {
+        const api = 'https://lead-command-center-phi.vercel.app';
+        const form = document.querySelector('#command-login-form');
+        const status = document.querySelector('#command-login-status');
+        const login = document.querySelector('#command-login');
+        const unlock = (user) => {
+          if (user.role !== 'admin') {
+            status.textContent = 'This panel is reserved for administrators.';
+            return;
+          }
+          document.body.classList.remove('auth-locked');
+          login.hidden = true;
+        };
+        fetch(api + '/api/me', { credentials: 'include' }).then((r) => r.ok ? r.json() : null).then((data) => { if (data && data.user) unlock(data.user); }).catch(() => {});
+        form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          status.textContent = 'Signing in...';
+          const identifier = document.querySelector('#command-identifier').value.trim();
+          const response = await fetch(api + '/api/login', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: identifier, username: identifier, password: document.querySelector('#command-password').value }) });
+          const data = await response.json();
+          if (!response.ok) { status.textContent = data.error || 'Unable to sign in'; return; }
+          unlock(data.user);
+        });
+      })();
+    </script>
   </body>
 </html>

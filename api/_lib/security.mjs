@@ -20,7 +20,7 @@ export async function verifyPassword(password, stored) {
 export function tokenHash(token) { return crypto.createHash('sha256').update(token).digest('hex'); }
 
 export function issueSessionCookie(token) {
-  return `bg_session=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800`;
+  return `bg_session=${token}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=604800`;
 }
 
 export function readCookie(req, name) {
@@ -49,6 +49,11 @@ export function json(res, status, body) {
 }
 
 export function method(req, res, allowed) {
+  res.setHeader('Access-Control-Allow-Origin', 'https://calina-miguel.github.io');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
+  if (req.method === 'OPTIONS') { res.statusCode = 204; res.end(); return false; }
   if (!allowed.includes(req.method)) { res.setHeader('Allow', allowed.join(', ')); json(res, 405, { error: 'Method not allowed' }); return false; }
   return true;
 }
