@@ -1,0 +1,12 @@
+{
+  "name": "black-glove-marketing-backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "check": "node --check api/login.mjs && node --check api/ghl/pipelines.mjs && node --check api/ghl/workflows.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.1"
+  }
+}
