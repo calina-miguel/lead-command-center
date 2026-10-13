@@ -534,7 +534,7 @@
           if (!response.ok) { status.textContent = data.error || 'Unable to sign in'; return; }
           unlock(data.user);
         });
-        const googleMessage = () => { status.textContent = 'Google access is awaiting workspace OAuth setup.'; };
+        const googleMessage = () => { status.textContent = 'Google access is being connected to this workspace.'; };
         document.querySelector('#google-sign-in').addEventListener('click', googleMessage);
         document.querySelector('#google-sign-up').addEventListener('click', googleMessage);
       })();
