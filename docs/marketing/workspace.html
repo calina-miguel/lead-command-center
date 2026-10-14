@@ -35,6 +35,11 @@
         <article><span>CRM alignment</span><strong>Ready</strong><small>GHL record and optional native sync</small></article>
       </section>
 
+      <section class="campaign crm-sync" aria-label="CRM sync destination">
+        <div><p class="eyebrow">Lead destination</p><h2>Choose the first CRM to sync</h2><p>Select the system that should receive approved lead records first. Connected destinations can sync immediately; other choices stay staged for setup.</p></div>
+        <div class="crm-controls"><label for="crm-destination">First sync destination</label><select id="crm-destination"><option value="highlevel">HighLevel</option><option value="boldtrail">BoldTrail</option><option value="hubspot">HubSpot</option><option value="salesforce">Salesforce</option></select><button class="primary" id="save-crm" type="button">Save destination</button></div>
+      </section>
+
       <section class="workflow" id="workflow">
         <div class="section-head"><div><p class="eyebrow">The core workflow</p><h2>From lead to aligned record</h2></div><span class="step-count" id="step-count">Step 1 of 4</span></div>
         <div class="steps">
