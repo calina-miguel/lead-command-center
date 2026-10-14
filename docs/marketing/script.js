@@ -1,3 +1,4 @@
+fetch('https://lead-command-center-phi.vercel.app/api/me',{credentials:'include'}).then(response=>{if(!response.ok)location.href='./';}).catch(()=>{location.href='./';});
 const steps = [...document.querySelectorAll('.step')];
 const status = document.querySelector('#campaign-status');
 const detail = document.querySelector('#campaign-detail');
