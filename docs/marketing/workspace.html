@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Black Glove Marketing</title>
-    <link rel="stylesheet" href="./styles.css?v=content-routing-1" />
+    <link rel="stylesheet" href="./styles.css?v=admin-workspace-1" />
   </head>
   <body>
     <main class="shell">
@@ -55,9 +55,14 @@
         <div><p class="eyebrow">Campaign monitor</p><h2>Every conversation has a next action.</h2><p id="monitor-copy">Choose a campaign path to preview how outreach and recruiting move through source selection, approval, follow-up, and CRM alignment.</p></div>
         <button class="secondary" data-action="advance">Advance workflow</button>
       </section>
+
+      <section class="workflow admin-controls" id="admin-controls" aria-label="Admin control panel" hidden>
+        <div class="section-head"><div><p class="eyebrow">Admin workspace</p><h2>Internal operations control</h2></div><span class="step-count" id="admin-user">Authorized admin</span></div>
+        <div class="admin-control-grid"><article class="admin-control-card"><h3>Team access</h3><p>Review the users and roles permitted to operate this workspace.</p><button class="secondary" id="load-team" type="button">Load team access</button><pre id="team-output" aria-live="polite">Ready.</pre></article><article class="admin-control-card"><h3>GHL pipeline</h3><p>Inspect the connected HighLevel pipeline from this private control surface.</p><button class="secondary" id="load-pipeline" type="button">Load pipeline</button><pre id="pipeline-output" aria-live="polite">Ready.</pre></article></div>
+      </section>
     </main>
     <dialog class="campaign-dialog" id="campaign-dialog"><form method="dialog"><div class="dialog-head"><div><p class="eyebrow">Step 01</p><h2>Choose a campaign type</h2><p>Select the audience this workflow should prepare for.</p></div><button class="dialog-close" value="cancel" aria-label="Close">×</button></div><div class="campaign-choices"><button class="campaign-choice" type="button" data-campaign="outreach"><strong>Outreach campaign</strong><span>Organize and follow up with prospective buyers and sellers.</span></button><button class="campaign-choice" type="button" data-campaign="agents"><strong>Recruiting real estate agents</strong><span>Build a focused recruiting campaign for prospective agents.</span></button></div></form></dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="./script.js?v=content-routing-1"></script>
+    <script src="./script.js?v=admin-workspace-1"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
-fetch('https://lead-command-center-phi.vercel.app/api/me',{credentials:'include'}).then(response=>{if(!response.ok)location.href='./';}).catch(()=>{location.href='./';});
+const API = 'https://lead-command-center-phi.vercel.app';
+fetch(`${API}/api/me`,{credentials:'include'}).then(async response=>{if(!response.ok){location.href='./';return}const data=await response.json();if(data.user?.role==='admin'){const panel=document.querySelector('#admin-controls');panel.hidden=false;document.querySelector('#admin-user').textContent=data.user.email;}}).catch(()=>{location.href='./';});
 const steps = [...document.querySelectorAll('.step')];
 const status = document.querySelector('#campaign-status');
 const detail = document.querySelector('#campaign-detail');
@@ -28,5 +29,7 @@ videoFile.addEventListener('change',()=>{document.querySelector('#video-status')
 document.querySelector('#queue-content').addEventListener('click',()=>{const destinations=[...document.querySelectorAll('.destination-list input:checked')].map(input=>input.value);if(!videoFile.files.length){showToast('Attach or record a video first');return}if(!destinations.length){showToast('Choose at least one destination');return}showToast('Content package queued for approval');});
 document.querySelector('#theme-toggle').addEventListener('click',()=>{const dark=document.body.dataset.theme==='dark';const theme=dark?'light':'dark';document.body.dataset.theme=theme;localStorage.setItem('black-glove-marketing-theme',theme);document.querySelector('#theme-toggle').textContent=dark?'Dark':'Light';});
 document.querySelector('#save-crm').addEventListener('click',()=>{localStorage.setItem('black-glove-marketing-crm',crmDestination.value);showToast(`${crmDestination.options[crmDestination.selectedIndex].text} selected as the first sync destination`);});
+document.querySelector('#load-team').addEventListener('click',async()=>{const output=document.querySelector('#team-output');output.textContent='Loading...';const response=await fetch(`${API}/api/admin/users`,{credentials:'include'});const data=await response.json();output.textContent=response.ok?data.users.map(user=>`${user.username||user.email} - ${user.role}`).join('\\n'):(data.error||'Unable to load team access');});
+document.querySelector('#load-pipeline').addEventListener('click',async()=>{const output=document.querySelector('#pipeline-output');output.textContent='Loading...';const response=await fetch(`${API}/api/ghl/pipelines`,{credentials:'include'});const data=await response.json();output.textContent=response.ok?JSON.stringify(data,null,2):(data.error||'Unable to load pipeline');});
 document.body.dataset.theme=localStorage.getItem('black-glove-marketing-theme')||'light';document.querySelector('#theme-toggle').textContent=document.body.dataset.theme==='dark'?'Light':'Dark';
 render();
