@@ -45,8 +45,8 @@ document.querySelector('#save-pipeline').addEventListener('click',async()=>{cons
 const profileTrigger=document.querySelector('#profile-trigger');
 const profileDropdown=document.querySelector('#profile-dropdown');
 profileTrigger.addEventListener('click',()=>{const open=profileTrigger.getAttribute('aria-expanded')==='true';profileTrigger.setAttribute('aria-expanded',String(!open));profileDropdown.hidden=open;});
-document.querySelector('#open-settings').addEventListener('click',()=>{profileDropdown.hidden=true;profileTrigger.setAttribute('aria-expanded','false');document.querySelector('#settings-crm').value=crmDestination.value;document.querySelector('#settings-dialog').showModal();});
-document.querySelector('#settings-theme').addEventListener('click',()=>document.querySelector('#theme-toggle').click());
+document.querySelector('#open-settings').addEventListener('click',()=>{profileDropdown.hidden=true;profileTrigger.setAttribute('aria-expanded','false');document.querySelector('#settings-crm').value=crmDestination.value;document.querySelector('#settings-theme').textContent=`Use ${document.body.dataset.theme==='dark'?'light':'dark'} mode`;document.querySelector('#settings-dialog').showModal();});
+document.querySelector('#settings-theme').addEventListener('click',()=>{document.querySelector('#theme-toggle').click();document.querySelector('#settings-theme').textContent=`Use ${document.body.dataset.theme==='dark'?'light':'dark'} mode`;});
 document.querySelector('#settings-dialog .settings-save').addEventListener('click',()=>{crmDestination.value=document.querySelector('#settings-crm').value;localStorage.setItem('black-glove-marketing-crm',crmDestination.value);showToast('Workspace settings saved');});
 document.querySelector('#logout').addEventListener('click',async()=>{await fetch(`${API}/api/logout`,{method:'POST',credentials:'include',headers:authHeaders});sessionStorage.removeItem('bg_session');location.href='./';});
 document.body.dataset.theme=localStorage.getItem('black-glove-marketing-theme')||'light';document.querySelector('#theme-toggle').textContent=document.body.dataset.theme==='dark'?'Light':'Dark';
