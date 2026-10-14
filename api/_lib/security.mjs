@@ -29,8 +29,13 @@ export function readCookie(req, name) {
   return found ? decodeURIComponent(found[1]) : null;
 }
 
+export function readSessionToken(req) {
+  const auth = req.headers.authorization || '';
+  return auth.startsWith('Bearer ') ? auth.slice(7) : readCookie(req, 'bg_session');
+}
+
 export async function requireUser(req, { admin = false } = {}) {
-  const token = readCookie(req, 'bg_session');
+  const token = readSessionToken(req);
   if (!token) throw Object.assign(new Error('Authentication required'), { statusCode: 401 });
   const rows = await sql`select u.id, u.email, u.role from sessions s join users u on u.id = s.user_id where s.token_hash = ${tokenHash(token)} and s.expires_at > now()`;
   const user = rows[0];
