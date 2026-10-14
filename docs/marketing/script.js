@@ -13,10 +13,10 @@ crmDestination.value = localStorage.getItem('black-glove-marketing-crm') || 'hig
 workflowCampaignButtons.forEach(button=>button.classList.toggle('selected',button.dataset.workflowCampaign===localStorage.getItem('black-glove-marketing-campaign-type')));
 let current = 0;
 const messages = [
-  ['Lead captured', 'The new lead is organized with source and stated interest.', 'Intake is complete and the record is ready for campaign routing.'],
-  ['Campaign started', 'The matching follow-up sequence is now active.', 'The lead has moved into the right campaign based on their marketing need.'],
-  ['Email follow-up ready', 'A relevant message is prepared for the next touchpoint.', 'The follow-up keeps the conversation useful, timely, and connected to the lead’s need.'],
-  ['CRM aligned', 'The GHL record is current and ready for optional native CRM sync.', 'Approved contact context, stage, and next action can stay aligned across systems.']
+  ['Campaign path selected', 'The workflow is ready for prospect outreach or agent recruiting.', 'The campaign audience is selected before source and CRM routing begin.'],
+  ['Source selected', 'The supplying CRM or lead source is ready for review.', 'The workflow knows where the audience comes from and where approved records should go.'],
+  ['Follow-up approved', 'Relevant campaign messaging is prepared for the next touchpoint.', 'Content and outreach remain behind review until an authorized user approves the action.'],
+  ['CRM aligned', 'The approved record is ready for the selected destination.', 'Contact context, tags, stage, and next action stay aligned across the operating flow.']
 ];
 function showToast(message){toast.textContent=message;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2600)}
 function render(){const [title,desc,copy]=messages[current];status.textContent=title;detail.textContent=desc;monitor.textContent=copy;bar.style.width=`${((current+1)/steps.length)*100}%`;count.textContent=`Step ${current+1} of ${steps.length}`;steps.forEach((step,index)=>step.classList.toggle('active',index===current));}

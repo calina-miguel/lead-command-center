@@ -21,38 +21,38 @@
 
       <section class="hero" id="overview">
         <div>
-          <p class="eyebrow">Lead growth, organized</p>
-          <h1>Turn every new lead into a clear next step.</h1>
-          <p class="hero-copy">Black Glove Marketing helps agencies and growing businesses capture leads, start the right campaign, follow up by email, and keep every CRM record aligned.</p>
-          <div class="metrics" aria-label="Marketing workspace metrics"><article><span>Leads captured</span><strong>2,852</strong><small>Organized from connected sources</small></article><article><span>Campaign coverage</span><strong>96%</strong><small>Contacts with a next action</small></article><article><span>CRM alignment</span><strong>Ready</strong><small>GHL record and optional native sync</small></article></div>
+          <p class="eyebrow">Real-estate marketing operations</p>
+          <h1>Move every real-estate conversation forward.</h1>
+          <p class="hero-copy">Black Glove Marketing organizes prospect outreach and agent recruiting into one operating flow, with the right source, message, approval, and CRM destination attached to every next step.</p>
+          <div class="metrics" aria-label="Marketing workspace metrics"><article><span>Prospects organized</span><strong>2,852</strong><small>Grouped by source and campaign path</small></article><article><span>Follow-up coverage</span><strong>96%</strong><small>Contacts with a clear next action</small></article><article><span>Routing status</span><strong>Ready</strong><small>Campaign and CRM path selected before sync</small></article></div>
           <div class="hero-actions"><button class="primary" data-action="start-campaign">Start a campaign</button><a class="secondary" href="#workflow">View the workflow</a><a class="secondary" href="./presentation/">Watch presentation</a><a class="secondary" href="./admin.html">Admin sign in</a></div>
         </div>
-        <div class="hero-card"><span class="eyebrow">Live campaign</span><strong id="campaign-status">Ready to begin</strong><div class="progress"><span id="progress-bar"></span></div><small id="campaign-detail">New leads will move through intake, email follow-up, and CRM organization.</small></div>
+        <div class="hero-card"><span class="eyebrow">Campaign operations</span><strong id="campaign-status">Choose a campaign path</strong><div class="progress"><span id="progress-bar"></span></div><small id="campaign-detail">Start with prospect outreach or agent recruiting, then route the approved records to the right source and CRM.</small></div>
       </section>
 
       <section class="campaign crm-sync" aria-label="CRM sync destination">
-        <div><p class="eyebrow">Lead destination</p><h2>Choose the first CRM to sync</h2><p>Select the system that should receive approved lead records first. Connected destinations can sync immediately; other choices stay staged for setup.</p></div>
+        <div><p class="eyebrow">Routing after campaign choice</p><h2>Choose the first CRM to sync</h2><p>For outreach, choose where approved prospects should go. For agent recruiting, the next step will choose which source or CRM supplies the recruiting leads.</p></div>
         <div class="crm-controls"><label for="crm-destination">First sync destination</label><select id="crm-destination"><option value="highlevel">HighLevel</option><option value="boldtrail">BoldTrail</option><option value="hubspot">HubSpot</option><option value="salesforce">Salesforce</option></select><button class="primary" id="save-crm" type="button">Save destination</button></div>
       </section>
 
       <section class="workflow" id="workflow">
-        <div class="section-head"><div><p class="eyebrow">The core workflow</p><h2>From campaign choice to aligned record</h2></div><span class="step-count" id="step-count">Step 1 of 4</span></div>
+        <div class="section-head"><div><p class="eyebrow">The core workflow</p><h2>From campaign path to aligned record</h2></div><span class="step-count" id="step-count">Step 1 of 4</span></div>
         <div class="workflow-choice"><p class="eyebrow">Step 01 · Choose the campaign path</p><div class="workflow-choice-grid"><button class="workflow-choice-button" type="button" data-workflow-campaign="outreach"><strong>Outreach campaign</strong><span>Start with prospects, then choose which CRM receives the approved leads.</span></button><button class="workflow-choice-button" type="button" data-workflow-campaign="agents"><strong>Agent recruitment campaign</strong><span>Start with recruiting sources, then choose which CRM or source provides the leads.</span></button></div></div>
         <div class="steps">
-          <article class="step active"><b>01</b><h3>Lead Intake</h3><p>Bring new leads into one organized workspace with the source and stated interest attached.</p></article>
-          <article class="step"><b>02</b><h3>Campaign Start</h3><p>Start the appropriate follow-up campaign as soon as the lead enters the system.</p></article>
-          <article class="step"><b>03</b><h3>Email Follow-Up</h3><p>Send useful, relevant information that matches the lead’s marketing need and timing.</p></article>
-          <article class="step"><b>04</b><h3>CRM Sync</h3><p>Keep the GHL record current and optionally pass the approved contact, stage, and next action to the client’s native CRM.</p></article>
+          <article class="step active"><b>01</b><h3>Choose the path</h3><p>Select prospect outreach or agent recruiting before any source, message, or sync route is chosen.</p></article>
+          <article class="step"><b>02</b><h3>Choose the source</h3><p>Set the CRM or lead source that supplies the right audience for the selected campaign.</p></article>
+          <article class="step"><b>03</b><h3>Approve follow-up</h3><p>Prepare relevant email and campaign actions for review before anything is sent or published.</p></article>
+          <article class="step"><b>04</b><h3>Sync the record</h3><p>Move approved contacts, tags, stage, and next action into the selected CRM destination.</p></article>
         </div>
       </section>
 
       <section class="campaign" aria-label="Campaign monitor">
-        <div><p class="eyebrow">Campaign monitor</p><h2>Every lead has a next action.</h2><p id="monitor-copy">Start the workflow to preview how a new lead moves from intake through follow-up and CRM alignment.</p></div>
+        <div><p class="eyebrow">Campaign monitor</p><h2>Every conversation has a next action.</h2><p id="monitor-copy">Choose a campaign path to preview how outreach and recruiting move through source selection, approval, follow-up, and CRM alignment.</p></div>
         <button class="secondary" data-action="advance">Advance workflow</button>
       </section>
     </main>
     <dialog class="campaign-dialog" id="campaign-dialog"><form method="dialog"><div class="dialog-head"><div><p class="eyebrow">Step 01</p><h2>Choose a campaign type</h2><p>Select the audience this workflow should prepare for.</p></div><button class="dialog-close" value="cancel" aria-label="Close">×</button></div><div class="campaign-choices"><button class="campaign-choice" type="button" data-campaign="outreach"><strong>Outreach campaign</strong><span>Organize and follow up with prospective buyers and sellers.</span></button><button class="campaign-choice" type="button" data-campaign="agents"><strong>Recruiting real estate agents</strong><span>Build a focused recruiting campaign for prospective agents.</span></button></div></form></dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="./script.js?v=workspace-layout-1"></script>
+    <script src="./script.js?v=workspace-ops-1"></script>
   </body>
 </html>
