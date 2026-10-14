@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Black Glove Marketing</title>
-    <link rel="stylesheet" href="./styles.css?v=workspace-layout-3" />
+    <link rel="stylesheet" href="./styles.css?v=content-routing-1" />
   </head>
   <body>
     <main class="shell">
@@ -35,6 +35,11 @@
         <div class="crm-controls"><label for="crm-destination">First sync destination</label><select id="crm-destination"><option value="highlevel">HighLevel</option><option value="boldtrail">BoldTrail</option><option value="hubspot">HubSpot</option><option value="salesforce">Salesforce</option></select><button class="primary" id="save-crm" type="button">Save destination</button></div>
       </section>
 
+      <section class="workflow content-production" id="content-production" aria-label="Video content production and distribution">
+        <div class="section-head"><div><p class="eyebrow">Marketing and outreach</p><h2>Create once, distribute with approval</h2></div><span class="step-count">Content routing</span></div>
+        <div class="content-production-grid"><div><label class="field-label" for="content-audience">Content path</label><select class="field-control" id="content-audience"><option value="prospects">Prospect outreach</option><option value="agents">Agent recruitment</option></select><label class="field-label" for="clip-provider">Clipping provider</label><select class="field-control" id="clip-provider"><option value="opus-clip">Opus Clip</option><option value="other">Other connected clipping app</option><option value="manual">Upload an edited clip</option></select><label class="field-label" for="video-file">Record or attach a video</label><input class="field-control file-control" id="video-file" type="file" accept="video/*" capture="user"><small class="field-note" id="video-status">No video selected. Recording and clipping stay staged until approved.</small></div><div><span class="field-label">Deploy the approved clip to</span><div class="destination-list"><label><input type="checkbox" value="instagram"> Instagram</label><label><input type="checkbox" value="facebook"> Facebook</label><label><input type="checkbox" value="linkedin"> LinkedIn</label><label><input type="checkbox" value="tiktok"> TikTok</label><label><input type="checkbox" value="email"> CRM email addresses</label></div><label class="field-label" for="content-crm">CRM email source</label><select class="field-control" id="content-crm"><option value="boldtrail">BoldTrail contacts</option><option value="highlevel">HighLevel contacts</option><option value="selected">Selected approved segment</option></select><button class="primary" id="queue-content" type="button">Queue content for approval</button><small class="field-note">No social post or email is sent until an authorized user approves the final content and destinations.</small></div></div>
+      </section>
+
       <section class="workflow" id="workflow">
         <div class="section-head"><div><p class="eyebrow">The core workflow</p><h2>From campaign path to aligned record</h2></div><span class="step-count" id="step-count">Step 1 of 4</span></div>
         <div class="workflow-choice"><p class="eyebrow">Step 01 · Choose the campaign path</p><div class="workflow-choice-grid"><button class="workflow-choice-button" type="button" data-workflow-campaign="outreach"><strong>Outreach campaign</strong><span>Start with prospects, then choose which CRM receives the approved leads.</span></button><button class="workflow-choice-button" type="button" data-workflow-campaign="agents"><strong>Agent recruitment campaign</strong><span>Start with recruiting sources, then choose which CRM or source provides the leads.</span></button></div></div>
@@ -53,6 +58,6 @@
     </main>
     <dialog class="campaign-dialog" id="campaign-dialog"><form method="dialog"><div class="dialog-head"><div><p class="eyebrow">Step 01</p><h2>Choose a campaign type</h2><p>Select the audience this workflow should prepare for.</p></div><button class="dialog-close" value="cancel" aria-label="Close">×</button></div><div class="campaign-choices"><button class="campaign-choice" type="button" data-campaign="outreach"><strong>Outreach campaign</strong><span>Organize and follow up with prospective buyers and sellers.</span></button><button class="campaign-choice" type="button" data-campaign="agents"><strong>Recruiting real estate agents</strong><span>Build a focused recruiting campaign for prospective agents.</span></button></div></form></dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="./script.js?v=workspace-ops-1"></script>
+    <script src="./script.js?v=content-routing-1"></script>
   </body>
 </html>
