@@ -32,7 +32,7 @@ document.querySelectorAll('[data-campaign]').forEach(button=>button.addEventList
 workflowCampaignButtons.forEach(button=>button.addEventListener('click',()=>{applyCampaignPath(button.dataset.workflowCampaign);showToast(button.dataset.workflowCampaign==='agents'?'Agent Recruitment selected':'Lead Outreach selected');}));
 videoFile.addEventListener('change',()=>{document.querySelector('#video-status').textContent=videoFile.files[0]?`${videoFile.files[0].name} selected. Ready for staged clipping.`:'No video selected. Recording and clipping stay staged until approved.';});
 document.querySelector('#queue-content').addEventListener('click',()=>{const destinations=[...document.querySelectorAll('.destination-list input:checked')].map(input=>input.value);if(!videoFile.files.length){showToast('Attach or record a video first');return}if(!destinations.length){showToast('Choose at least one destination');return}showToast('Content package queued for approval');});
-document.querySelector('#theme-toggle').addEventListener('click',()=>{const dark=document.body.dataset.theme==='dark';const theme=dark?'light':'dark';document.body.dataset.theme=theme;localStorage.setItem('black-glove-marketing-theme',theme);document.querySelector('#theme-toggle').textContent=dark?'Dark':'Light';});
+function toggleTheme(){const dark=document.body.dataset.theme==='dark';const theme=dark?'light':'dark';document.body.dataset.theme=theme;localStorage.setItem('black-glove-marketing-theme',theme);document.querySelector('#settings-theme').textContent=`Use ${theme==='dark'?'light':'dark'} mode`;}
 document.querySelector('#save-crm').addEventListener('click',()=>{localStorage.setItem('black-glove-marketing-crm',crmDestination.value);showToast(`${crmDestination.options[crmDestination.selectedIndex].text} selected as the first sync destination`);});
 const sourcePath=document.querySelector('#source-path');
 const leadSource=document.querySelector('#lead-source');
@@ -46,8 +46,8 @@ const profileTrigger=document.querySelector('#profile-trigger');
 const profileDropdown=document.querySelector('#profile-dropdown');
 profileTrigger.addEventListener('click',()=>{const open=profileTrigger.getAttribute('aria-expanded')==='true';profileTrigger.setAttribute('aria-expanded',String(!open));profileDropdown.hidden=open;});
 document.querySelector('#open-settings').addEventListener('click',()=>{profileDropdown.hidden=true;profileTrigger.setAttribute('aria-expanded','false');document.querySelector('#settings-crm').value=crmDestination.value;document.querySelector('#settings-theme').textContent=`Use ${document.body.dataset.theme==='dark'?'light':'dark'} mode`;document.querySelector('#settings-dialog').showModal();});
-document.querySelector('#settings-theme').addEventListener('click',()=>{document.querySelector('#theme-toggle').click();document.querySelector('#settings-theme').textContent=`Use ${document.body.dataset.theme==='dark'?'light':'dark'} mode`;});
+document.querySelector('#settings-theme').addEventListener('click',toggleTheme);
 document.querySelector('#settings-dialog .settings-save').addEventListener('click',()=>{crmDestination.value=document.querySelector('#settings-crm').value;localStorage.setItem('black-glove-marketing-crm',crmDestination.value);showToast('Workspace settings saved');});
 document.querySelector('#logout').addEventListener('click',async()=>{await fetch(`${API}/api/logout`,{method:'POST',credentials:'include',headers:authHeaders});sessionStorage.removeItem('bg_session');location.href='./';});
-document.body.dataset.theme=localStorage.getItem('black-glove-marketing-theme')||'light';document.querySelector('#theme-toggle').textContent=document.body.dataset.theme==='dark'?'Light':'Dark';
+document.body.dataset.theme=localStorage.getItem('black-glove-marketing-theme')||'light';document.querySelector('#settings-theme').textContent=`Use ${document.body.dataset.theme==='dark'?'light':'dark'} mode`;
 render();
