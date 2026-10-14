@@ -15,8 +15,7 @@
         </a>
         <div class="top-actions">
           <span class="status"><i></i> Marketing workspace</span>
-          <span class="signed-in-user" id="signed-in-user" aria-live="polite"></span>
-          <button class="secondary logout-button" id="logout" type="button">Log out</button>
+          <div class="profile-menu"><button class="profile-trigger" id="profile-trigger" type="button" aria-expanded="false" aria-controls="profile-dropdown"><span class="profile-avatar" id="profile-avatar">BG</span><span class="profile-name" id="signed-in-user">Account</span><span class="profile-chevron">⌄</span></button><div class="profile-dropdown" id="profile-dropdown" hidden><span class="profile-email" id="profile-email"></span><button type="button" id="open-settings">Settings</button><button type="button" id="logout">Log out</button></div></div>
           <button class="theme" id="theme-toggle" type="button" aria-label="Switch theme">Dark</button>
         </div>
       </header>
@@ -69,6 +68,7 @@
       </section>
     </main>
     <dialog class="campaign-dialog" id="campaign-dialog"><form method="dialog"><div class="dialog-head"><div><p class="eyebrow">Step 01</p><h2>Choose a campaign type</h2><p>Select the audience this workflow should prepare for.</p></div><button class="dialog-close" value="cancel" aria-label="Close">×</button></div><div class="campaign-choices"><button class="campaign-choice" type="button" data-campaign="outreach"><strong>Lead Outreach</strong><span>Organize and follow up with prospective buyers and sellers.</span></button><button class="campaign-choice" type="button" data-campaign="agents"><strong>Agent Recruitment</strong><span>Build a focused recruiting campaign for prospective agents.</span></button></div></form></dialog>
+    <dialog class="settings-dialog" id="settings-dialog"><form method="dialog"><div class="dialog-head"><div><p class="eyebrow">Workspace settings</p><h2>Admin preferences</h2><p>Manage the workspace appearance and default routing.</p></div><button class="dialog-close" value="cancel" aria-label="Close">×</button></div><label class="field-label" for="settings-theme">Theme</label><button class="secondary settings-action" id="settings-theme" type="button">Switch theme</button><label class="field-label" for="settings-crm">Default CRM destination</label><select class="field-control" id="settings-crm"><option value="highlevel">HighLevel</option><option value="boldtrail">BoldTrail</option><option value="hubspot">HubSpot</option><option value="salesforce">Salesforce</option></select><button class="primary settings-save" value="default">Save settings</button></form></dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="./script.js?v=admin-workspace-2"></script>
   </body>
