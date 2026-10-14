@@ -1,5 +1,5 @@
 const API = 'https://lead-command-center-phi.vercel.app';
-fetch(`${API}/api/me`,{credentials:'include'}).then(async response=>{if(!response.ok){location.href='./';return}const data=await response.json();if(data.user?.role==='admin'){const panel=document.querySelector('#admin-controls');panel.hidden=false;document.querySelector('#admin-user').textContent=data.user.email;}}).catch(()=>{location.href='./';});
+fetch(`${API}/api/me`,{credentials:'include'}).then(async response=>{if(!response.ok){location.href='./';return}const data=await response.json();if(data.user?.role==='admin'){const panel=document.querySelector('#admin-controls');panel.hidden=false;document.querySelector('#admin-user').textContent=data.user.email;document.querySelector('.status').lastChild.textContent=' Admin workspace';}}).catch(()=>{location.href='./';});
 const steps = [...document.querySelectorAll('.step')];
 const status = document.querySelector('#campaign-status');
 const detail = document.querySelector('#campaign-detail');
