@@ -3,7 +3,7 @@ const params = new URLSearchParams(location.search);
 const session = params.get('session') || sessionStorage.getItem('bg_session');
 if(params.has('session')){sessionStorage.setItem('bg_session',session);history.replaceState({},'',location.pathname+location.hash)}
 const authHeaders = session ? {Authorization:`Bearer ${session}`} : {};
-fetch(`${API}/api/me`,{credentials:'include',headers:authHeaders}).then(async response=>{if(!response.ok){location.href='./';return}const data=await response.json();if(data.user?.role==='admin'){const panel=document.querySelector('#admin-controls');panel.hidden=false;document.querySelector('#admin-user').textContent=data.user.email;document.querySelector('.status').lastChild.textContent=' Admin workspace';}}).catch(()=>{location.href='./';});
+fetch(`${API}/api/me`,{credentials:'include',headers:authHeaders}).then(async response=>{if(!response.ok){location.href='./';return}const data=await response.json();document.querySelector('#signed-in-user').textContent=data.user.email;if(data.user?.role==='admin'){const panel=document.querySelector('#admin-controls');panel.hidden=false;document.querySelector('#admin-user').textContent=data.user.email;document.querySelector('.status').lastChild.textContent=' Admin workspace';}}).catch(()=>{location.href='./';});
 const steps = [...document.querySelectorAll('.step')];
 const status = document.querySelector('#campaign-status');
 const detail = document.querySelector('#campaign-detail');
@@ -35,5 +35,6 @@ document.querySelector('#theme-toggle').addEventListener('click',()=>{const dark
 document.querySelector('#save-crm').addEventListener('click',()=>{localStorage.setItem('black-glove-marketing-crm',crmDestination.value);showToast(`${crmDestination.options[crmDestination.selectedIndex].text} selected as the first sync destination`);});
 document.querySelector('#load-team').addEventListener('click',async()=>{const output=document.querySelector('#team-output');output.textContent='Loading...';const response=await fetch(`${API}/api/admin/users`,{credentials:'include',headers:authHeaders});const data=await response.json();output.textContent=response.ok?data.users.map(user=>`${user.username||user.email} - ${user.role}`).join('\\n'):(data.error||'Unable to load team access');});
 document.querySelector('#load-pipeline').addEventListener('click',async()=>{const output=document.querySelector('#pipeline-output');output.textContent='Loading...';const response=await fetch(`${API}/api/ghl/pipelines`,{credentials:'include',headers:authHeaders});const data=await response.json();output.textContent=response.ok?JSON.stringify(data,null,2):(data.error||'Unable to load pipeline');});
+document.querySelector('#logout').addEventListener('click',async()=>{await fetch(`${API}/api/logout`,{method:'POST',credentials:'include',headers:authHeaders});sessionStorage.removeItem('bg_session');location.href='./';});
 document.body.dataset.theme=localStorage.getItem('black-glove-marketing-theme')||'light';document.querySelector('#theme-toggle').textContent=document.body.dataset.theme==='dark'?'Light':'Dark';
 render();
