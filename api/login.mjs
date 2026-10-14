@@ -13,6 +13,6 @@ export default async function handler(req, res) {
     const rawToken = btoa(`${user.id}:${crypto.randomUUID()}:${Date.now()}`);
     await sql`insert into sessions (user_id, token_hash, expires_at) values (${user.id}, ${tokenHash(rawToken)}, now() + interval '7 days')`;
     res.setHeader('Set-Cookie', issueSessionCookie(rawToken));
-    return json(res, 200, { user: { email: user.email, username: user.username, role: user.role } });
+    return json(res, 200, { user: { email: user.email, username: user.username, role: user.role }, sessionToken: rawToken });
   } catch (error) { return json(res, 500, { error: 'Login service unavailable' }); }
 }
