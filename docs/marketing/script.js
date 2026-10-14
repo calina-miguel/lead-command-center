@@ -8,7 +8,9 @@ const monitor = document.querySelector('#monitor-copy');
 const toast = document.querySelector('#toast');
 const crmDestination = document.querySelector('#crm-destination');
 const campaignDialog = document.querySelector('#campaign-dialog');
+const workflowCampaignButtons = [...document.querySelectorAll('[data-workflow-campaign]')];
 crmDestination.value = localStorage.getItem('black-glove-marketing-crm') || 'highlevel';
+workflowCampaignButtons.forEach(button=>button.classList.toggle('selected',button.dataset.workflowCampaign===localStorage.getItem('black-glove-marketing-campaign-type')));
 let current = 0;
 const messages = [
   ['Lead captured', 'The new lead is organized with source and stated interest.', 'Intake is complete and the record is ready for campaign routing.'],
@@ -20,6 +22,7 @@ function showToast(message){toast.textContent=message;toast.classList.add('show'
 function render(){const [title,desc,copy]=messages[current];status.textContent=title;detail.textContent=desc;monitor.textContent=copy;bar.style.width=`${((current+1)/steps.length)*100}%`;count.textContent=`Step ${current+1} of ${steps.length}`;steps.forEach((step,index)=>step.classList.toggle('active',index===current));}
 document.querySelectorAll('[data-action]').forEach(button=>button.addEventListener('click',()=>{if(button.dataset.action==='start-campaign'){campaignDialog.showModal();return}current=(current+1)%steps.length;render();showToast(messages[current][0]);document.querySelector('#workflow').scrollIntoView({behavior:'smooth',block:'center'})}));
 document.querySelectorAll('[data-campaign]').forEach(button=>button.addEventListener('click',()=>{const recruiting=button.dataset.campaign==='agents';campaignDialog.close();localStorage.setItem('black-glove-marketing-campaign-type',button.dataset.campaign);showToast(recruiting?'Agent recruiting campaign selected':'Outreach campaign selected');document.querySelector('#workflow').scrollIntoView({behavior:'smooth',block:'center'});}));
+workflowCampaignButtons.forEach(button=>button.addEventListener('click',()=>{localStorage.setItem('black-glove-marketing-campaign-type',button.dataset.workflowCampaign);workflowCampaignButtons.forEach(item=>item.classList.toggle('selected',item===button));showToast(button.dataset.workflowCampaign==='agents'?'Agent recruitment campaign selected':'Outreach campaign selected');}));
 document.querySelector('#theme-toggle').addEventListener('click',()=>{const dark=document.body.dataset.theme==='dark';const theme=dark?'light':'dark';document.body.dataset.theme=theme;localStorage.setItem('black-glove-marketing-theme',theme);document.querySelector('#theme-toggle').textContent=dark?'Dark':'Light';});
 document.querySelector('#save-crm').addEventListener('click',()=>{localStorage.setItem('black-glove-marketing-crm',crmDestination.value);showToast(`${crmDestination.options[crmDestination.selectedIndex].text} selected as the first sync destination`);});
 document.body.dataset.theme=localStorage.getItem('black-glove-marketing-theme')||'light';document.querySelector('#theme-toggle').textContent=document.body.dataset.theme==='dark'?'Light':'Dark';
