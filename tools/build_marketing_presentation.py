@@ -13,11 +13,14 @@ VOICE = DOCS / "assets" / "lead-command-center-voiceover.mp3"
 W, H, FPS = 1280, 720, 15
 PORT = 8790
 SCENES = [
-    ("Lead Intake", "New leads enter one organized workspace with source and stated interest attached."),
-    ("Campaign Start", "The right follow-up campaign begins as soon as the lead enters the system."),
-    ("Email Follow-Up", "Useful, relevant information keeps the next conversation connected to the lead's need."),
-    ("CRM Alignment", "Approved contact context, stage, and next action stay current in GHL."),
-    ("Native CRM Sync", "When needed, the approved record can stay aligned with the client's existing CRM."),
+    ("Secure workspace", "Sign in first, then enter the protected Black Glove Marketing workspace with the right user access."),
+    ("Choose the campaign", "Start with Lead Outreach for prospects or Agent Recruitment for recruiting real-estate agents."),
+    ("Route the audience", "Select the lead source and first CRM destination, including BoldTrail or HighLevel."),
+    ("Create and clip", "Record or attach a video, choose a clipping provider, and prepare social or CRM email destinations."),
+    ("Prepare with AI", "Use AI to qualify the audience, draft authentic follow-up, and organize appointment handoff."),
+    ("Approve before action", "Every message, post, appointment handoff, and CRM change stays staged for authorized review."),
+    ("Align the record", "After approval, keep contact context, campaign path, stage, and next action organized together."),
+    ("Move forward", "Black Glove Marketing turns each opportunity into a clear, reviewable next step without contacting leads automatically."),
 ]
 
 
