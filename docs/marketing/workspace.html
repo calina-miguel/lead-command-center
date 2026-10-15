@@ -60,6 +60,11 @@
             <label class="field-label" for="ai-appointment">Appointment handoff</label>
             <select class="field-control" id="ai-appointment"><option value="review">Prepare for review</option><option value="calendar">Prepare calendar handoff</option><option value="none">No appointment step yet</option></select>
           </div>
+          <div>
+            <label class="field-label" for="ai-assistant">Appointment assistant</label>
+            <select class="field-control" id="ai-assistant"><option value="brief">Prepare qualification and call brief</option><option value="calendar">Prepare booking handoff</option><option value="voice">Voice assistant setup required</option></select>
+            <p class="field-note">AI can organize the conversation and booking path. Live calls stay disabled until an admin connects and approves a provider.</p>
+          </div>
         </div>
         <div class="ai-automation-footer"><span class="field-note">AI drafts the recommendation, message, and next action. An authorized user must approve before contact, publishing, or CRM changes.</span><button class="primary" id="prepare-ai" type="button">Prepare AI workflow</button></div>
       </section>

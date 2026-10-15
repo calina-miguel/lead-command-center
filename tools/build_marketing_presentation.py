@@ -90,9 +90,20 @@ def main():
             Image.alpha_composite(canvas.convert("RGBA"), overlay).convert("RGB").save(frame)
             listing.write(f"file '{frame.as_posix()}'\n")
             listing.write("duration 6\n")
-        listing.write(f"file '{frame.as_posix()}'\n")
     video_only = frames / "video.mp4"
-    subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(list_file), "-vf", "fps=30,format=yuv420p", "-c:v", "libx264", "-crf", "20", "-movflags", "+faststart", str(video_only)], check=True)
+    scene_inputs = []
+    for frame in sorted(frames.glob("scene_*.png")):
+        scene_inputs.extend(["-loop", "1", "-t", "6", "-i", str(frame)])
+    transition = 0.35
+    filters = []
+    current = "[0:v]"
+    for index in range(1, len(SCENES)):
+        output = f"[v{index}]"
+        offset = (6 - transition) * index
+        filters.append(f"{current}[{index}:v]xfade=transition=fade:duration={transition}:offset={offset}{output}")
+        current = output
+    filters.append(f"{current}fps=30,format=yuv420p[vout]")
+    subprocess.run(["ffmpeg", "-y", *scene_inputs, "-filter_complex", ";".join(filters), "-map", "[vout]", "-c:v", "libx264", "-crf", "20", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(video_only)], check=True)
     command = ["ffmpeg", "-y", "-i", str(video_only)]
     if VOICE.exists():
         command += ["-i", str(VOICE), "-c:v", "copy", "-c:a", "aac", "-shortest"]
