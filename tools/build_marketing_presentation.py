@@ -13,14 +13,14 @@ VOICE = DOCS / "assets" / "lead-command-center-voiceover.mp3"
 W, H, FPS = 1280, 720, 15
 PORT = 8790
 SCENES = [
-    ("Secure workspace", "Sign in first, then enter the protected Black Glove Marketing workspace with the right user access."),
-    ("Choose the campaign", "Start with Lead Outreach for prospects or Agent Recruitment for recruiting real-estate agents."),
-    ("Route the audience", "Select the lead source and first CRM destination, including BoldTrail or HighLevel."),
-    ("Create and clip", "Record or attach a video, choose a clipping provider, and prepare social or CRM email destinations."),
-    ("Prepare with AI", "Use AI to qualify the audience, draft authentic follow-up, and organize appointment handoff."),
-    ("Approve before action", "Every message, post, appointment handoff, and CRM change stays staged for authorized review."),
-    ("Align the record", "After approval, keep contact context, campaign path, stage, and next action organized together."),
-    ("Move forward", "Black Glove Marketing turns each opportunity into a clear, reviewable next step without contacting leads automatically."),
+    ("01  Secure workspace", "Sign in to the protected Black Glove Marketing workspace before the workflow begins."),
+    ("02  Campaign path", "Choose Lead Outreach for prospects or Agent Recruitment for real-estate agents."),
+    ("03  Source and CRM", "Route the campaign to the right lead source and first CRM destination, such as BoldTrail or HighLevel."),
+    ("04  Content operations", "Create or clip audience-specific content and stage social or CRM email destinations."),
+    ("05  AI appointment assistant", "Qualify interest, prepare a call brief, and organize a calendar handoff for review."),
+    ("06  Human approval", "Keep messages, posts, booking handoffs, and CRM changes staged until an authorized user approves them."),
+    ("07  Lead record", "Keep campaign path, source, stage, next action, and CRM context organized together."),
+    ("08  Next action", "Move each opportunity forward through a connected, reviewable workflow without contacting leads automatically."),
 ]
 
 
