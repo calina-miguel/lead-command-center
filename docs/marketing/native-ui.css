@@ -1,0 +1,31 @@
+/* Shared Apple-platform visual language for sign-in and the admin workspace. */
+:root{--apple-surface:color-mix(in srgb,var(--panel) 92%,transparent);--apple-elevated:color-mix(in srgb,var(--soft) 88%,transparent);--apple-separator:color-mix(in srgb,var(--line) 78%,transparent)}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body.auth-page{background:var(--page)}
+.auth-page .auth-layout{gap:56px}
+.auth-page .auth-card{border-radius:18px;background:var(--apple-surface);box-shadow:0 10px 34px rgba(0,0,0,.16);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.auth-page .auth-card input,.auth-page .google-login{border-radius:10px}
+.auth-page .auth-points span{border-radius:10px;background:var(--apple-elevated)}
+.auth-page .auth-submit{border-radius:10px;box-shadow:none}
+.auth-page button:focus-visible,.auth-page a:focus-visible,.auth-page input:focus-visible{outline:3px solid color-mix(in srgb,var(--blue) 45%,transparent);outline-offset:2px}
+.operations-shell .topbar,.operations-sidebar,.system-state,.ops-metrics article,.operations-section,.connector-card,.draft-panel,.chat-preview,.outcome-panel,.profile-dropdown,.settings-dialog,.campaign-dialog{border-color:var(--apple-separator);box-shadow:0 8px 28px rgba(0,0,0,.09)}
+body[data-theme=dark]{--shadow:0 10px 30px rgba(0,0,0,.2)}
+.operations-shell .topbar{background:color-mix(in srgb,var(--page) 78%,transparent)}
+.operations-sidebar{background:var(--apple-surface)}
+.operations-sidebar nav a{min-height:42px;border-radius:9px}
+.operations-sidebar nav a.active{background:color-mix(in srgb,var(--blue) 12%,var(--soft));color:var(--blue)}
+.operations-shell button,.operations-shell select,.operations-shell input,.operations-shell textarea{font-family:inherit}
+.operations-shell button:focus-visible,.operations-shell a:focus-visible,.operations-shell select:focus-visible,.operations-shell input:focus-visible,.operations-shell textarea:focus-visible{outline:3px solid color-mix(in srgb,var(--blue) 45%,transparent);outline-offset:2px}
+.operations-shell .field-control,.operations-shell select,.operations-shell input.field-control{border-radius:10px}
+.operations-shell .primary,.operations-shell .secondary{box-shadow:none}
+.operations-shell .primary{border-radius:10px}
+.operations-shell .secondary{border-radius:10px;background:var(--apple-elevated)}
+.operations-shell .profile-trigger{border-radius:12px;background:var(--apple-elevated)}
+.operations-shell .profile-dropdown{border-radius:14px;background:color-mix(in srgb,var(--panel) 94%,transparent);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.operations-shell .operations-section{background:var(--apple-surface)}
+.operations-shell .connector-card,.operations-shell .segment-card,.operations-shell .channel-item{box-shadow:none}
+.operations-shell .settings-dialog,.operations-shell .campaign-dialog{border-radius:18px;background:color-mix(in srgb,var(--panel) 96%,transparent);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+@media(min-width:901px){.operations-layout{grid-template-columns:232px minmax(0,1fr);gap:26px}.operations-sidebar{border-radius:14px}.operations-main{padding:0 2px}.operations-section{border-radius:14px}}
+@media(min-width:721px) and (max-width:900px){.operations-shell .operations-sidebar{border-radius:12px}.operations-shell .operations-sidebar nav a{min-height:44px;border-radius:9px}.operations-shell .operations-section{border-radius:14px}}
+@media(max-width:720px){.operations-shell{padding-bottom:calc(92px + env(safe-area-inset-bottom))}.operations-shell .topbar{background:color-mix(in srgb,var(--page) 76%,transparent)}.operations-shell .operations-sidebar{border-top:1px solid var(--apple-separator);border-radius:14px 14px 0 0;background:color-mix(in srgb,var(--panel) 82%,transparent)}.operations-shell .operations-sidebar nav a{min-height:58px;border-radius:10px;font-size:12px}.operations-shell .operations-sidebar nav a.active{background:color-mix(in srgb,var(--blue) 13%,var(--panel))}.operations-shell button,.operations-shell .field-control,.operations-shell select{min-height:44px}.operations-shell .profile-trigger{width:42px;height:42px}.operations-shell .profile-avatar{width:34px;height:34px}.operations-shell .operations-section,.operations-shell .ops-metrics article{border-radius:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.operations-shell *{scroll-behavior:auto!important}}
