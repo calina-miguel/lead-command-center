@@ -257,7 +257,7 @@ body.motion-ready .operations-section.is-visible .segment-card:nth-child(6){anim
 @media(max-width:420px){
   .operations-shell{padding-right:11px;padding-left:11px}
   .operations-shell .topbar{margin-right:-11px;margin-left:-11px;padding-right:11px;padding-left:11px}
-  .operations-shell .operations-sidebar nav a{flex-basis:70px;font-size:12px}
+  .operations-shell .operations-sidebar nav a{flex:0 0 auto;width:max-content;min-width:max-content;padding-right:9px;padding-left:9px;font-size:12px}
   .operations-shell .operations-heading h1{font-size:31px}
   .operations-shell .ops-metrics article{padding:11px}
 }
