@@ -1,6 +1,5 @@
 /* Shared Apple-platform visual language for sign-in and the admin workspace. */
-:root{--apple-surface:color-mix(in srgb,var(--panel) 92%,transparent);--apple-elevated:color-mix(in srgb,var(--soft) 88%,transparent);--apple-separator:color-mix(in srgb,var(--line) 78%,transparent)}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{--apple-surface:color-mix(in srgb,var(--panel) 92%,transparent);--apple-elevated:color-mix(in srgb,var(--soft) 88%,transparent);--apple-separator:color-mix(in srgb,var(--line) 78%,transparent);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body.auth-page{background:var(--page)}
 .auth-page .auth-layout{gap:56px}
 .auth-page .auth-card{border-radius:18px;background:var(--apple-surface);box-shadow:0 10px 34px rgba(0,0,0,.16);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
