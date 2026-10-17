@@ -3,96 +3,122 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Black Glove Marketing</title>
-    <link rel="stylesheet" href="./styles.css?v=admin-workspace-2" />
+    <meta name="theme-color" content="#0b1018" />
+    <title>Black Glove Marketing | Admin</title>
+    <link rel="stylesheet" href="./styles.css?v=ops-console-4" />
+    <link rel="stylesheet" href="./operations.css?v=ops-import-fix-1" />
   </head>
   <body>
-    <main class="shell">
+    <main class="shell operations-shell">
       <header class="topbar">
-        <a class="brand" href="./">
+        <a class="brand" href="./workspace.html" aria-label="Black Glove Marketing admin home">
           <span class="mark">BG</span>
           <span><small>BLACK GLOVE AGENCY</small><strong>Black Glove Marketing</strong></span>
         </a>
         <div class="top-actions">
-          <div class="profile-menu"><span class="status" aria-label="Online"><i></i></span><button class="profile-trigger" id="profile-trigger" type="button" aria-expanded="false" aria-controls="profile-dropdown"><span class="profile-avatar" id="profile-avatar">BG</span><span class="profile-name" id="signed-in-user">Account</span></button><div class="profile-dropdown" id="profile-dropdown" hidden><span class="profile-email" id="profile-email"></span><button type="button" id="open-settings">Settings</button><button type="button" id="logout">Log out</button></div></div>
+          <div class="profile-menu">
+            <span class="status" aria-label="Signed in"><i></i></span>
+            <button class="profile-trigger" id="profile-trigger" type="button" aria-label="Open account menu" aria-expanded="false" aria-controls="profile-dropdown">
+              <span class="profile-avatar" id="profile-avatar">BG</span><span class="profile-name" id="signed-in-user">Account</span>
+            </button>
+            <div class="profile-dropdown" id="profile-dropdown" hidden>
+              <div class="profile-identity"><span class="profile-avatar" id="profile-menu-avatar">BG</span><span><strong id="profile-menu-name">Account</strong><small id="profile-email"></small></span></div>
+              <div class="profile-menu-divider" role="separator"></div>
+              <button class="profile-menu-item" type="button" id="open-profile"><span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c.4-3 2.5-4.5 6-4.5s5.6 1.5 6 4.5"/></svg></span><span>Profile</span></button>
+              <button class="profile-menu-item" type="button" id="open-inbox"><span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M3 5.5h14v10H3z"/><path d="M3 11h4l1.5 2h3L13 11h4"/></svg></span><span>Inbox</span></button>
+              <button class="profile-menu-item" type="button" id="open-settings"><span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M8 2.8h4l.5 2a5.7 5.7 0 0 1 1.3.8l2-.5 2 3.4-1.5 1.5v1.6l1.5 1.5-2 3.4-2-.5a5.7 5.7 0 0 1-1.3.8l-.5 2H8l-.5-2a5.7 5.7 0 0 1-1.3-.8l-2 .5-2-3.4 1.5-1.5v-1.6L2.2 8.5l2-3.4 2 .5a5.7 5.7 0 0 1 1.3-.8z" transform="translate(0 -1) scale(.9)"/><circle cx="10" cy="10" r="2.2"/></svg></span><span>Account settings</span></button>
+              <button class="profile-menu-item" type="button" id="toggle-appearance" aria-expanded="false" aria-controls="appearance-submenu"><span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 2.5a7.5 7.5 0 1 0 0 15z"/><path d="M10 2.5a7.5 7.5 0 0 1 0 15"/></svg></span><span>Appearance</span><span class="menu-chevron" aria-hidden="true">›</span></button>
+              <div class="profile-submenu" id="appearance-submenu" hidden><span class="appearance-current" id="appearance-current">Dark appearance</span><button type="button" id="open-appearance-settings">Appearance settings</button></div>
+              <div class="profile-menu-divider" role="separator"></div>
+              <button class="profile-menu-item logout-item" type="button" id="logout"><span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M8 3H4.5v14H8"/><path d="M10 6l4 4-4 4M14 10H7"/></svg></span><span>Log out</span></button>
+            </div>
+          </div>
         </div>
       </header>
 
-      <section class="hero" id="overview">
-        <div>
-          <p class="eyebrow">Real-estate marketing operations</p>
-          <h1>Move every opportunity toward action.</h1>
-          <p class="hero-copy">Black Glove Marketing organizes prospect outreach and agent recruiting into one operating flow, with the right source, message, approval, and CRM destination attached to every next step.</p>
-          <div class="metrics" aria-label="Marketing workspace metrics"><article><span>Prospects organized</span><strong>2,852</strong><small>Grouped by source and campaign path</small></article><article><span>Follow-up coverage</span><strong>96%</strong><small>Contacts with a clear next action</small></article><article><span>Routing status</span><strong>Ready</strong><small>Campaign and CRM path selected before sync</small></article></div>
-          <div class="hero-actions"><button class="primary" data-action="start-campaign">Start a campaign</button><a class="secondary" href="#workflow">View the workflow</a></div>
+      <div class="operations-layout">
+        <aside class="operations-sidebar" aria-label="Admin workflow navigation">
+          <p class="eyebrow">Operations</p>
+          <nav>
+            <a class="active" href="#overview"><span>01</span> Overview</a>
+            <a href="#crm-sync"><span>02</span> CRM intake</a>
+            <a href="#segments"><span>03</span> Lead folders</a>
+            <a href="#content-production"><span>04</span> Content studio</a>
+            <a href="#conversations"><span>05</span> Inbox automation</a>
+            <a href="#channels"><span>06</span> Channels</a>
+            <a href="#admin-controls"><span>07</span> Access & approvals</a>
+          </nav>
+          <div class="sidebar-foot"><span class="connection-dot"></span><span>Actions require review</span></div>
+        </aside>
+
+        <div class="operations-main">
+          <section class="operations-heading" id="overview">
+            <div><p class="eyebrow">Lead operations control</p><h1>From CRM intake to next action.</h1><p>Bring in leads, organize them by intent, prepare relevant content, and route every approved conversation to its outcome.</p></div>
+            <div class="system-state"><span class="state-mark">●</span><div><strong>Approval-first workspace</strong><small>Nothing is sent or synced without an authorized action.</small></div></div>
+          </section>
+
+          <section class="ops-metrics" aria-label="Lead workflow status">
+            <article><span>CRM sources</span><strong id="metric-sources">—</strong><small>Connection status not verified</small></article>
+            <article><span>Leads imported</span><strong id="metric-leads">—</strong><small>Waiting for a live CRM intake</small></article>
+            <article><span>Needs review</span><strong id="metric-approvals">—</strong><small>Pending approval requests</small></article>
+            <article><span>Channels</span><strong id="metric-channels">0 / 4</strong><small>Messaging accounts connected</small></article>
+          </section>
+
+          <section class="operations-section" id="crm-sync">
+            <div class="section-heading"><div><p class="eyebrow">01 · CRM intake</p><h2>Choose where leads come from</h2><p>Verify a source first. Live contact import and automatic status classification require a completed, authorized connector.</p></div><span class="section-tag">Start here</span></div>
+            <div class="connector-grid">
+              <article class="connector-card"><div class="connector-top"><span class="connector-logo ghl">HL</span><span class="status-pill pending" id="highlevel-status">Not checked</span></div><h3>HighLevel</h3><p>Check the connected location and available pipeline configuration.</p><button class="secondary" id="check-highlevel" type="button">Check connection</button><button class="secondary" id="import-highlevel" type="button">Import latest leads</button><small class="connector-result" id="highlevel-result" aria-live="polite">Read-only import. Contacts with unclear status stay unclassified.</small></article>
+              <article class="connector-card"><div class="connector-top"><span class="connector-logo bt">BT</span><span class="status-pill pending" id="boldtrail-status">Setup needed</span></div><h3>BoldTrail</h3><p>Connect the account and verify its status mapping before importing or syncing.</p><button class="secondary" id="check-boldtrail" type="button">Check setup</button><small class="connector-result" id="boldtrail-result" aria-live="polite">Status mapping stays disabled until account-specific verification.</small></article>
+            </div>
+            <div class="intake-bar"><label for="crm-destination">Default destination for approved records</label><select id="crm-destination"><option value="highlevel">HighLevel</option><option value="boldtrail">BoldTrail</option><option value="hubspot">HubSpot</option><option value="salesforce">Salesforce</option></select><button class="primary" id="save-crm" type="button">Save destination</button></div>
+          </section>
+
+          <section class="operations-section" id="segments">
+            <div class="section-heading"><div><p class="eyebrow">02 · Lead organization</p><h2>Route leads into working folders</h2><p>Use verified CRM status and conversation signals to keep each lead in the right follow-up lane.</p></div><span class="section-tag" id="segment-source-label">No CRM data loaded</span></div>
+            <div class="segment-grid" role="group" aria-label="Lead status folders">
+              <button class="segment-card" type="button" data-segment="cold"><span class="segment-count">—</span><span class="segment-name">Cold</span><small>Not yet engaged</small></button>
+              <button class="segment-card" type="button" data-segment="inquiring"><span class="segment-count">—</span><span class="segment-name">Inquiring</span><small>Asked for information</small></button>
+              <button class="segment-card selected" type="button" data-segment="warm"><span class="segment-count">—</span><span class="segment-name">Warm</span><small>Showing clear interest</small></button>
+              <button class="segment-card" type="button" data-segment="hot"><span class="segment-count">—</span><span class="segment-name">Hot</span><small>Ready for timely handoff</small></button>
+              <button class="segment-card restricted" type="button" data-segment="closed"><span class="segment-count">—</span><span class="segment-name">Closed / do not contact</span><small>Excluded from outreach and sync</small></button>
+              <button class="segment-card" type="button" data-segment="unclassified"><span class="segment-count">—</span><span class="segment-name">Needs review</span><small>Status is missing or unclear</small></button>
+            </div>
+            <div class="lead-table-wrap"><table class="lead-table"><thead><tr><th>Lead</th><th>Source</th><th>CRM status</th><th>Folder</th><th></th></tr></thead><tbody id="imported-leads"><tr><td colspan="5" class="empty-leads">No leads imported yet. Use a read-only CRM import to begin.</td></tr></tbody></table></div>
+            <div class="segment-controls"><div><label class="field-label" for="source-path">Campaign path</label><select class="field-control" id="source-path"><option value="outreach">Lead Outreach</option><option value="agents">Agent Recruitment</option></select></div><div><label class="field-label" for="lead-source">Lead source</label><select class="field-control" id="lead-source"><option value="boldtrail">BoldTrail saved filters</option><option value="highlevel">HighLevel contacts</option><option value="website">Website inquiries</option><option value="referrals">Referral and partner sources</option></select></div><div><label class="field-label" for="segment-rule">Selected folder</label><select class="field-control" id="segment-rule"><option value="cold">Cold</option><option value="inquiring">Inquiring</option><option value="warm" selected>Warm</option><option value="hot">Hot</option><option value="unclassified">Needs review</option></select></div><button class="secondary" id="save-source" type="button">Save routing</button></div>
+            <p class="safety-note"><strong>Closed, archived, client, and do-not-contact records stay excluded.</strong> Folder assignment organizes records inside BGM only; CRM writes and outreach still require separate approval.</p>
+          </section>
+
+          <section class="operations-section" id="content-production">
+            <div class="section-heading"><div><p class="eyebrow">03 · Segment content</p><h2>Prepare content for the right audience</h2><p>Create a draft for review based on the selected lead folder and campaign objective.</p></div><span class="section-tag">Drafts only</span></div>
+            <div class="studio-grid">
+              <div class="studio-controls"><label class="field-label" for="content-audience">Lead folder</label><select class="field-control" id="content-audience"><option value="cold">Cold</option><option value="inquiring">Inquiring</option><option value="warm" selected>Warm</option><option value="hot">Hot</option><option value="unclassified">Needs review</option><option value="agents">Agent recruitment</option></select><label class="field-label" for="content-type">Content format</label><select class="field-control" id="content-type"><option value="message">Targeted message</option><option value="ad">Ad post</option><option value="landing">Promo landing page</option><option value="video">Short video concept</option></select><label class="field-label" for="content-goal">Campaign objective</label><input class="field-control" id="content-goal" placeholder="e.g. invite to a property consultation"><button class="primary" id="generate-content" type="button">Generate draft</button><p class="field-note">Draft generation uses a built-in starting template. Connect an approved AI provider for account-specific generation.</p></div>
+              <div class="draft-panel"><div class="draft-panel-head"><strong>Content draft</strong><span id="draft-state">No draft</span></div><textarea class="field-control draft-editor" id="content-draft" rows="9" placeholder="Choose a lead folder and format, then generate a draft."></textarea><div class="draft-actions"><label class="field-label" for="clip-provider">Video clipping</label><select class="field-control" id="clip-provider"><option value="opus-clip">Opus Clip</option><option value="other">Other provider</option><option value="manual">Upload an edited clip</option></select><input class="field-control" id="video-url" type="url" placeholder="Public source video URL for Opus Clip"><button class="secondary" id="create-clips" type="button">Create clip project</button><small class="field-note" id="clip-status" aria-live="polite">Provider credentials required; nothing is connected yet.</small><label class="field-label" for="video-file">Or stage a video file</label><input class="field-control file-control" id="video-file" type="file" accept="video/*" capture="user"><small class="field-note" id="video-status">A selected file stays on this device; it is not uploaded.</small><div class="destination-list"><label><input type="checkbox" value="whatsapp"> WhatsApp</label><label><input type="checkbox" value="messenger"> Messenger</label><label><input type="checkbox" value="instagram"> Instagram</label><label><input type="checkbox" value="linkedin"> LinkedIn</label><label><input type="checkbox" value="email"> CRM email</label></div><button class="secondary" id="queue-content" type="button">Submit draft for approval</button><small class="field-note">No messages, posts, or emails are sent from this draft action.</small></div></div>
+            </div>
+          </section>
+
+          <section class="operations-section" id="conversations">
+            <div class="section-heading"><div><p class="eyebrow">04 · Conversation automation</p><h2>Answer, classify, assign</h2><p>Use lead context to prepare a response and route the outcome to a folder or team member.</p></div><span class="section-tag">Preview mode</span></div>
+            <div class="inbox-grid"><div class="chat-preview"><div class="chat-preview-head"><span class="assistant-avatar">BG</span><div><strong>Inquiry assistant</strong><small>Rule-based preview · no live channel</small></div><span class="status-pill pending">Not connected</span></div><label class="field-label" for="chat-segment">Lead context</label><select class="field-control" id="chat-segment"><option value="inquiring">Inquiring</option><option value="cold">Cold</option><option value="warm">Warm</option><option value="hot">Hot</option></select><label class="field-label" for="chat-question">Test a general inquiry</label><textarea class="field-control" id="chat-question" rows="3" placeholder="Type a sample question. Do not enter personal lead details."></textarea><button class="secondary" id="test-chatbot" type="button">Preview response</button><div class="chat-answer" id="chat-answer" aria-live="polite">Connect a messaging channel and approved response provider to answer real inquiries.</div></div><div class="outcome-panel"><p class="eyebrow">Conversation outcome</p><h3>Assign the next step</h3><label class="field-label" for="conversation-outcome">Outcome</label><select class="field-control" id="conversation-outcome"><option value="needs_reply">Needs a human reply</option><option value="appointment">Appointment requested</option><option value="qualified">Qualified and ready</option><option value="not_interested">Not interested</option><option value="do_not_contact">Do not contact</option></select><label class="field-label" for="outcome-folder">Route to folder</label><select class="field-control" id="outcome-folder"><option value="inquiring">Inquiring</option><option value="warm">Warm</option><option value="hot">Hot / handoff</option><option value="closed">Closed / do not contact</option></select><button class="secondary" id="save-outcome" type="button">Save routing rule</button><small class="field-note" id="outcome-status">Routing rules are saved on this device until connected to the workflow service.</small></div></div>
+          </section>
+
+          <section class="operations-section" id="channels">
+            <div class="section-heading"><div><p class="eyebrow">05 · Messaging channels</p><h2>Connect the places leads already talk</h2><p>Each channel needs its own approved account connection before inbound or outbound automation can run.</p></div><span class="section-tag">0 connected</span></div>
+            <div class="channel-grid"><article class="channel-item"><span class="channel-icon whatsapp">WA</span><div><strong>WhatsApp</strong><small>Business account and messaging permissions required</small></div><span class="status-pill pending">Setup needed</span></article><article class="channel-item"><span class="channel-icon messenger">M</span><div><strong>Facebook Messenger</strong><small>Page connection and messaging review required</small></div><span class="status-pill pending">Setup needed</span></article><article class="channel-item"><span class="channel-icon instagram">IG</span><div><strong>Instagram</strong><small>Professional account and messaging access required</small></div><span class="status-pill pending">Setup needed</span></article><article class="channel-item"><span class="channel-icon linkedin">in</span><div><strong>LinkedIn</strong><small>Approved organization access and supported API scopes required</small></div><span class="status-pill pending">Setup needed</span></article></div>
+            <p class="safety-note">Channel delivery is not active. Connect each provider, confirm its permissions and policies, then test inbound and outbound behavior before enabling automations.</p>
+          </section>
+
+          <section class="operations-section admin-controls" id="admin-controls" aria-label="Admin control panel" hidden>
+            <div class="section-heading"><div><p class="eyebrow">06 · Admin control</p><h2>Access, approvals, and safe CRM tests</h2></div><span class="section-tag" id="admin-user">Authorized admin</span></div>
+            <div class="admin-control-grid"><article class="admin-control-card"><h3>Team access</h3><p>Review the users and roles permitted to operate this workspace.</p><button class="secondary" id="load-team" type="button">Load team access</button><pre id="team-output" aria-live="polite">Ready.</pre></article><article class="admin-control-card"><h3>HighLevel pipeline</h3><p>Inspect the connected HighLevel pipeline from this private control surface.</p><button class="secondary" id="load-pipeline" type="button">Load pipeline</button><button class="secondary" id="save-pipeline" type="button">Save workflow changes</button><textarea class="pipeline-editor" id="pipeline-editor" rows="8" placeholder="Pipeline data appears here after loading."></textarea><pre id="pipeline-output" aria-live="polite">Ready.</pre></article><article class="admin-control-card"><h3>Approved test records</h3><p>Register only a dedicated test record. Its current open status is checked again immediately before any CRM update.</p><label class="field-label" for="test-crm">CRM</label><select class="field-control" id="test-crm"><option value="highlevel">HighLevel</option><option value="boldtrail">BoldTrail</option></select><label class="field-label" for="test-record-id">Opportunity ID (HighLevel) or contact ID (BoldTrail)</label><input class="field-control" id="test-record-id" autocomplete="off"><label class="field-label" for="test-record-label">Test label</label><input class="field-control" id="test-record-label" value="Approved test lead"><button class="secondary" id="register-test-lead" type="button">Register test record</button><label class="field-label" for="test-first-name">Test update: first name</label><input class="field-control" id="test-first-name" autocomplete="off"><label class="field-label" for="test-last-name">Test update: last name</label><input class="field-control" id="test-last-name" autocomplete="off"><label class="field-label" for="test-email">Test email</label><input class="field-control" id="test-email" type="email" autocomplete="off"><button class="secondary" id="create-sync-approval" type="button">Request test sync approval</button><button class="secondary" id="refresh-test-leads" type="button">Refresh registered records</button><pre id="test-lead-output" aria-live="polite">No test records loaded.</pre></article><article class="admin-control-card"><h3>Approval queue</h3><p>Approve content requests or explicitly approve a test-record sync. Sync runs re-check live open status.</p><button class="secondary" id="refresh-approvals" type="button">Refresh approvals</button><div class="approval-list" id="approval-list" aria-live="polite">No approvals loaded.</div></article></div>
+          </section>
+          <footer class="operations-footer"><span>Black Glove Marketing</span><span>CRM first · reviewed automation · clear outcomes</span></footer>
         </div>
-        <div class="hero-card"><span class="eyebrow">Campaign operations</span><strong id="campaign-status">Choose a campaign path</strong><div class="progress"><span id="progress-bar"></span></div><small id="campaign-detail">Start with prospect outreach or agent recruiting, then route the approved records to the right source and CRM.</small></div>
-      </section>
-
-      <section class="campaign crm-sync" aria-label="CRM sync destination">
-        <div><p class="eyebrow">Routing after campaign choice</p><h2>Choose the first CRM to sync</h2><p>For outreach, choose where approved prospects should go. For agent recruiting, the next step will choose which source or CRM supplies the recruiting leads.</p></div>
-        <div class="crm-controls"><label for="crm-destination">First sync destination</label><select id="crm-destination"><option value="highlevel">HighLevel</option><option value="boldtrail">BoldTrail</option><option value="hubspot">HubSpot</option><option value="salesforce">Salesforce</option></select><button class="primary" id="save-crm" type="button">Save</button></div>
-      </section>
-
-      <section class="campaign source-routing" aria-label="Campaign source routing">
-        <div><p class="eyebrow">Audience source</p><h2>Choose where this campaign starts</h2><p>Keep prospect outreach and agent recruiting separate so each path can use the right CRM, saved filter, or lead source.</p></div>
-        <div class="source-controls"><label for="source-path">Campaign path</label><select class="field-control" id="source-path"><option value="outreach">Prospect outreach</option><option value="agents">Agent recruitment</option></select><label for="lead-source">Lead source</label><select class="field-control" id="lead-source"><option value="boldtrail">BoldTrail saved filters</option><option value="highlevel">HighLevel contacts</option><option value="website">Website inquiries</option><option value="referrals">Referral and partner sources</option></select><button class="primary" id="save-source" type="button">Save campaign source</button></div>
-      </section>
-
-      <section class="workflow content-production" id="content-production" aria-label="Video content production and distribution">
-        <div class="section-head"><div><p class="eyebrow">Marketing and outreach</p><h2>Create once, distribute with approval</h2></div><span class="step-count">Content routing</span></div>
-        <div class="content-production-grid"><div><label class="field-label" for="content-audience">Content path</label><select class="field-control" id="content-audience"><option value="prospects">Prospect outreach</option><option value="agents">Agent recruitment</option></select><label class="field-label" for="clip-provider">Clipping provider</label><select class="field-control" id="clip-provider"><option value="opus-clip">Opus Clip</option><option value="other">Other connected clipping app</option><option value="manual">Upload an edited clip</option></select><label class="field-label" for="video-file">Record or attach a video</label><input class="field-control file-control" id="video-file" type="file" accept="video/*" capture="user"><small class="field-note" id="video-status">No video selected. Recording and clipping stay staged until approved.</small></div><div><span class="field-label">Deploy the approved clip to</span><div class="destination-list"><label><input type="checkbox" value="instagram"> Instagram</label><label><input type="checkbox" value="facebook"> Facebook</label><label><input type="checkbox" value="linkedin"> LinkedIn</label><label><input type="checkbox" value="tiktok"> TikTok</label><label><input type="checkbox" value="email"> CRM email addresses</label></div><label class="field-label" for="content-crm">CRM email source</label><select class="field-control" id="content-crm"><option value="boldtrail">BoldTrail contacts</option><option value="highlevel">HighLevel contacts</option><option value="selected">Selected approved segment</option></select><button class="primary" id="queue-content" type="button">Queue content for approval</button><small class="field-note">No social post or email is sent until an authorized user approves the final content and destinations.</small></div></div>
-      </section>
-
-      <section class="workflow ai-automation" id="ai-automation" aria-label="AI campaign automation">
-        <div class="section-head"><div><p class="eyebrow">AI campaign operations</p><h2>Prepare the next conversation</h2></div><span class="step-count">Approval required</span></div>
-        <p class="workflow-context">Use AI to qualify the right audience, prepare authentic follow-up, and organize appointment handoff without sending anything automatically.</p>
-        <div class="ai-automation-grid">
-          <div>
-            <label class="field-label" for="ai-audience">Audience path</label>
-            <select class="field-control" id="ai-audience"><option value="outreach">Lead Outreach</option><option value="agents">Agent Recruitment</option></select>
-            <label class="field-label" for="ai-qualification">Qualification focus</label>
-            <select class="field-control" id="ai-qualification"><option value="intent">Interest and intent</option><option value="appointment">Appointment readiness</option><option value="recruiting">Agent fit and recruiting interest</option></select>
-          </div>
-          <div>
-            <label class="field-label" for="ai-follow-up">Prepared follow-up</label>
-            <select class="field-control" id="ai-follow-up"><option value="email">Email follow-up</option><option value="social">Social response draft</option><option value="call">Appointment call brief</option></select>
-            <label class="field-label" for="ai-appointment">Appointment handoff</label>
-            <select class="field-control" id="ai-appointment"><option value="review">Prepare for review</option><option value="calendar">Prepare calendar handoff</option><option value="none">No appointment step yet</option></select>
-          </div>
-          <div>
-            <label class="field-label" for="ai-assistant">Appointment assistant</label>
-            <select class="field-control" id="ai-assistant"><option value="brief">Prepare qualification and call brief</option><option value="calendar">Prepare booking handoff</option><option value="voice">Voice assistant setup required</option></select>
-            <p class="field-note">AI can organize the conversation and booking path. Live calls stay disabled until an admin connects and approves a provider.</p>
-          </div>
-        </div>
-        <div class="ai-automation-footer"><span class="field-note">AI drafts the recommendation, message, and next action. An authorized user must approve before contact, publishing, or CRM changes.</span><button class="primary" id="prepare-ai" type="button">Prepare AI workflow</button></div>
-      </section>
-
-      <section class="workflow" id="workflow">
-        <div class="section-head"><div><p class="eyebrow">The core workflow</p><h2>From campaign path to aligned record</h2></div><span class="step-count" id="step-count">Step 1 of 4</span></div>
-        <div class="workflow-choice"><p class="eyebrow">Step 01 · Choose the campaign path</p><div class="workflow-choice-grid"><button class="workflow-choice-button" type="button" data-workflow-campaign="outreach"><strong>Lead Outreach</strong><span>Start with prospects, then choose which CRM receives the approved leads.</span></button><button class="workflow-choice-button" type="button" data-workflow-campaign="agents"><strong>Agent Recruitment</strong><span>Start with recruiting sources, then choose which CRM or source provides the leads.</span></button></div><p class="workflow-context" id="workflow-context" aria-live="polite">Choose a path to keep the next steps in context.</p></div>
-        <div class="steps">
-          <article class="step active"><b>01</b><h3>Choose the path</h3><p>Select prospect outreach or agent recruiting before any source, message, or sync route is chosen.</p></article>
-          <article class="step"><b>02</b><h3>Choose the source</h3><p>Set the CRM or lead source that supplies the right audience for the selected campaign.</p></article>
-          <article class="step"><b>03</b><h3>Approve follow-up</h3><p>Prepare relevant email and campaign actions for review before anything is sent or published.</p></article>
-          <article class="step"><b>04</b><h3>Sync the record</h3><p>Move approved contacts, tags, stage, and next action into the selected CRM destination.</p></article>
-        </div>
-      </section>
-
-      <section class="campaign" aria-label="Campaign monitor">
-        <div><p class="eyebrow">Campaign monitor</p><h2>Every conversation has a next action.</h2><p id="monitor-copy">Choose a campaign path to preview how outreach and recruiting move through source selection, approval, follow-up, and CRM alignment.</p></div>
-        <button class="secondary" data-action="advance">Advance workflow</button>
-      </section>
-
-      <section class="workflow admin-controls" id="admin-controls" aria-label="Admin control panel" hidden>
-        <div class="section-head"><div><p class="eyebrow">Admin workspace</p><h2>Internal operations control</h2></div><span class="step-count" id="admin-user">Authorized admin</span></div>
-        <div class="admin-control-grid"><article class="admin-control-card"><h3>Team access</h3><p>Review the users and roles permitted to operate this workspace.</p><button class="secondary" id="load-team" type="button">Load team access</button><pre id="team-output" aria-live="polite">Ready.</pre></article><article class="admin-control-card"><h3>GHL pipeline</h3><p>Inspect the connected HighLevel pipeline from this private control surface.</p><button class="secondary" id="load-pipeline" type="button">Load pipeline</button><button class="secondary" id="save-pipeline" type="button">Save workflow changes</button><textarea class="pipeline-editor" id="pipeline-editor" rows="8" placeholder="Pipeline data appears here after loading."></textarea><pre id="pipeline-output" aria-live="polite">Ready.</pre></article></div>
-      </section>
+      </div>
     </main>
-    <dialog class="campaign-dialog" id="campaign-dialog"><form method="dialog"><div class="dialog-head"><div><p class="eyebrow">Step 01</p><h2>Choose a campaign type</h2><p>Select the audience this workflow should prepare for.</p></div><button class="dialog-close" value="cancel" aria-label="Close">×</button></div><div class="campaign-choices"><button class="campaign-choice" type="button" data-campaign="outreach"><strong>Lead Outreach</strong><span>Organize and follow up with prospective buyers and sellers.</span></button><button class="campaign-choice" type="button" data-campaign="agents"><strong>Agent Recruitment</strong><span>Build a focused recruiting campaign for prospective agents.</span></button></div></form></dialog>
-    <dialog class="settings-dialog" id="settings-dialog"><form method="dialog"><div class="dialog-head"><div><p class="eyebrow">Workspace settings</p><h2>Admin preferences</h2><p>Manage the workspace appearance and default routing.</p></div><button class="dialog-close" value="cancel" aria-label="Close">×</button></div><p class="eyebrow settings-section-label">Appearance</p><label class="field-label" for="settings-theme">Color theme</label><button class="secondary settings-action" id="settings-theme" type="button">Switch theme</button><label class="field-label" for="settings-crm">Default CRM destination</label><select class="field-control" id="settings-crm"><option value="highlevel">HighLevel</option><option value="boldtrail">BoldTrail</option><option value="hubspot">HubSpot</option><option value="salesforce">Salesforce</option></select><button class="primary settings-save" value="default">Save settings</button></form></dialog>
+
+    <dialog class="settings-dialog" id="profile-dialog"><form method="dialog"><div class="dialog-head"><div><p class="eyebrow">Account profile</p><h2 id="profile-dialog-name">Account</h2><p id="profile-dialog-email"></p></div><button class="dialog-close" value="cancel" aria-label="Close">×</button></div><p class="profile-role-line">Workspace role <strong id="profile-dialog-role">Member</strong></p><button class="secondary settings-save" id="profile-to-settings" type="button">Account settings</button></form></dialog>
+    <dialog class="settings-dialog" id="settings-dialog"><form method="dialog"><div class="dialog-head"><div><p class="eyebrow">Workspace settings</p><h2>Admin preferences</h2><p>Manage the workspace appearance and default CRM destination.</p></div><button class="dialog-close" value="cancel" aria-label="Close">×</button></div><p class="eyebrow settings-section-label">Appearance</p><label class="field-label" for="settings-theme">Color theme</label><button class="secondary settings-action" id="settings-theme" type="button">Switch theme</button><label class="field-label" for="settings-crm">Default CRM destination</label><select class="field-control" id="settings-crm"><option value="highlevel">HighLevel</option><option value="boldtrail">BoldTrail</option><option value="hubspot">HubSpot</option><option value="salesforce">Salesforce</option></select><button class="primary settings-save" value="default">Save settings</button></form></dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="./script.js?v=admin-workspace-2"></script>
+    <script src="./script.js?v=ops-import-fix-1"></script>
   </body>
 </html>

@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
 import { neon } from '@neondatabase/serverless';
+export { ensureOpenLead } from './lead-policy.mjs';
 
 export const sql = neon(process.env.DATABASE_URL);
 
@@ -20,7 +21,7 @@ export async function verifyPassword(password, stored) {
 export function tokenHash(token) { return crypto.createHash('sha256').update(token).digest('hex'); }
 
 export function issueSessionCookie(token) {
-  return `bg_session=${token}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=604800`;
+  return `bg_session=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800`;
 }
 
 export function readCookie(req, name) {
@@ -54,15 +55,21 @@ export function json(res, status, body) {
 }
 
 export function method(req, res, allowed) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://calina-miguel.github.io');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
+  const origin = req.headers.origin;
+  const allowedOrigins = new Set([process.env.APP_ORIGIN, 'https://lead-command-center-phi.vercel.app'].filter(Boolean));
+  if (origin && allowedOrigins.has(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Vary', 'Origin');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
+  }
   if (req.method === 'OPTIONS') { res.statusCode = 204; res.end(); return false; }
   if (!allowed.includes(req.method)) { res.setHeader('Allow', allowed.join(', ')); json(res, 405, { error: 'Method not allowed' }); return false; }
   return true;
 }
 
 export function ghlHeaders() {
+  if (!process.env.GHL_PRIVATE_INTEGRATION_TOKEN) throw Object.assign(new Error('HighLevel integration is not configured'), { statusCode: 503 });
   return { Authorization: `Bearer ${process.env.GHL_PRIVATE_INTEGRATION_TOKEN}`, Version: '2021-07-28', Accept: 'application/json', 'Content-Type': 'application/json' };
 }

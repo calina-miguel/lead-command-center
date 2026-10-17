@@ -9,3 +9,6 @@ docs/assets/lead-command-center-voiceover.mp3
 tools/_app_screenshots/
 __pycache__/
 *.pyc
+
+.vercel
+.env*

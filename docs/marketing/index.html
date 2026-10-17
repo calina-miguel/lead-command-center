@@ -30,11 +30,11 @@
       </section>
     </main>
     <script>
-      const API='https://lead-command-center-phi.vercel.app';
-      const WORKSPACE='https://lead-command-center-phi.vercel.app/marketing/workspace.html';
+      const API=location.origin;
+      const WORKSPACE='./workspace.html';
       const form=document.querySelector('#login-form');
       const status=document.querySelector('#login-status');
-      form.addEventListener('submit',async(event)=>{event.preventDefault();status.textContent='Signing in...';const identifier=document.querySelector('#identifier').value;const response=await fetch(`${API}/api/login`,{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:identifier,username:identifier,password:document.querySelector('#password').value})});const data=await response.json();if(!response.ok){status.textContent=data.error||'Unable to sign in';return}if(data.sessionToken)sessionStorage.setItem('bg_session',data.sessionToken);location.href=WORKSPACE});
+      form.addEventListener('submit',async(event)=>{event.preventDefault();status.textContent='Signing in...';const identifier=document.querySelector('#identifier').value;const response=await fetch(`${API}/api/login`,{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:identifier,username:identifier,password:document.querySelector('#password').value})});const data=await response.json();if(!response.ok){status.textContent=data.error||'Unable to sign in';return}location.href=WORKSPACE});
       document.querySelector('#google-sign-in').onclick=()=>location.href=`${API}/api/auth/google?mode=signin`;
       document.querySelector('#google-sign-up').onclick=()=>location.href=`${API}/api/auth/google?mode=signup`;
     </script>
