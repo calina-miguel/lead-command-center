@@ -1,0 +1,66 @@
+.operations-sidebar nav a .nav-icon {
+  display: inline-flex;
+  flex: 0 0 20px;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: currentColor;
+}
+
+.operations-sidebar nav a .nav-icon svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+@media (max-width: 720px) {
+  .operations-shell .operations-sidebar nav {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 2px;
+    overflow: visible;
+  }
+
+  .operations-shell .operations-sidebar nav a {
+    display: flex;
+    flex: initial;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: auto;
+    min-width: 0;
+    min-height: 54px;
+    padding: 6px 2px;
+    white-space: normal;
+  }
+
+  .operations-shell .operations-sidebar nav a .nav-label {
+    display: none;
+  }
+
+  .operations-shell .operations-sidebar nav a .nav-icon {
+    display: inline-flex !important;
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .operations-shell .operations-sidebar nav a .nav-icon svg {
+    width: 23px;
+    height: 23px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .operations-sidebar nav a,
+  .operations-sidebar nav a .nav-icon {
+    transition: none;
+  }
+}
