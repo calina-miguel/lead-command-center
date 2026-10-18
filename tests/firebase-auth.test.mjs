@@ -22,6 +22,7 @@ test('Firebase signup creates a temporary account and sends its verification ema
     assert.equal(requests[1].body.requestType, 'VERIFY_EMAIL');
     assert.equal(requests[1].body.idToken, 'firebase-id-token');
     assert.equal(requests[1].body.continueUrl, 'https://app.example/marketing/verify.html');
+    assert.equal(requests[1].body.canHandleCodeInApp, false);
   } finally { global.fetch = originalFetch; }
 });
 
@@ -41,7 +42,7 @@ test('Firebase signup resumes an unverified account only with its matching passw
   } finally { global.fetch = originalFetch; }
 });
 
-test('Firebase verification applies only the one-time email action code', async () => {
+test('BGM completion signs into Firebase and returns the verified account token', async () => {
   const originalFetch = global.fetch;
   let request;
   global.fetch = async (url, options) => {
@@ -49,9 +50,10 @@ test('Firebase verification applies only the one-time email action code', async 
     return Response.json({ email: 'person@example.com', emailVerified: true, idToken: 'verified-id-token' });
   };
   try {
-    const result = await firebase.applyFirebaseVerification('one-time-action-code');
-    assert.match(request.url, /accounts:update\?key=test-web-api-key$/);
-    assert.deepEqual(request.body, { oobCode: 'one-time-action-code', returnSecureToken: true });
+    const result = await firebase.signInFirebaseSignup({ email: 'person@example.com', password: 'a-strong-test-password' });
+    assert.match(request.url, /accounts:signInWithPassword\?key=test-web-api-key$/);
+    assert.deepEqual(request.body, { email: 'person@example.com', password: 'a-strong-test-password', returnSecureToken: true });
     assert.equal(result.emailVerified, true);
+    assert.equal(result.idToken, 'verified-id-token');
   } finally { global.fetch = originalFetch; }
 });

@@ -29,9 +29,13 @@ export async function createOrResumeFirebaseSignup({ email, password }) {
     return { idToken: account.idToken, emailVerified: Boolean(account.emailVerified) };
   } catch (error) {
     if (error.firebaseCode !== 'EMAIL_EXISTS') throw error;
-    const account = await request('accounts:signInWithPassword', { email, password, returnSecureToken: true });
-    return { idToken: account.idToken, emailVerified: Boolean(account.emailVerified) };
+    return signInFirebaseSignup({ email, password });
   }
+}
+
+export async function signInFirebaseSignup({ email, password }) {
+  const account = await request('accounts:signInWithPassword', { email, password, returnSecureToken: true });
+  return { idToken: account.idToken, emailVerified: Boolean(account.emailVerified) };
 }
 
 export async function sendFirebaseVerification({ idToken, continueUrl }) {
@@ -39,12 +43,8 @@ export async function sendFirebaseVerification({ idToken, continueUrl }) {
     requestType: 'VERIFY_EMAIL',
     idToken,
     continueUrl,
-    canHandleCodeInApp: true
+    canHandleCodeInApp: false
   });
-}
-
-export async function applyFirebaseVerification(oobCode) {
-  return request('accounts:update', { oobCode, returnSecureToken: true });
 }
 
 export async function deleteFirebaseSignup(idToken) {

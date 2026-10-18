@@ -10,32 +10,39 @@
     <link rel="stylesheet" href="./signup.css?v=onboarding-1" />
     <style>
       .verify-card{width:min(100%,560px);margin:10vh auto;padding:32px;border:1px solid var(--line);border-radius:18px;background:var(--panel);box-shadow:var(--shadow)}
-      .verify-card h1{margin:0 0 8px;font-size:28px}.verify-card p{color:var(--muted);line-height:1.5}.verify-card .primary{width:100%;margin-top:18px}.verify-card a{display:inline-block;margin-top:20px;color:var(--blue)}
+      .verify-card h1{margin:0 0 8px;font-size:28px}.verify-card p{color:var(--muted);line-height:1.5}.verify-card .primary{width:100%;margin-top:18px}.verify-card a{display:inline-block;margin-top:20px;color:var(--blue)}.verify-card label{display:block;margin-top:16px;font-weight:600}.verify-card input{display:block;width:100%;margin-top:6px;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--field,var(--panel));color:var(--text);font:inherit}
     </style>
   </head>
   <body class="auth-page">
     <main class="verify-card" aria-live="polite">
-      <div class="auth-card-heading"><span class="auth-icon">✦</span><div><h1>Confirm your email</h1><p id="verify-message">Checking your confirmation link…</p></div></div>
-      <button class="primary" id="verify-retry" type="button" hidden>Try again</button>
+      <div class="auth-card-heading"><span class="auth-icon">✦</span><div><h1>Finish account setup</h1><p>After you confirm your email using the link we sent, enter the same signup credentials below to activate your workspace.</p></div></div>
+      <form id="verify-form">
+        <label for="verify-email">Email</label>
+        <input id="verify-email" name="email" type="email" autocomplete="email" required />
+        <label for="verify-password">Password</label>
+        <input id="verify-password" name="password" type="password" autocomplete="new-password" minlength="12" required />
+        <button class="primary" id="verify-submit" type="submit">Confirm and continue</button>
+      </form>
+      <p id="verify-message" role="status" aria-live="polite"></p>
       <a href="./?signup=1">Return to sign in</a>
     </main>
     <script>
       const message=document.querySelector('#verify-message');
-      const retry=document.querySelector('#verify-retry');
-      const code=new URLSearchParams(location.search).get('oobCode');
-      async function confirmEmail(){
-        if(!code){message.textContent='This confirmation link is incomplete. Open the latest link from your email.';return}
-        retry.hidden=true;
+      const form=document.querySelector('#verify-form');
+      const submit=document.querySelector('#verify-submit');
+      form.addEventListener('submit',async(event)=>{
+        event.preventDefault();
+        submit.disabled=true;
+        message.textContent='Checking your confirmed account…';
         try{
-          const response=await fetch(`${location.origin}/api/signup/verify`,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({oobCode:code})});
+          const values=Object.fromEntries(new FormData(form));
+          const response=await fetch(`${location.origin}/api/signup/verify`,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify(values)});
           const data=await response.json();
-          if(!response.ok)throw new Error(data.error||'We could not confirm this email.');
-          message.textContent=data.message||'Email confirmed. Opening your workspace…';
+          if(!response.ok)throw new Error(data.error||'We could not finish account setup.');
+          message.textContent=data.message||'Account ready. Opening your workspace…';
           location.replace(data.redirect||'./workspace.html');
-        }catch(error){message.textContent=error.message||'We could not confirm this email. Please try again.';retry.hidden=false}
-      }
-      retry.addEventListener('click',confirmEmail);
-      confirmEmail();
+        }catch(error){message.textContent=error.message||'We could not finish account setup. Please try again.';submit.disabled=false}
+      });
     </script>
   </body>
 </html>
