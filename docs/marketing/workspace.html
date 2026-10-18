@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b1018" />
-    <title>Black Glove Marketing | Admin</title>
+    <title>Black Glove Systems | Admin</title>
+    <script src="./legacy-redirect.js"></script>
     <link rel="stylesheet" href="./styles.css?v=apple-ui-1" />
     <link rel="stylesheet" href="./operations.css?v=font-plus-3-1" />
     <link rel="stylesheet" href="./native-ui.css?v=apple-ui-1" />
@@ -13,9 +14,9 @@
   <body>
     <main class="shell operations-shell">
       <header class="topbar">
-        <a class="brand" href="./workspace.html" aria-label="Black Glove Marketing admin home">
+        <a class="brand" href="./workspace.html" aria-label="Black Glove Systems admin home">
           <span class="mark">BG</span>
-          <span><small>BLACK GLOVE AGENCY</small><strong>Black Glove Marketing</strong></span>
+          <span><small>BLACK GLOVE AGENCY</small><strong>Black Glove Systems</strong></span>
         </a>
         <div class="top-actions">
           <div class="profile-menu">
@@ -113,7 +114,7 @@
             <div class="section-heading"><div><p class="eyebrow">06 · Admin control</p><h2>Access, approvals, and safe CRM tests</h2></div><span class="section-tag" id="admin-user">Authorized admin</span></div>
             <div class="admin-control-grid"><article class="admin-control-card"><h3>Team access</h3><p>Review the users and roles permitted to operate this workspace.</p><button class="secondary" id="load-team" type="button">Load team access</button><pre id="team-output" aria-live="polite">Ready.</pre></article><article class="admin-control-card"><h3>HighLevel pipeline</h3><p>Inspect the connected HighLevel pipeline from this private control surface.</p><button class="secondary" id="load-pipeline" type="button">Load pipeline</button><button class="secondary" id="save-pipeline" type="button">Save workflow changes</button><textarea class="pipeline-editor" id="pipeline-editor" rows="8" placeholder="Pipeline data appears here after loading."></textarea><pre id="pipeline-output" aria-live="polite">Ready.</pre></article><article class="admin-control-card"><h3>Approved test records</h3><p>Register only a dedicated test record. Its current open status is checked again immediately before any CRM update.</p><label class="field-label" for="test-crm">CRM</label><select class="field-control" id="test-crm"><option value="highlevel">HighLevel</option><option value="boldtrail">BoldTrail</option></select><label class="field-label" for="test-record-id">Opportunity ID (HighLevel) or contact ID (BoldTrail)</label><input class="field-control" id="test-record-id" autocomplete="off"><label class="field-label" for="test-record-label">Test label</label><input class="field-control" id="test-record-label" value="Approved test lead"><button class="secondary" id="register-test-lead" type="button">Register test record</button><label class="field-label" for="test-first-name">Test update: first name</label><input class="field-control" id="test-first-name" autocomplete="off"><label class="field-label" for="test-last-name">Test update: last name</label><input class="field-control" id="test-last-name" autocomplete="off"><label class="field-label" for="test-email">Test email</label><input class="field-control" id="test-email" type="email" autocomplete="off"><button class="secondary" id="create-sync-approval" type="button">Request test sync approval</button><button class="secondary" id="refresh-test-leads" type="button">Refresh registered records</button><pre id="test-lead-output" aria-live="polite">No test records loaded.</pre></article><article class="admin-control-card"><h3>Approval queue</h3><p>Approve content requests or explicitly approve a test-record sync. Sync runs re-check live open status.</p><button class="secondary" id="refresh-approvals" type="button">Refresh approvals</button><div class="approval-list" id="approval-list" aria-live="polite">No approvals loaded.</div></article></div>
           </section>
-          <footer class="operations-footer"><span>Black Glove Marketing</span><span>CRM first · reviewed automation · clear outcomes</span></footer>
+          <footer class="operations-footer"><span>Black Glove Systems</span><span>CRM first · reviewed automation · clear outcomes</span></footer>
         </div>
       </div>
     </main>

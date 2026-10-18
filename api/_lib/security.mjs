@@ -56,7 +56,11 @@ export function json(res, status, body) {
 
 export function method(req, res, allowed) {
   const origin = req.headers.origin;
-  const allowedOrigins = new Set([process.env.APP_ORIGIN, 'https://lead-command-center-phi.vercel.app'].filter(Boolean));
+  const allowedOrigins = new Set([
+    process.env.APP_ORIGIN,
+    'https://black-glove-systems.vercel.app',
+    'https://lead-command-center-phi.vercel.app'
+  ].filter(Boolean));
   if (origin && allowedOrigins.has(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Credentials', 'true');
