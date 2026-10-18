@@ -7,10 +7,11 @@
     <script src="./legacy-redirect.js"></script>
     <link rel="stylesheet" href="./styles.css?v=apple-ui-1" />
     <link rel="stylesheet" href="./native-ui.css?v=apple-ui-1" />
+    <link rel="stylesheet" href="./signup.css?v=onboarding-1" />
   </head>
   <body class="auth-page">
     <main class="auth-shell">
-      <div class="auth-brand"><div class="mark">BG</div><div><small>BLACK GLOVE SYSTEMS</small><strong>Workspace</strong></div></div>
+      <div class="auth-brand"><div class="mark">BG</div><div><small>BLACK GLOVE SYSTEMS</small><strong>Black Glove Marketing</strong></div></div>
       <section class="auth-layout">
         <div class="auth-intro">
           <p class="eyebrow">Private workspace</p>
@@ -26,8 +27,25 @@
           <div class="login-divider"><span>or continue with</span></div>
           <button class="google-login" id="google-sign-in" type="button"><span class="google-mark">G</span>Sign in with Google</button>
           <button class="google-login" id="google-sign-up" type="button"><span class="google-mark">G</span>Sign up with Google</button>
+          <button class="auth-switch" id="show-signup" type="button">Create an account</button>
           <p id="login-status" role="status"></p>
           <small class="auth-footnote">Authorized workspace access only.</small>
+        </form>
+        <form id="signup-form" class="auth-card signup-card" hidden>
+          <div class="auth-card-heading"><span class="auth-icon">✦</span><div><h2>Create your account</h2><p>Tell us about you and your project</p></div></div>
+          <div class="signup-grid">
+            <label>Full Name<input name="fullName" id="signup-full-name" autocomplete="name" maxlength="120" required /></label>
+            <label>Email<input name="email" id="signup-email" type="email" autocomplete="email" maxlength="254" required /></label>
+            <label>Company name<input name="companyName" autocomplete="organization" maxlength="160" required /></label>
+            <label>Project title<input name="projectTitle" maxlength="160" required /></label>
+            <label>Your role<select name="businessRole" required><option value="">Select your role</option><option>Owner</option><option>Operations</option><option>Marketing</option><option>Agent</option><option>Other</option></select></label>
+            <label>Username<input name="username" autocomplete="username" minlength="3" maxlength="32" pattern="[A-Za-z0-9._-]{3,32}" required /></label>
+            <label class="signup-password">Password<input name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required /><small>Use at least 12 characters.</small></label>
+          </div>
+          <button class="primary auth-submit" type="submit">Authorize &amp; send confirmation</button>
+          <button class="google-login" id="google-signup-continue" type="button"><span class="google-mark">G</span>Continue with Google</button>
+          <p id="signup-status" role="status"></p>
+          <button class="auth-switch" id="show-login" type="button">Back to sign in</button>
         </form>
       </section>
     </main>
@@ -36,9 +54,24 @@
       const WORKSPACE='./workspace.html';
       const form=document.querySelector('#login-form');
       const status=document.querySelector('#login-status');
-      form.addEventListener('submit',async(event)=>{event.preventDefault();status.textContent='Signing in...';const identifier=document.querySelector('#identifier').value;const response=await fetch(`${API}/api/login`,{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:identifier,username:identifier,password:document.querySelector('#password').value})});const data=await response.json();if(!response.ok){status.textContent=data.error||'Unable to sign in';return}location.href=WORKSPACE});
+      const signupForm=document.querySelector('#signup-form');
+      const signupStatus=document.querySelector('#signup-status');
+      const params=new URLSearchParams(location.search);
+      function showSignup(){form.hidden=true;signupForm.hidden=false;signupForm.querySelector('input').focus()}
+      function showLogin(){signupForm.hidden=true;form.hidden=false}
+      document.querySelector('#show-signup').onclick=showSignup;
+      document.querySelector('#show-login').onclick=showLogin;
+      form.addEventListener('submit',async(event)=>{event.preventDefault();status.textContent='Signing in...';try{const identifier=document.querySelector('#identifier').value;const response=await fetch(`${API}/api/login`,{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:identifier,username:identifier,password:document.querySelector('#password').value})});const data=await response.json();if(!response.ok){status.textContent=data.error||'Unable to sign in';return}location.href=WORKSPACE}catch{status.textContent='Unable to sign in right now. Please try again.'}});
       document.querySelector('#google-sign-in').onclick=()=>location.href=`${API}/api/auth/google?mode=signin`;
       document.querySelector('#google-sign-up').onclick=()=>location.href=`${API}/api/auth/google?mode=signup`;
+      document.querySelector('#google-signup-continue').onclick=()=>location.href=`${API}/api/auth/google?mode=signup`;
+      if(params.get('signup')){
+        showSignup();
+        const signupMessages={expired:'That confirmation link has expired. Please submit the form again.',invalid:'That confirmation link is not valid. Please submit the form again.',exists:'An account already exists for that Google email. Sign in instead.',error:'We could not finish account setup. Please try again.'};
+        signupStatus.textContent=signupMessages[params.get('signup')]||'';
+      }
+      if(params.get('signup')==='google')fetch(`${API}/api/auth/google/onboarding`,{credentials:'include'}).then(async response=>{const data=await response.json();if(!response.ok)throw new Error(data.error);document.querySelector('#signup-full-name').value=data.fullName||'';document.querySelector('#signup-email').value=data.email||'';document.querySelector('#signup-email').readOnly=true}).catch(error=>{signupStatus.textContent=error.message||'Restart Google sign-up to continue.'});
+      signupForm.addEventListener('submit',async(event)=>{event.preventDefault();signupStatus.textContent='Sending your confirmation email...';const values=Object.fromEntries(new FormData(signupForm));try{const response=await fetch(`${API}/api/signup`,{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify(values)});const data=await response.json();signupStatus.textContent=data.message||data.error||'Unable to start account setup.';if(response.ok){signupForm.reset();document.querySelector('#signup-email').readOnly=false}}catch{signupStatus.textContent='Unable to start account setup right now. Please try again.'}});
     </script>
   </body>
 </html>

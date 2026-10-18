@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vercel dev",
     "test": "node --test tests/*.test.mjs",
-    "check": "node --check api/router.mjs && node --check api/routing.mjs && node --check api/_lib/routing-policy.mjs && node --check api/login.mjs && node --check api/logout.mjs && node --check api/me.mjs && node --check api/integrations.mjs && node --check api/approvals.mjs && node --check api/sync.mjs && node --check api/test-leads.mjs && node --check api/opus/projects.mjs && node --check api/auth/google.mjs && node --check api/auth/google/callback.mjs && node --check api/ghl/pipelines.mjs && node --check api/ghl/contacts.mjs && node --check api/ghl/workflows.mjs && node --check scripts/apply-production-migration.mjs && node --check docs/marketing/script.js"
+    "check": "node --check api/router.mjs && node --check api/routing.mjs && node --check api/_lib/routing-policy.mjs && node --check api/_lib/signup.mjs && node --check api/login.mjs && node --check api/logout.mjs && node --check api/me.mjs && node --check api/signup.mjs && node --check api/signup/verify.mjs && node --check api/integrations.mjs && node --check api/approvals.mjs && node --check api/sync.mjs && node --check api/test-leads.mjs && node --check api/opus/projects.mjs && node --check api/auth/google.mjs && node --check api/auth/google/callback.mjs && node --check api/auth/google/onboarding.mjs && node --check api/ghl/pipelines.mjs && node --check api/ghl/contacts.mjs && node --check api/ghl/workflows.mjs && node --check scripts/apply-production-migration.mjs && node --check docs/marketing/script.js && node --check tests/signup.test.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.1"

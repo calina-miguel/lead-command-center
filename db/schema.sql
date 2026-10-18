@@ -4,8 +4,27 @@ create table if not exists users (
   username text unique,
   password_hash text not null,
   role text not null check (role in ('admin', 'member')),
+  full_name text,
+  company_name text,
+  project_title text,
+  business_role text,
   created_at timestamptz not null default now()
 );
+
+create table if not exists pending_signups (
+  email text primary key,
+  username text not null unique,
+  full_name text not null,
+  company_name text not null,
+  project_title text not null,
+  business_role text not null,
+  password_hash text not null,
+  verification_token_hash text not null unique,
+  expires_at timestamptz not null,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists pending_signups_expiry_idx on pending_signups(expires_at);
 
 create unique index if not exists users_username_lower_idx on users(lower(username)) where username is not null;
 

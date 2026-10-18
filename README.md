@@ -26,10 +26,10 @@ The GitHub Pages experience remains static and keeps its existing URLs. The secu
 
 ## Production rollout
 
-Production CRM sync is deliberately restricted to admin-approved records in the `test_leads` registry. The server looks up each record's current status immediately before writing; closed, client, archived, unknown, or unregistered records are rejected. Sync approval IDs are single-use. No endpoint sends email, SMS, or social posts.
+Production CRM sync is deliberately restricted to admin-approved records in the `test_leads` registry. The server looks up each record's current status immediately before writing; closed, client, archived, unknown, or unregistered records are rejected. Sync approval IDs are single-use. Account confirmation email is sent through Resend; SMS and social posts are not sent by the app.
 
-1. Apply `db/migrations/20261016_approval_and_test_sync.sql` in the Neon SQL editor (or apply the complete `db/schema.sql` to a new database).
-2. Add the production variables in `.env.example` to the Vercel project's Production environment. Use the matching production OAuth redirect URL in Google Cloud and set `GOOGLE_REDIRECT_URI` to `https://<production-domain>/api/auth/google/callback`.
+1. Apply the migrations in `db/migrations/` in date order in the Neon SQL editor (or apply the complete `db/schema.sql` to a new database).
+2. Add the production variables in `.env.example` to the Vercel project's Production environment. For signup confirmation, configure `RESEND_API_KEY` and a verified `EMAIL_FROM` sender. Use the matching production OAuth redirect URL in Google Cloud and set `GOOGLE_REDIRECT_URI` to `https://<production-domain>/api/auth/google/callback`.
 3. Seed the two admin accounts from a trusted local shell with their unique admin passwords. Do not put admin passwords into a public/static build.
 4. Add BoldTrail's private API token and Opus Clip's API key only after the account owner obtains them. Keep `BOLDTRAIL_STATUS_MAP_VERIFIED=false` until the account owner verifies BoldTrail's current API contract and status mapping with a dedicated test contact. The Opus route creates a clip project from a public HTTPS URL; it does not publish clips.
 5. In the admin panel, register only a dedicated CRM test record, submit a sync approval, approve it, run the live dry-run, then explicitly run the test sync. Never register or sync closed leads or ordinary production contacts for QA.

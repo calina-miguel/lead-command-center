@@ -1,0 +1,13 @@
+.auth-card[hidden]{display:none}
+.auth-switch{display:block;width:100%;margin-top:14px;padding:8px;border:0;background:transparent;color:var(--blue);font:inherit;font-size:15px;font-weight:650}
+.signup-card{width:min(100%,620px)}
+.signup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 14px}
+.signup-grid label{display:block;margin:12px 0 5px;color:var(--ink);font-size:14px;font-weight:700}
+.signup-grid input,.signup-grid select{display:block;width:100%;min-height:48px;margin-top:7px;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:var(--soft);color:var(--ink);font:inherit;font-size:16px;outline:0}
+.signup-grid input:focus,.signup-grid select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,122,255,.15)}
+.signup-grid input[readonly]{opacity:.74;cursor:not-allowed}
+.signup-grid .signup-password{grid-column:1/-1}
+.signup-password small{display:block;margin-top:5px;color:var(--muted);font-size:13px;font-weight:500}
+#signup-status{min-height:22px;margin:12px 0 0;color:var(--muted);font-size:15px;line-height:1.45}
+.signup-card .google-login{margin-top:10px}
+@media(max-width:520px){.signup-grid{grid-template-columns:1fr}.signup-grid .signup-password{grid-column:auto}.signup-card{padding:22px}}

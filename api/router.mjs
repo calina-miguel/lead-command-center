@@ -2,6 +2,7 @@ import approvals from './approvals.mjs';
 import adminUsers from './admin/users.mjs';
 import googleAuth from './auth/google.mjs';
 import googleCallback from './auth/google/callback.mjs';
+import googleOnboarding from './auth/google/onboarding.mjs';
 import highLevelContacts from './ghl/contacts.mjs';
 import highLevelPipelines from './ghl/pipelines.mjs';
 import highLevelWorkflows from './ghl/workflows.mjs';
@@ -12,6 +13,8 @@ import me from './me.mjs';
 import opusProjects from './opus/projects.mjs';
 import routing from './routing.mjs';
 import sync from './sync.mjs';
+import signup from './signup.mjs';
+import signupVerify from './signup/verify.mjs';
 import testLeads from './test-leads.mjs';
 import { json } from './_lib/security.mjs';
 
@@ -20,6 +23,7 @@ const handlers = new Map([
   ['admin/users', adminUsers],
   ['auth/google', googleAuth],
   ['auth/google/callback', googleCallback],
+  ['auth/google/onboarding', googleOnboarding],
   ['ghl/contacts', highLevelContacts],
   ['ghl/pipelines', highLevelPipelines],
   ['ghl/workflows', highLevelWorkflows],
@@ -30,6 +34,8 @@ const handlers = new Map([
   ['opus/projects', opusProjects],
   ['routing', routing],
   ['sync', sync],
+  ['signup', signup],
+  ['signup/verify', signupVerify],
   ['test-leads', testLeads]
 ]);
 
