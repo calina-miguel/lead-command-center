@@ -188,13 +188,13 @@ def check_live_site(url):
     checks.append(result("live fetch", True, cache_bust))
     forbidden = [term for term in FORBIDDEN_PUBLIC_TERMS if re.search(re.escape(term), html, re.IGNORECASE)]
     checks.append(result("live sensitive wording", not forbidden, f"found: {forbidden}" if forbidden else "clean"))
-    checks.append(result("live public title", "Lead Command Center" in html, "title present" if "Lead Command Center" in html else "title missing"))
+    checks.append(result("live public title", "Black Glove Systems" in html, "title present" if "Black Glove Systems" in html else "title missing"))
     checks.append(result("live video cache", "lead-command-center-presentation.mp4?v=client-showcase" in html, "client video linked"))
     return checks
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Persistent QA checks for Lead Command Center.")
+    parser = argparse.ArgumentParser(description="Persistent QA checks for Black Glove Systems.")
     parser.add_argument("--live", action="store_true", help="Also check the live GitHub Pages URL.")
     parser.add_argument("--url", default=LIVE_URL, help="Live URL to check.")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON.")
